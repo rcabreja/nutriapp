@@ -129,6 +129,11 @@ export interface Plan {
   sections: MealSection[];
   supplements: string;
   avoid: string;
+  macronutrients?: {
+    protein: number;
+    carbs: number;
+    fats: number;
+  };
   createdAt: string;
 }
 

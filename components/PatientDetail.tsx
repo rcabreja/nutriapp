@@ -30,7 +30,8 @@ export default function PatientDetail() {
     avatarUrl: '',
     occupation: '',
     maritalStatus: '',
-    address: ''
+    address: '',
+    gender: 'F' // Default, will be overwritten
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -89,7 +90,8 @@ export default function PatientDetail() {
       avatarUrl: patient.avatarUrl || '',
       occupation: patient.occupation || '',
       maritalStatus: patient.maritalStatus || '',
-      address: patient.address || ''
+      address: patient.address || '',
+      gender: patient.gender || 'F'
     });
     setShowEditProfileModal(true);
   };
@@ -111,7 +113,8 @@ export default function PatientDetail() {
       avatarUrl: editForm.avatarUrl,
       occupation: editForm.occupation,
       maritalStatus: editForm.maritalStatus,
-      address: editForm.address
+      address: editForm.address,
+      gender: editForm.gender as 'M' | 'F'
     });
     setShowEditProfileModal(false);
   };
@@ -290,15 +293,30 @@ export default function PatientDetail() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Correo Electrónico</label>
-                <input
-                  type="email"
-                  value={editForm.email}
-                  onChange={e => setEditForm({ ...editForm, email: e.target.value })}
-                  className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
-                />
+              <div className="grid grid-cols-2 gap-4">
+                 <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Sexo</label>
+                    <select
+                      value={editForm.gender}
+                      onChange={e => setEditForm({ ...editForm, gender: e.target.value })}
+                      className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none appearance-none"
+                    >
+                      <option value="F">Femenino</option>
+                      <option value="M">Masculino</option>
+                    </select>
+                 </div>
+                 <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Correo Electrónico</label>
+                    <input
+                      type="email"
+                      value={editForm.email}
+                      onChange={e => setEditForm({ ...editForm, email: e.target.value })}
+                      className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
+                    />
+                 </div>
               </div>
+
+
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
