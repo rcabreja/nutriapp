@@ -23,6 +23,7 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
     const [observations, setObservations] = useState('');
     const [nextAppointment, setNextAppointment] = useState('');
     const [images, setImages] = useState<string[]>([]); // Array of images
+    const [evolution, setEvolution] = useState<any>({}); // New Evolution State
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const resetForm = () => {
@@ -35,6 +36,7 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
         setObservations('');
         setNextAppointment('');
         setImages([]);
+        setEvolution({});
         setEditingNoteId(null);
     };
 
@@ -49,6 +51,7 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
         setObjective(note.objective);
         setObservations(note.observations);
         setNextAppointment(note.nextAppointment || '');
+        setEvolution(note.evolution || {});
         const imgs = note.images || ((note as any).imageUrl ? [(note as any).imageUrl] : []);
         setImages(imgs);
         setShowModal(true);
@@ -59,7 +62,7 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
             // Update existing note
             const updatedNotes = patient.notes.map(n =>
                 n.id === editingNoteId
-                    ? { ...n, date, objective, observations, images, nextAppointment }
+                    ? { ...n, date, objective, observations, images, nextAppointment, evolution }
                     : n
             );
             updatePatient(patient.id, { notes: updatedNotes });
@@ -71,7 +74,8 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
                 objective,
                 observations,
                 images,
-                nextAppointment
+                nextAppointment,
+                evolution
             };
             const updatedNotes = [newNote, ...patient.notes];
             updatePatient(patient.id, { notes: updatedNotes });
@@ -166,6 +170,24 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
                                                 <p className="text-xs uppercase text-slate-500 font-bold mb-1">OBSERVACIONES / ANÁLISIS CLÍNICO</p>
                                                 <p className="text-slate-300 whitespace-pre-wrap text-sm leading-relaxed">{note.observations}</p>
                                             </div>
+                                            <div className="grid grid-cols-1 gap-4 bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                                                <div className="text-xs uppercase text-green-400 font-bold border-b border-slate-700 pb-1 mb-1">
+                                                    Cuestionario de Evolución
+                                                </div>
+                                                {note.evolution?.feelingWithPlan && <div><span className="text-slate-500 text-xs block">Sentimiento c/ Plan:</span> <span className="text-slate-300 text-sm">{note.evolution.feelingWithPlan}</span></div>}
+                                                {note.evolution?.adherence && <div><span className="text-slate-500 text-xs block">Apego:</span> <span className="text-slate-300 text-sm">{note.evolution.adherence}</span></div>}
+                                                {note.evolution?.hungerOrAnxiety && <div><span className="text-slate-500 text-xs block">Hambre/Ansiedad:</span> <span className="text-slate-300 text-sm">{note.evolution.hungerOrAnxiety}</span></div>}
+                                                {note.evolution?.inflammation && <div><span className="text-slate-500 text-xs block">Inflamación:</span> <span className="text-slate-300 text-sm">{note.evolution.inflammation}</span></div>}
+                                                {note.evolution?.constipation && <div><span className="text-slate-500 text-xs block">Estreñimiento:</span> <span className="text-slate-300 text-sm">{note.evolution.constipation}</span></div>}
+                                                {note.evolution?.stress && <div><span className="text-slate-500 text-xs block">Estrés por cambios:</span> <span className="text-slate-300 text-sm">{note.evolution.stress}</span></div>}
+                                                {note.evolution?.sleep && <div><span className="text-slate-500 text-xs block">Sueño:</span> <span className="text-slate-300 text-sm">{note.evolution.sleep}</span></div>}
+                                                {note.evolution?.water && <div><span className="text-slate-500 text-xs block">Consumo de Agua:</span> <span className="text-slate-300 text-sm">{note.evolution.water}</span></div>}
+                                                {note.evolution?.eatingOut && <div><span className="text-slate-500 text-xs block">Comidas fuera:</span> <span className="text-slate-300 text-sm">{note.evolution.eatingOut}</span></div>}
+                                                {note.evolution?.exercise && <div><span className="text-slate-500 text-xs block">Ejercicio:</span> <span className="text-slate-300 text-sm">{note.evolution.exercise}</span></div>}
+                                                {note.evolution?.modifications && <div><span className="text-slate-500 text-xs block">Modificaciones:</span> <span className="text-slate-300 text-sm">{note.evolution.modifications}</span></div>}
+                                                {note.evolution?.management && <div className="border-t border-slate-700 pt-2"><span className="text-blue-400 text-xs font-bold block">PLAN / MANEJO:</span> <span className="text-white text-sm">{note.evolution.management}</span></div>}
+                                            </div>
+
                                             {note.nextAppointment && (
                                                 <div>
                                                     <p className="text-xs uppercase text-green-500 font-bold mb-1 flex items-center gap-1">
@@ -335,6 +357,41 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
                                 />
                             </div>
 
+                            {/* Evolution Questionnaire */}
+                            <div className="bg-slate-800/50 border border-slate-700 p-4 rounded-xl space-y-4">
+                                <h4 className="text-sm font-bold text-blue-400 uppercase border-b border-slate-700 pb-2">Cuestionario de Evolución</h4>
+
+                                <div className="grid grid-cols-1 gap-4">
+                                    <InputQ label="¿Cómo te sentiste con el plan? (Gustos/Disgustos)" value={evolution.feelingWithPlan} onChange={v => setEvolution({ ...evolution, feelingWithPlan: v })} />
+                                    <InputQ label="¿Apego al plan?" value={evolution.adherence} onChange={v => setEvolution({ ...evolution, adherence: v })} />
+
+                                    <InputQ label="¿Hambre o Ansiedad?" value={evolution.hungerOrAnxiety} onChange={v => setEvolution({ ...evolution, hungerOrAnxiety: v })} />
+                                    <InputQ label="¿Inflamación?" value={evolution.inflammation} onChange={v => setEvolution({ ...evolution, inflammation: v })} />
+
+                                    <InputQ label="¿Estreñimiento?" value={evolution.constipation} onChange={v => setEvolution({ ...evolution, constipation: v })} />
+                                    <InputQ label="¿Estrés por cambios?" value={evolution.stress} onChange={v => setEvolution({ ...evolution, stress: v })} />
+
+                                    <InputQ label="¿Calidad de Sueño?" value={evolution.sleep} onChange={v => setEvolution({ ...evolution, sleep: v })} />
+                                    <InputQ label="¿Consumo de Agua?" value={evolution.water} onChange={v => setEvolution({ ...evolution, water: v })} />
+
+                                    <InputQ label="¿Comidas fuera?" value={evolution.eatingOut} onChange={v => setEvolution({ ...evolution, eatingOut: v })} />
+                                    <InputQ label="¿Ejercicio?" value={evolution.exercise} onChange={v => setEvolution({ ...evolution, exercise: v })} />
+
+                                    <div>
+                                        <InputQ label="¿Modificaciones deseadas?" value={evolution.modifications} onChange={v => setEvolution({ ...evolution, modifications: v })} />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-green-500 uppercase mb-1">PLAN / MANEJO</label>
+                                        <textarea
+                                            value={evolution.management || ''}
+                                            onChange={e => setEvolution({ ...evolution, management: e.target.value })}
+                                            className="w-full bg-slate-900 border border-slate-600 rounded-lg p-2 text-white text-sm h-20"
+                                            placeholder="Plan de acción..."
+                                        ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                             {/* Observations Textarea */}
                             <div>
                                 <label className="block text-xs font-bold text-slate-500 uppercase mb-1">OBSERVACIONES / ANÁLISIS CLÍNICO</label>
@@ -428,3 +485,15 @@ const CalendarIcon = ({ date }: { date: string }) => {
         </div>
     )
 }
+
+const InputQ = ({ label, value, onChange }: any) => (
+    <div>
+        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">{label}</label>
+        <input
+            type="text"
+            value={value || ''}
+            onChange={e => onChange(e.target.value)}
+            className="w-full bg-slate-900 border border-slate-600 rounded p-2 text-white text-sm focus:border-blue-500 outline-none"
+        />
+    </div>
+);

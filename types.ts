@@ -16,17 +16,38 @@ export interface Note {
   observations: string;
   images?: string[];
   nextAppointment?: string; // New field for next appointment date
+
+  // New Evolution Fields
+  evolution?: {
+    feelingWithPlan: string;
+    hungerOrAnxiety: string;
+    inflammation: string;
+    constipation: string;
+    stress: string;
+    adherence: string;
+    sleep: string;
+    water: string;
+    eatingOut: string;
+    exercise: string;
+    modifications: string;
+    management: string;
+  };
 }
 
 export interface Lifestyle {
   activity: {
     regular: boolean;
     details: string;
+    // New fields
+    type?: string;
+    frequency?: string;
+    duration?: string;
   };
   sleep: {
     hours: string;
-    stress: string;
+    stress: string; // General stress
   };
+  stressLevel?: string; // Daily stress level
   diet: {
     meals: string;
     water: string;
@@ -36,6 +57,17 @@ export interface Lifestyle {
   bowelMovement?: string;
   foodAllergies?: string[]; // Changed to array
   foodIntolerances?: string[]; // Changed to array
+
+  // New Lifestyle Fields
+  supplementation?: string;
+  weightLossMeds?: string;
+  toxicSubstances?: string; // Drugs etc.
+  dailyRoutine?: string;
+  sittingHours?: string;
+  wakeUpTime?: string;
+  bedTime?: string;
+  energyLevel?: 'Cansado' | 'Activo' | 'Variable';
+  otherHealthCare?: string;
 
   preferences: {
     likes: string;
@@ -91,6 +123,7 @@ export interface ClinicalHistory {
       others: string;
       allergies: string;
     };
+    symptoms?: string[]; // List of symptoms
   };
   gyneco?: {
     g: string;
@@ -99,6 +132,10 @@ export interface ClinicalHistory {
     a: string;
     fum: string;
     contraception: string;
+    // New fields
+    menarche?: string;
+    cycleDuration?: string;
+    cycleRegularity?: 'Regular' | 'Irregular';
   };
   recall24h: {
     breakfast: string;
@@ -106,6 +143,19 @@ export interface ClinicalHistory {
     lunch: string;
     snackPM: string;
     dinner: string;
+  };
+  // New Nutritional Habits Section
+  nutritionalHabits?: {
+    dietType?: string;
+    mealsPerDay?: string;
+    cookingHabits?: string; // Do you cook or someone else?
+    mealTimes?: string;
+    eatingCompany?: string; // Alone, accompanied, with distractors?
+    favoriteRecipes?: string;
+    waterConsumption?: string;
+    coffeeConsumption?: string;
+    eatingOutFrequency?: string;
+    processedFoodFrequency?: string;
   };
   frequencies: Record<string, string>;
 }
