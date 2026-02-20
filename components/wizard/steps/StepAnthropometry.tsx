@@ -88,10 +88,14 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
         }
     }, [data.weight, data.height, data.activity, gender, dob]);
 
-    // Sum folds
-    const foldsSum = useMemo(() => {
+    // Sum & Average folds
+    const foldsMetrics = useMemo(() => {
         const f = data.folds || {};
-        return (f.bicipital || 0) + (f.tricipital || 0) + (f.subscapular || 0) + (f.abdominal || 0) + (f.suprailiac || 0) + (f.quadriceps || 0);
+        const values = [f.bicipital, f.tricipital, f.subscapular, f.abdominal, f.suprailiac, f.quadriceps].map(v => parseFloat(v) || 0);
+        const sum = values.reduce((a, b) => a + b, 0);
+        const count = values.filter(v => v > 0).length;
+        const avg = count > 0 ? sum / count : 0;
+        return { sum, avg };
     }, [data.folds]);
 
     return (
@@ -101,9 +105,19 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
                 <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700">
                     <h4 className="text-white font-bold mb-4 border-b border-slate-700 pb-2">Medidas Básicas</h4>
                     <div className="grid grid-cols-2 gap-4">
+                        <Input label="Fecha y Hora" type="datetime-local" value={data.date || new Date().toISOString().slice(0, 16)} onChange={(v: any) => updateAuthro('date', v)} />
                         <Input label="Peso (kg)" value={data.weight} onChange={(v: any) => updateAuthro('weight', v)} />
                         <Input label="Altura (cm)" value={data.height} onChange={(v: any) => updateAuthro('height', v)} />
                         <Input label="IMC" value={data.imc || 0} readOnly />
+                    </div>
+                </div>
+
+                {/* Energy */}
+                <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700">
+                    <h4 className="text-white font-bold mb-4 border-b border-slate-700 pb-2 flex items-center gap-2">
+                        <Activity size={16} className="text-green-500" /> Cálculo Energético (Mifflin-St Jeor)
+                    </h4>
+                    <div className="space-y-4">
                         <div>
                             <label className="block text-xs font-bold text-slate-400 mb-1 truncate">Factor Actividad</label>
                             <select
@@ -116,21 +130,11 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
                                 ))}
                             </select>
                         </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <Input label="BMR (Kcal)" value={data.bmr || 0} readOnly />
+                            <Input label="TDEE (Kcal Diarias)" value={data.tdee || 0} readOnly />
+                        </div>
                     </div>
-                </div>
-
-                {/* Energy */}
-                <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700">
-                    <h4 className="text-white font-bold mb-4 border-b border-slate-700 pb-2 flex items-center gap-2">
-                        <Activity size={16} className="text-green-500" /> Estimación Energética
-                    </h4>
-                    <div className="grid grid-cols-2 gap-4">
-                        <Input label="BMR (Kcal)" value={data.bmr || 0} readOnly />
-                        <Input label="TDEE (Kcal Diarias)" value={data.tdee || 0} readOnly />
-                    </div>
-                    <p className="text-xs text-slate-500 mt-4 italic">
-                        * Calculado usando Mifflin-St Jeor basado en peso, altura, edad y sexo.
-                    </p>
                 </div>
 
                 {/* Circumferences */}
@@ -152,9 +156,14 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
                 <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700">
                     <div className="flex justify-between items-center mb-4 border-b border-slate-700 pb-2">
                         <h4 className="text-white font-bold">Pliegues (mm)</h4>
-                        <span className="text-xs font-bold text-orange-400 bg-orange-500/10 px-2 py-1 rounded border border-orange-500/20 flex items-center gap-1">
-                            <Calculator size={10} /> Σ {foldsSum.toFixed(1)} mm
-                        </span>
+                        <div className="flex gap-2">
+                            <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-2 py-1 rounded border border-blue-500/20 flex items-center gap-1">
+                                <Calculator size={10} /> Prom: {foldsMetrics.avg.toFixed(1)} mm
+                            </span>
+                            <span className="text-xs font-bold text-orange-400 bg-orange-500/10 px-2 py-1 rounded border border-orange-500/20 flex items-center gap-1">
+                                <Calculator size={10} /> Σ {foldsMetrics.sum.toFixed(1)} mm
+                            </span>
+                        </div>
                     </div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                         <Input label="Tricipital" value={data.folds?.tricipital} onChange={(v: any) => updateNested('folds', 'tricipital', v)} />
@@ -164,19 +173,6 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
                         <Input label="Abdominal" value={data.folds?.abdominal} onChange={(v: any) => updateNested('folds', 'abdominal', v)} />
                         <Input label="Cuádriceps" value={data.folds?.quadriceps} onChange={(v: any) => updateNested('folds', 'quadriceps', v)} />
                     </div>
-                </div>
-
-                {/* Notes */}
-                <div className="col-span-1 md:col-span-2 bg-slate-800/40 p-4 rounded-xl border border-slate-700">
-                    <h4 className="text-white font-bold mb-4 border-b border-slate-700 pb-2 flex items-center gap-2">
-                        <FileText size={18} /> Notas Antropométricas
-                    </h4>
-                    <textarea
-                        value={data.notes}
-                        onChange={(e) => updateAuthro('notes', e.target.value)}
-                        placeholder="Observaciones adicionales..."
-                        className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors h-24 resize-none"
-                    />
                 </div>
             </div>
         </div>

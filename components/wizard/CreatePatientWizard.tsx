@@ -17,9 +17,9 @@ interface Props {
 
 const STEPS = [
     { id: 'basic', label: 'Datos Básicos' },
-    { id: 'clinical', label: 'Historia Clínica' },
-    { id: 'lifestyle', label: 'Estilo de Vida' },
-    { id: 'anthro', label: 'Antropometría' },
+    { id: 'lifestyle', label: 'Estilo de Vida' }, // Moved up
+    { id: 'anthro', label: 'Antropometría' }, // Moved up
+    { id: 'clinical', label: 'Historia Clínica' }, // Moved down
     { id: 'labs', label: 'Analíticas' },
 ];
 
@@ -35,6 +35,9 @@ export default function CreatePatientWizard({ onClose }: Props) {
         // Clinical - Pathological
         diabetes: false, cancer: false, dislipidemia: false, anemia: false, hypertension: false, renal: false, others: '', allergies: '',
 
+        // Clinical - Symptoms (New)
+        symptoms: [] as string[],
+
         // Clinical - General
         medications: '', familyHistory: '',
 
@@ -46,12 +49,26 @@ export default function CreatePatientWizard({ onClose }: Props) {
         dietType: '', cookingHabits: '', eatingCompany: '', coffeeConsumption: '', eatingOutFrequency: '', processedFoodFrequency: '', favoriteRecipes: '',
         recallBreakfast: '', recallSnackAM: '', recallLunch: '', recallSnackPM: '', recallDinner: '',
 
+        // Clinical - Frequency Grid (New)
+        foodFrequencies: {} as Record<string, string>,
+
+        // Nutrition Habits (New Image 4 fields if not covered)
+        waterConsumption: '', numMeals: '', mealTimes: '',
+
         // Lifestyle
         exercise: false, exerciseType: '', exerciseFrequency: '', exerciseDuration: '', exerciseDetails: '', sittingHours: '',
         wakeUpTime: '', bedTime: '', sleepHours: '', energyLevel: '', stress: '',
+
+        // Lifestyle - New Fields from Image 1
+        dailyStress: '', // Nivel estres diario
+        mealSchedules: '', // Horarios comida
+        weightLossMeds: '', // Medicamentos peso
+        otherHealthCare: '', // Cuidas salud de otra manera
+
         alcohol: false, tobacco: false, water: '', bowel: '', dailyRoutine: '',
         mealsPerDay: '', eatingOut: '',
-        supplementation: '', foodIntolerances: '', likes: '', dislikes: '',
+        supplementation: '', foodIntolerances: '', foodAllergies: '', likes: '', dislikes: '',
+        preferences: '', aversiones: '', budget: 'Medio', access: '', eatingOutStat: '', // Preferences & Economy
 
         // Anthropometry (Object)
         anthropometry: {
@@ -122,17 +139,19 @@ export default function CreatePatientWizard({ onClose }: Props) {
                     duration: formData.exerciseDuration
                 },
                 sleep: { hours: formData.sleepHours, stress: formData.stress },
-                stressLevel: formData.stress, // Added top level stress
+                stressLevel: formData.dailyStress, // Mapped
                 diet: {
-                    meals: formData.mealsPerDay,
+                    meals: formData.mealSchedules, // Mapped to mealSchedules
                     water: formData.water,
                     alcohol: formData.alcohol,
                     tobacco: formData.tobacco
                 },
                 bowelMovement: formData.bowel,
-                foodAllergies: [], // Kept empty, strictly distinct from clinical allergies?
+                foodAllergies: formData.foodAllergies ? formData.foodAllergies.split(',').map((s: string) => s.trim()) : [],
                 foodIntolerances: formData.foodIntolerances ? formData.foodIntolerances.split(',').map((s: string) => s.trim()) : [],
                 supplementation: formData.supplementation,
+                weightLossMeds: formData.weightLossMeds,
+                otherHealthCare: formData.otherHealthCare,
                 dailyRoutine: formData.dailyRoutine,
                 sittingHours: formData.sittingHours,
                 wakeUpTime: formData.wakeUpTime,
@@ -141,10 +160,10 @@ export default function CreatePatientWizard({ onClose }: Props) {
 
                 preferences: {
                     likes: formData.likes,
-                    dislikes: formData.dislikes,
-                    budget: 'Medio',
-                    access: '',
-                    eatingOut: formData.eatingOut
+                    dislikes: formData.dislikes, // or aversiones
+                    budget: formData.budget,
+                    access: formData.access,
+                    eatingOut: formData.eatingOutStat
                 }
             },
 
@@ -162,7 +181,8 @@ export default function CreatePatientWizard({ onClose }: Props) {
                         renal: formData.renal,
                         others: formData.others,
                         allergies: formData.allergies
-                    }
+                    },
+                    symptoms: formData.symptoms
                 },
                 gyneco: {
                     g: formData.g,
@@ -184,21 +204,30 @@ export default function CreatePatientWizard({ onClose }: Props) {
                 },
                 nutritionalHabits: {
                     dietType: formData.dietType,
+                    mealsPerDay: formData.numMeals,
                     cookingHabits: formData.cookingHabits,
                     eatingCompany: formData.eatingCompany,
                     coffeeConsumption: formData.coffeeConsumption,
-                    eatingOutFrequency: formData.eatingOutFrequency,
+                    eatingOutFrequency: formData.eatingOutFrequency, // Or eatingOutStat?
                     processedFoodFrequency: formData.processedFoodFrequency,
-                    favoriteRecipes: formData.favoriteRecipes
+                    favoriteRecipes: formData.favoriteRecipes,
+                    waterConsumption: formData.waterConsumption,
+                    mealTimes: formData.mealTimes
                 },
-                frequencies: {}
+                frequencies: formData.foodFrequencies
             }
         };
 
         // Add Initial Anthropometry if weight/height are set
-        if (formData.anthropometry.weight > 0 || formData.anthropometry.height > 0) {
+        if (Number(formData.anthropometry.weight) > 0 || Number(formData.anthropometry.height) > 0) {
             newPatient.anthropometry.push({
                 ...formData.anthropometry,
+                weight: Number(formData.anthropometry.weight) || 0,
+                height: Number(formData.anthropometry.height) || 0,
+                imc: Number(formData.anthropometry.imc) || 0,
+                activity: Number(formData.anthropometry.activity) || 1.2,
+                bmr: Number(formData.anthropometry.bmr) || 0,
+                tdee: Number(formData.anthropometry.tdee) || 0,
                 id: Date.now().toString(),
                 date: new Date().toISOString(),
                 notes: formData.anthropometry.notes || 'Medida Inicial'
@@ -206,21 +235,22 @@ export default function CreatePatientWizard({ onClose }: Props) {
         }
 
         // Add Initial Lab if name or glucose set
+        // Ensure values are strings for LabResult markers
         if (formData.initialLab.name || formData.initialLab.glucose) {
             const labCtx = formData.initialLab;
             const markers = [
-                { name: 'Glucosa', value: labCtx.glucose, unit: 'mg/dL' },
-                { name: 'Colesterol', value: labCtx.cholesterol, unit: 'mg/dL' },
-                { name: 'Triglicéridos', value: labCtx.triglycerides, unit: 'mg/dL' },
-                { name: 'Hemoglobina', value: labCtx.hemoglobin, unit: 'g/dL' },
-                { name: 'Hematocrito', value: labCtx.hematocrit, unit: '%' },
+                { name: 'Glucosa', value: String(labCtx.glucose || ''), unit: 'mg/dL' },
+                { name: 'Colesterol', value: String(labCtx.cholesterol || ''), unit: 'mg/dL' },
+                { name: 'Triglicéridos', value: String(labCtx.triglycerides || ''), unit: 'mg/dL' },
+                { name: 'Hemoglobina', value: String(labCtx.hemoglobin || ''), unit: 'g/dL' },
+                { name: 'Hematocrito', value: String(labCtx.hematocrit || ''), unit: '%' },
             ].filter(m => m.value && m.value !== '');
 
             if (markers.length > 0 || labCtx.name) {
                 newPatient.labs.push({
                     id: Date.now().toString(),
                     name: labCtx.name || 'Análisis Inicial',
-                    date: labCtx.date,
+                    date: labCtx.date || new Date().toISOString(),
                     markers,
                     attachments: []
                 });
@@ -274,9 +304,9 @@ export default function CreatePatientWizard({ onClose }: Props) {
                 <div className="flex-1 overflow-y-auto custom-scrollbar p-6 bg-[var(--card-bg)]">
                     <div className="max-w-4xl mx-auto">
                         {currentStep === 0 && <StepBasicInfo formData={formData} onChange={handleChange} />}
-                        {currentStep === 1 && <StepClinical formData={formData} onChange={handleChange} />}
-                        {currentStep === 2 && <StepLifestyle formData={formData} onChange={handleChange} />}
-                        {currentStep === 3 && <StepAnthropometry formData={formData} onChange={handleChange} gender={formData.gender as 'M' | 'F'} dob={formData.dob} />}
+                        {currentStep === 1 && <StepLifestyle formData={formData} onChange={handleChange} />}
+                        {currentStep === 2 && <StepAnthropometry formData={formData} onChange={handleChange} gender={formData.gender as 'M' | 'F'} dob={formData.dob} />}
+                        {currentStep === 3 && <StepClinical formData={formData} onChange={handleChange} />}
                         {currentStep === 4 && <StepLabs formData={formData} onChange={handleChange} />}
                     </div>
                 </div>

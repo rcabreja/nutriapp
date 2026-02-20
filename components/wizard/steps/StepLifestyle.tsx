@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, Moon, Coffee, Utensils, X, Sun, Heart } from 'lucide-react';
+import { Activity, Moon, Coffee, Wallet, AlertCircle } from 'lucide-react';
 
 interface Props {
     formData: any;
@@ -7,45 +7,45 @@ interface Props {
 }
 
 const Input = ({ label, value, onChange, placeholder, type = "text" }: any) => (
-    <div>
-        <label className="block text-xs font-bold text-slate-400 mb-1">{label}</label>
+    <div className="flex-1">
+        <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">{label}</label>
         <input
             type={type}
             value={value}
             onChange={e => onChange(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors"
+            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors focus:bg-slate-900"
         />
     </div>
 );
 
 const TextArea = ({ label, value, onChange, placeholder }: any) => (
-    <div>
-        <label className="block text-xs font-bold text-slate-400 mb-1">{label}</label>
+    <div className="flex-1">
+        <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">{label}</label>
         <textarea
             value={value}
             onChange={e => onChange(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors h-20 resize-none"
+            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors h-20 resize-none focus:bg-slate-900"
         />
     </div>
 );
 
 const Checkbox = ({ label, checked, onChange }: any) => (
-    <label className="flex items-center gap-2 cursor-pointer group">
-        <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${checked ? 'bg-[var(--primary)] border-[var(--primary)]' : 'bg-slate-800 border-slate-600 group-hover:border-[var(--primary)]'}`}>
-            {checked && <X size={12} className="text-white" />}
+    <label className="flex items-center gap-3 cursor-pointer group bg-slate-900/30 p-3 rounded-lg border border-slate-700 hover:border-slate-600 transition-colors">
+        <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${checked ? 'bg-[var(--primary)] border-[var(--primary)]' : 'bg-slate-800 border-slate-600 group-hover:border-[var(--primary)]'}`}>
+            {checked && <div className="w-2.5 h-2.5 bg-white rounded-sm" />}
         </div>
-        <span className={`text-sm ${checked ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>{label}</span>
+        <span className={`text-sm font-medium ${checked ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>{label}</span>
         <input type="checkbox" checked={checked} onChange={e => onChange(e.target.checked)} className="hidden" />
     </label>
 );
 
 const Section = ({ title, icon: Icon, children }: any) => (
-    <div className="bg-slate-800/40 border border-slate-700 rounded-xl p-4">
-        <div className="flex items-center gap-2 mb-4 text-blue-400 border-b border-slate-700 pb-2">
-            <Icon size={18} />
-            <h4 className="font-bold uppercase text-xs tracking-wider">{title}</h4>
+    <div className="bg-slate-800/40 border border-slate-700 rounded-xl p-5 mb-6">
+        <div className="flex items-center gap-2 mb-5 text-[var(--primary)] border-b border-slate-700/50 pb-3">
+            <Icon size={20} />
+            <h4 className="font-bold uppercase text-sm tracking-wider text-white">{title}</h4>
         </div>
         {children}
     </div>
@@ -54,144 +54,143 @@ const Section = ({ title, icon: Icon, children }: any) => (
 export default function StepLifestyle({ formData, onChange }: Props) {
     return (
         <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Actividad Física */}
-                <Section title="Actividad Física" icon={Activity}>
-                    <div className="space-y-4">
-                        <Checkbox
-                            label="Realiza ejercicio regularmente"
-                            checked={formData.exercise}
-                            onChange={(c: any) => onChange('exercise', c)}
-                        />
-                        {formData.exercise && (
-                            <div className="space-y-3 animate-in fade-in slide-in-from-top-2">
-                                <Input
-                                    label="Tipo de Ejercicio"
-                                    value={formData.exerciseType}
-                                    onChange={(v: any) => onChange('exerciseType', v)}
-                                    placeholder="Ej. Pesas, Correr..."
-                                />
-                                <div className="grid grid-cols-2 gap-4">
-                                    <Input
-                                        label="Frecuencia"
-                                        value={formData.exerciseFrequency}
-                                        onChange={(v: any) => onChange('exerciseFrequency', v)}
-                                        placeholder="Ej. 3/sem"
-                                    />
-                                    <Input
-                                        label="Duración (min)"
-                                        value={formData.exerciseDuration}
-                                        onChange={(v: any) => onChange('exerciseDuration', v)}
-                                        placeholder="Ej. 45"
-                                    />
-                                </div>
-                                <TextArea
-                                    label="Detalles Adicionales"
-                                    value={formData.exerciseDetails}
-                                    onChange={(v: any) => onChange('exerciseDetails', v)}
-                                    placeholder="Intensidad, horario, etc."
-                                />
-                            </div>
-                        )}
+            {/* Actividad Física */}
+            <Section title="Actividad Física" icon={Activity}>
+                <div className="mb-4">
+                    <Checkbox
+                        label="Realiza Actividad Física regularmente"
+                        checked={formData.exercise}
+                        onChange={(c: any) => onChange('exercise', c)}
+                    />
+                </div>
+
+                {formData.exercise && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 animate-in fade-in slide-in-from-top-2">
                         <Input
-                            label="Horas Sentado/Día"
-                            value={formData.sittingHours}
-                            onChange={(v: any) => onChange('sittingHours', v)}
+                            label="Tipo de Ejercicio"
+                            value={formData.exerciseType}
+                            onChange={(v: any) => onChange('exerciseType', v)}
+                            placeholder="Ej. Pesas, Cardio..."
+                        />
+                        <Input
+                            label="Frecuencia"
+                            value={formData.exerciseFrequency}
+                            onChange={(v: any) => onChange('exerciseFrequency', v)}
+                            placeholder="Ej. 3 veces/sem..."
+                        />
+                        <Input
+                            label="Duración Promedio"
+                            value={formData.exerciseDuration}
+                            onChange={(v: any) => onChange('exerciseDuration', v)}
+                            placeholder="Ej. 45 min..."
                         />
                     </div>
-                </Section>
+                )}
 
-                {/* Sueño y Energía */}
-                <Section title="Sueño y Energía" icon={Moon}>
+                <TextArea
+                    label="Detalles Adicionales"
+                    value={formData.exerciseDetails}
+                    onChange={(v: any) => onChange('exerciseDetails', v)}
+                    placeholder={formData.exercise ? "Intensidad, objetivos..." : "Sin detalles"}
+                />
+            </Section>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Sueño y Estrés */}
+                <Section title="Sueño, Estrés y Sustancias" icon={Moon}>
                     <div className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
-                            <Input label="Hora Levantarse" type="time" value={formData.wakeUpTime} onChange={(v: any) => onChange('wakeUpTime', v)} />
-                            <Input label="Hora Acostarse" type="time" value={formData.bedTime} onChange={(v: any) => onChange('bedTime', v)} />
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                            <Input
-                                label="Horas Sueño"
-                                value={formData.sleepHours}
-                                onChange={(v: any) => onChange('sleepHours', v)}
-                            />
+                            <Input label="Horas Sueño" value={formData.sleepHours} onChange={(v: any) => onChange('sleepHours', v)} />
                             <div>
-                                <label className="block text-xs font-bold text-slate-400 mb-1">Nivel Energía</label>
+                                <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">Nivel Estrés (General)</label>
                                 <select
-                                    value={formData.energyLevel}
-                                    onChange={e => onChange('energyLevel', e.target.value)}
-                                    className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 text-white text-sm focus:border-[var(--primary)] outline-none"
+                                    value={formData.stress}
+                                    onChange={e => onChange('stress', e.target.value)}
+                                    className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none"
                                 >
-                                    <option value="">Seleccionar</option>
-                                    <option value="Cansado">Cansado</option>
-                                    <option value="Variable">Variable</option>
-                                    <option value="Activo">Activo</option>
+                                    <option value="">No especificado</option>
+                                    <option value="Bajo">Bajo</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Alto">Alto</option>
                                 </select>
                             </div>
                         </div>
+                        <Input label="Nivel Estrés (Diario)" value={formData.dailyStress} onChange={(v: any) => onChange('dailyStress', v)} placeholder="Ej. Del 1 al 10..." />
+                        <Input label="Horarios Comida" value={formData.mealSchedules} onChange={(v: any) => onChange('mealSchedules', v)} />
+
+                        <div className="grid grid-cols-2 gap-4 pt-2">
+                            <Checkbox label="Alcohol" checked={formData.alcohol} onChange={(c: any) => onChange('alcohol', c)} />
+                            <Checkbox label="Tabaco" checked={formData.tobacco} onChange={(c: any) => onChange('tobacco', c)} />
+                        </div>
+                    </div>
+                </Section>
+
+                {/* Hábitos y Rutina */}
+                <Section title="Hábitos y Rutina Diaria" icon={Coffee}>
+                    <div className="space-y-4">
+                        <div className="grid grid-cols-1 gap-4">
+                            <Input label="Suplementación Actual" value={formData.supplementation} onChange={(v: any) => onChange('supplementation', v)} />
+                            <div className="grid grid-cols-1 gap-4">
+                                <TextArea label="Medicamentos Peso / Sustancias" value={formData.weightLossMeds} onChange={(v: any) => onChange('weightLossMeds', v)} placeholder="Uso previo de medicamentos para bajar de peso..." />
+                                {/* Assuming 'toxicSubstances' maps to weightLossMeds or we add a field? Using weightLossMeds for 'Medicamentos Peso'. */}
+                            </div>
+                        </div>
+
+                        <TextArea label="Rutina Diaria (Resumen)" value={formData.dailyRoutine} onChange={(v: any) => onChange('dailyRoutine', v)} placeholder="Descripción breve de un día típico..." />
+
+                        <div className="grid grid-cols-4 gap-2">
+                            <div className="col-span-1">
+                                <Input label="Horas Sentado" value={formData.sittingHours} onChange={(v: any) => onChange('sittingHours', v)} />
+                            </div>
+                            <div className="col-span-1">
+                                <Input label="Hora Despertar" type="time" value={formData.wakeUpTime} onChange={(v: any) => onChange('wakeUpTime', v)} />
+                            </div>
+                            <div className="col-span-1">
+                                <Input label="Hora Acostarse" type="time" value={formData.bedTime} onChange={(v: any) => onChange('bedTime', v)} />
+                            </div>
+                            <div className="col-span-1">
+                                <Input label="Nivel Energía (Día)" value={formData.energyLevel} onChange={(v: any) => onChange('energyLevel', v)} placeholder="-" />
+                            </div>
+                        </div>
+
+                        <Input label="¿Cuidas tu salud de otra manera?" value={formData.otherHealthCare} onChange={(v: any) => onChange('otherHealthCare', v)} />
+                    </div>
+                </Section>
+            </div>
+
+            {/* Preferencias y Economía */}
+            <Section title="Preferencias y Economía" icon={Wallet}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                        <TextArea label="Preferencias" value={formData.likes} onChange={(v: any) => onChange('likes', v)} />
                         <div>
-                            <label className="block text-xs font-bold text-slate-400 mb-1">Nivel de Estrés</label>
+                            <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">Presupuesto</label>
                             <select
-                                value={formData.stress}
-                                onChange={e => onChange('stress', e.target.value)}
-                                className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 text-white text-sm focus:border-[var(--primary)] outline-none"
+                                value={formData.budget}
+                                onChange={e => onChange('budget', e.target.value)}
+                                className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none"
                             >
-                                <option value="">Seleccionar</option>
                                 <option value="Bajo">Bajo</option>
                                 <option value="Medio">Medio</option>
                                 <option value="Alto">Alto</option>
                             </select>
                         </div>
+                        <Input label="Frecuencia de Comer Fuera" value={formData.eatingOutStat} onChange={(v: any) => onChange('eatingOutStat', v)} placeholder="Ej. 2 veces por semana..." />
                     </div>
-                </Section>
+                    <div className="space-y-4">
+                        <TextArea label="Aversiones" value={formData.dislikes} onChange={(v: any) => onChange('dislikes', v)} />
+                        <Input label="Acceso a Alimentos" value={formData.access} onChange={(v: any) => onChange('access', v)} placeholder="Ej. Súper, Mercado..." />
+                    </div>
+                </div>
+            </Section>
 
-                {/* Hábitos Generales */}
-                <Section title="Hábitos y Rutina" icon={Coffee}>
-                    <div className="space-y-3">
-                        <div className="flex gap-4">
-                            <Checkbox label="Alcohol" checked={formData.alcohol} onChange={(c: any) => onChange('alcohol', c)} />
-                            <Checkbox label="Tabaco" checked={formData.tobacco} onChange={(c: any) => onChange('tobacco', c)} />
-                        </div>
-                        <Input
-                            label="Consumo Agua"
-                            value={formData.water}
-                            onChange={(v: any) => onChange('water', v)}
-                            placeholder="Ej. 2 Litros"
-                        />
-                        <Input
-                            label="Estreñimiento / Digestión"
-                            value={formData.bowel}
-                            onChange={(v: any) => onChange('bowel', v)}
-                        />
-                        <TextArea
-                            label="Rutina Diaria Breve"
-                            value={formData.dailyRoutine}
-                            onChange={(v: any) => onChange('dailyRoutine', v)}
-                            placeholder="Despertar, trabajo, comidas..."
-                        />
-                    </div>
-                </Section>
-
-                {/* Preferencias y Salud */}
-                <Section title="Preferencias y Salud" icon={Heart}>
-                    <div className="space-y-3">
-                        <Input
-                            label="Suplementación Actual"
-                            value={formData.supplementation}
-                            onChange={(v: any) => onChange('supplementation', v)}
-                        />
-                        <Input
-                            label="Intolerancias Alimentarias"
-                            value={formData.foodIntolerances}
-                            onChange={(v: any) => onChange('foodIntolerances', v)}
-                            placeholder="Separar por comas..."
-                        />
-                        <div className="grid grid-cols-2 gap-4">
-                            <TextArea label="Gustos" value={formData.likes} onChange={(v: any) => onChange('likes', v)} />
-                            <TextArea label="Disgustos" value={formData.dislikes} onChange={(v: any) => onChange('dislikes', v)} />
-                        </div>
-                    </div>
-                </Section>
-            </div>
+            {/* Alergias */}
+            <Section title="Alergias e Intolerancias" icon={AlertCircle}>
+                <div className="space-y-4">
+                    <TextArea label="Alergias Alimentarias" value={formData.foodAllergies} onChange={(v: any) => onChange('foodAllergies', v)} placeholder="Ninguna registrada." />
+                    <TextArea label="Intolerancias Alimentarias" value={formData.foodIntolerances} onChange={(v: any) => onChange('foodIntolerances', v)} placeholder="Ninguna registrada." />
+                </div>
+            </Section>
         </div>
     );
 }

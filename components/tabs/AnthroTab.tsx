@@ -64,10 +64,14 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
         return { bmr: Math.round(bmr), tdee };
     };
 
-    // Dynamic Summation of Folds
-    const foldsSum = useMemo(() => {
-        const f = newMeasure.folds || { tricipital: 0, bicipital: 0, subscapular: 0, suprailiac: 0, abdominal: 0, quadriceps: 0 };
-        return (f.bicipital || 0) + (f.tricipital || 0) + (f.subscapular || 0) + (f.abdominal || 0) + (f.suprailiac || 0) + (f.quadriceps || 0);
+    // Dynamic Summation & Average of Folds
+    const foldsMetrics = useMemo(() => {
+        const f = newMeasure.folds || {};
+        const values = [f.bicipital, f.tricipital, f.subscapular, f.abdominal, f.suprailiac, f.quadriceps].map(v => parseFloat(v as any) || 0);
+        const sum = values.reduce((a, b) => a + b, 0);
+        const count = values.filter(v => v > 0).length;
+        const avg = count > 0 ? sum / count : 0;
+        return { sum, avg };
     }, [newMeasure.folds]);
 
     const handleInputChange = (field: string, val: string, nested?: string, nestedKey?: string) => {
@@ -399,8 +403,13 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                             <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700 relative">
                                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
                                     <h4 className="text-sm font-bold text-orange-400 uppercase tracking-wider">Pliegues (mm)</h4>
-                                    <div className="bg-orange-500/10 text-orange-400 px-3 py-1 rounded-full text-xs font-bold border border-orange-500/20 flex items-center gap-2">
-                                        <Calculator size={12} /> Σ6 pliegues: {foldsSum.toFixed(1)} mm
+                                    <div className="flex gap-2">
+                                        <div className="bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full text-xs font-bold border border-blue-500/20 flex items-center gap-2">
+                                            <Calculator size={12} /> Prom: {foldsMetrics.avg.toFixed(1)} mm
+                                        </div>
+                                        <div className="bg-orange-500/10 text-orange-400 px-3 py-1 rounded-full text-xs font-bold border border-orange-500/20 flex items-center gap-2">
+                                            <Calculator size={12} /> Σ {foldsMetrics.sum.toFixed(1)} mm
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">

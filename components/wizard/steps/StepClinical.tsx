@@ -1,32 +1,32 @@
 import React from 'react';
-import { X, Pill, Users, Stethoscope, Utensils, Clock } from 'lucide-react';
+import { Stethoscope, Activity, Utensils, Clock, AlertCircle, FileText } from 'lucide-react';
 
 interface Props {
     formData: any;
     onChange: (field: string, value: any) => void;
 }
 
-const Input = ({ label, value, onChange, type = "text", placeholder }: any) => (
-    <div>
-        <label className="block text-xs font-bold text-slate-400 mb-1 truncate" title={label}>{label}</label>
+const Input = ({ label, value, onChange, placeholder, type = "text" }: any) => (
+    <div className="flex-1">
+        <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">{label}</label>
         <input
             type={type}
             value={value}
             onChange={e => onChange(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors"
+            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors focus:bg-slate-900"
         />
     </div>
 );
 
 const TextArea = ({ label, value, onChange, placeholder }: any) => (
-    <div>
-        <label className="block text-xs font-bold text-slate-400 mb-1">{label}</label>
+    <div className="flex-1">
+        <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">{label}</label>
         <textarea
             value={value}
             onChange={e => onChange(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors h-20 resize-none"
+            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors h-20 resize-none focus:bg-slate-900"
         />
     </div>
 );
@@ -34,7 +34,7 @@ const TextArea = ({ label, value, onChange, placeholder }: any) => (
 const Checkbox = ({ label, checked, onChange }: any) => (
     <label className="flex items-center gap-2 cursor-pointer group">
         <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${checked ? 'bg-[var(--primary)] border-[var(--primary)]' : 'bg-slate-800 border-slate-600 group-hover:border-[var(--primary)]'}`}>
-            {checked && <X size={12} className="text-white" />}
+            {checked && <div className="w-2.5 h-2.5 bg-white rounded-sm" />}
         </div>
         <span className={`text-sm ${checked ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>{label}</span>
         <input type="checkbox" checked={checked} onChange={e => onChange(e.target.checked)} className="hidden" />
@@ -42,109 +42,188 @@ const Checkbox = ({ label, checked, onChange }: any) => (
 );
 
 const Section = ({ title, icon: Icon, children }: any) => (
-    <div className="bg-slate-800/40 border border-slate-700 rounded-xl p-4">
-        <div className="flex items-center gap-2 mb-4 text-blue-400 border-b border-slate-700 pb-2">
-            <Icon size={18} />
-            <h4 className="font-bold uppercase text-xs tracking-wider">{title}</h4>
+    <div className="bg-slate-800/40 border border-slate-700 rounded-xl p-5 mb-6">
+        <div className="flex items-center gap-2 mb-5 text-[var(--primary)] border-b border-slate-700/50 pb-3">
+            <Icon size={20} />
+            <h4 className="font-bold uppercase text-sm tracking-wider text-white">{title}</h4>
         </div>
         {children}
     </div>
 );
 
+const SYMPTOMS_LIST = [
+    "Dolores de cabeza", "Diarrea", "Dolor abdominal", "Flatulencias", "Acidez", "Mareos",
+    "Insomnio", "Resequedad", "Prurito", "Sangrado de encías", "Adormecimiento de las extremidades", "Depresión",
+    "Fatiga", "Estreñimiento", "Distensión abdominal", "Reflujo", "Náuseas", "Falta de memoria",
+    "Caída del cabello", "Piel seca o grasa", "Uñas quebradizas", "Cicatrización lenta", "Ansiedad"
+];
+
+const FOOD_GROUPS = [
+    "Verduras", "Frutas", "Cereales", "Tubérculos", "Leguminosas", "Carnes Rojas", "Pollo / Pavo",
+    "Pescados", "Huevo", "Embutidos", "Lácteos", "Grasas", "Azúcares"
+];
+
+const FREQUENCIES = ["Diario", "Semanal", "Quincenal", "Ocasional", "Nunca"];
+
 export default function StepClinical({ formData, onChange }: Props) {
+
+    const toggleSymptom = (symptom: string, checked: boolean) => {
+        const current = formData.symptoms || [];
+        if (checked) {
+            onChange('symptoms', [...current, symptom]);
+        } else {
+            onChange('symptoms', current.filter((s: string) => s !== symptom));
+        }
+    };
+
+    const updateFrequency = (group: string, freq: string) => {
+        const current = formData.foodFrequencies || {};
+        onChange('foodFrequencies', { ...current, [group]: freq });
+    };
+
     return (
         <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Antecedentes Patológicos */}
-                <Section title="Antecedentes Patológicos" icon={Stethoscope}>
-                    <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-4">
-                        <Checkbox label="Diabetes" checked={formData.diabetes} onChange={(c: any) => onChange('diabetes', c)} />
-                        <Checkbox label="Cáncer" checked={formData.cancer} onChange={(c: any) => onChange('cancer', c)} />
-                        <Checkbox label="Dislipidemia" checked={formData.dislipidemia} onChange={(c: any) => onChange('dislipidemia', c)} />
-                        <Checkbox label="Anemia" checked={formData.anemia} onChange={(c: any) => onChange('anemia', c)} />
-                        <Checkbox label="Hipertensión" checked={formData.hypertension} onChange={(c: any) => onChange('hypertension', c)} />
-                        <Checkbox label="Enf. Renales" checked={formData.renal} onChange={(c: any) => onChange('renal', c)} />
-                    </div>
-                    <div className="space-y-3">
-                        <Input label="Otros Antecedentes" value={formData.others} onChange={(v: any) => onChange('others', v)} />
-                        <Input label="Alergias" value={formData.allergies} onChange={(v: any) => onChange('allergies', v)} />
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Antecedentes Clínicos */}
+                <Section title="Antecedentes Clínicos" icon={Stethoscope}>
+                    <div className="space-y-4">
+                        <TextArea label="Motivo Consulta" value={formData.motive} onChange={(v: any) => onChange('motive', v)} placeholder="-" />
+                        <TextArea label="Medicamentos" value={formData.medications} onChange={(v: any) => onChange('medications', v)} placeholder="-" />
+                        <TextArea label="Heredofamiliares" value={formData.familyHistory} onChange={(v: any) => onChange('familyHistory', v)} placeholder="-" />
+                        <Input label="Otros" value={formData.others} onChange={(v: any) => onChange('others', v)} placeholder="-" />
+                        <Input label="Alergias (Clínicas)" value={formData.allergies} onChange={(v: any) => onChange('allergies', v)} placeholder="-" />
                     </div>
                 </Section>
 
-                {/* Antecedentes Heredofamiliares y Medicación */}
-                <Section title="General" icon={Users}>
+                {/* Gineco-Obstétricos / Patologías */}
+                <div className="space-y-6">
+                    {/* Patologías */}
+                    <Section title="Patologías" icon={AlertCircle}>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <Checkbox label="Diabetes" checked={formData.diabetes} onChange={(c: any) => onChange('diabetes', c)} />
+                            <Checkbox label="Cáncer" checked={formData.cancer} onChange={(c: any) => onChange('cancer', c)} />
+                            <Checkbox label="Dislipidemia" checked={formData.dislipidemia} onChange={(c: any) => onChange('dislipidemia', c)} />
+                            <Checkbox label="Anemia" checked={formData.anemia} onChange={(c: any) => onChange('anemia', c)} />
+                            <Checkbox label="Hipertensión" checked={formData.hypertension} onChange={(c: any) => onChange('hypertension', c)} />
+                            <Checkbox label="Enf. Renales" checked={formData.renal} onChange={(c: any) => onChange('renal', c)} />
+                        </div>
+                    </Section>
+
+                    {/* Gineco (Conditional) */}
+                    {formData.gender === 'F' && (
+                        <Section title="Gineco-Obstétricos" icon={Activity}>
+                            <div className="grid grid-cols-4 gap-2 mb-4">
+                                <Input label="G" value={formData.g} onChange={(v: any) => onChange('g', v)} placeholder="-" />
+                                <Input label="P" value={formData.p} onChange={(v: any) => onChange('p', v)} placeholder="-" />
+                                <Input label="C" value={formData.c} onChange={(v: any) => onChange('c', v)} placeholder="-" />
+                                <Input label="A" value={formData.a} onChange={(v: any) => onChange('a', v)} placeholder="-" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <Input label="FUM" type="date" value={formData.fum} onChange={(v: any) => onChange('fum', v)} />
+                                <Input label="Menarca" value={formData.menarche} onChange={(v: any) => onChange('menarche', v)} placeholder="-" />
+                                <Input label="Duración Ciclo" value={formData.cycleDuration} onChange={(v: any) => onChange('cycleDuration', v)} placeholder="-" />
+                                <div>
+                                    <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">Regularidad</label>
+                                    <select
+                                        value={formData.cycleRegularity}
+                                        onChange={e => onChange('cycleRegularity', e.target.value)}
+                                        className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none"
+                                    >
+                                        <option value="">-</option>
+                                        <option value="Regular">Regular</option>
+                                        <option value="Irregular">Irregular</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="mt-4">
+                                <Input label="Anticonceptivos" value={formData.contraception} onChange={(v: any) => onChange('contraception', v)} placeholder="-" />
+                            </div>
+                        </Section>
+                    )}
+                </div>
+            </div>
+
+            {/* Sintomatología Actual */}
+            <Section title="Sintomatología Actual" icon={Activity}>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {SYMPTOMS_LIST.map(symptom => (
+                        <Checkbox
+                            key={symptom}
+                            label={symptom}
+                            checked={(formData.symptoms || []).includes(symptom)}
+                            onChange={(c: boolean) => toggleSymptom(symptom, c)}
+                        />
+                    ))}
+                </div>
+            </Section>
+
+            {/* Recordatorio 24h & Hábitos Alimenticios */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Section title="Recordatorio 24H (Básico)" icon={Clock}>
                     <div className="space-y-4">
-                        <TextArea
-                            label="Antecedentes Heredofamiliares"
-                            value={formData.familyHistory}
-                            onChange={(v: any) => onChange('familyHistory', v)}
-                            placeholder="Diabetes, Hipertensión en padres/abuelos..."
-                        />
-                        <TextArea
-                            label="Medicación Actual"
-                            value={formData.medications}
-                            onChange={(v: any) => onChange('medications', v)}
-                            placeholder="Nombre, dosis, frecuencia..."
-                        />
+                        <TextArea label="Desayuno" value={formData.recallBreakfast} onChange={(v: any) => onChange('recallBreakfast', v)} placeholder="-" />
+                        <TextArea label="Comida" value={formData.recallLunch} onChange={(v: any) => onChange('recallLunch', v)} placeholder="-" />
+                        <TextArea label="Cena" value={formData.recallDinner} onChange={(v: any) => onChange('recallDinner', v)} placeholder="-" />
+                    </div>
+                </Section>
+
+                <Section title="Hábitos Alimenticios" icon={Utensils}>
+                    <div className="grid grid-cols-2 gap-4">
+                        <Input label="Tipo de dieta actual" value={formData.dietType} onChange={(v: any) => onChange('dietType', v)} placeholder="-" />
+                        <TextArea label="Recetas favoritas" value={formData.favoriteRecipes} onChange={(v: any) => onChange('favoriteRecipes', v)} placeholder="-" />
+
+                        <Input label="Número de comidas al día" value={formData.numMeals} onChange={(v: any) => onChange('numMeals', v)} placeholder="-" />
+                        <Input label="Consumo Agua (vasos/litros)" value={formData.waterConsumption} onChange={(v: any) => onChange('waterConsumption', v)} placeholder="-" />
+
+                        <Input label="¿Quién cocina?" value={formData.cookingHabits} onChange={(v: any) => onChange('cookingHabits', v)} placeholder="-" />
+                        <Input label="Consumo Café (tazas)" value={formData.coffeeConsumption} onChange={(v: any) => onChange('coffeeConsumption', v)} placeholder="-" />
+
+                        <Input label="Horarios para comer" value={formData.mealTimes} onChange={(v: any) => onChange('mealTimes', v)} placeholder="-" />
+                        <Input label="Frecuencia comer fuera / a domicilio" value={formData.eatingOutFrequency} onChange={(v: any) => onChange('eatingOutFrequency', v)} placeholder="-" />
+
+                        <Input label="Compañía / Distractores al comer" value={formData.eatingCompany} onChange={(v: any) => onChange('eatingCompany', v)} placeholder="-" />
+                        <Input label="Frecuencia alimentos procesados" value={formData.processedFoodFrequency} onChange={(v: any) => onChange('processedFoodFrequency', v)} placeholder="-" />
                     </div>
                 </Section>
             </div>
 
-            {/* Gineco-obstétricos (Only for Females) */}
-            {formData.gender === 'F' && (
-                <Section title="Gineco-obstétricos" icon={Users}>
-                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-4">
-                        <Input label="G (Gestas)" value={formData.g} onChange={(v: any) => onChange('g', v)} />
-                        <Input label="P (Partos)" value={formData.p} onChange={(v: any) => onChange('p', v)} />
-                        <Input label="C (Cesáreas)" value={formData.c} onChange={(v: any) => onChange('c', v)} />
-                        <Input label="A (Abortos)" value={formData.a} onChange={(v: any) => onChange('a', v)} />
-                        <Input label="FUM" type="date" value={formData.fum} onChange={(v: any) => onChange('fum', v)} />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <Input label="Método Anticonceptivo" value={formData.contraception} onChange={(v: any) => onChange('contraception', v)} />
-                        <Input label="Menarca (edad)" value={formData.menarche} onChange={(v: any) => onChange('menarche', v)} />
-                        <Input label="Duración Ciclo (días)" value={formData.cycleDuration} onChange={(v: any) => onChange('cycleDuration', v)} />
-                        <div>
-                            <label className="block text-xs font-bold text-slate-400 mb-1">Regularidad</label>
-                            <select
-                                value={formData.cycleRegularity}
-                                onChange={e => onChange('cycleRegularity', e.target.value)}
-                                className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 text-white text-sm focus:border-[var(--primary)] outline-none"
-                            >
-                                <option value="">Seleccionar</option>
-                                <option value="Regular">Regular</option>
-                                <option value="Irregular">Irregular</option>
-                            </select>
-                        </div>
-                    </div>
-                </Section>
-            )}
-
-            {/* Hábitos Nutricionales */}
-            <Section title="Hábitos Nutricionales" icon={Utensils}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input label="Tipo de Dieta" value={formData.dietType} onChange={(v: any) => onChange('dietType', v)} placeholder="Omnívora, Vegetariana..." />
-                    <Input label="Quién cocina?" value={formData.cookingHabits} onChange={(v: any) => onChange('cookingHabits', v)} />
-                    <Input label="Compañía al comer" value={formData.eatingCompany} onChange={(v: any) => onChange('eatingCompany', v)} placeholder="Solo, Familia..." />
-                    <Input label="Consumo Café (tazas/día)" value={formData.coffeeConsumption} onChange={(v: any) => onChange('coffeeConsumption', v)} />
-                    <Input label="Comidas Fuera (veces/sem)" value={formData.eatingOutFrequency} onChange={(v: any) => onChange('eatingOutFrequency', v)} />
-                    <Input label="Alimentos Procesados" value={formData.processedFoodFrequency} onChange={(v: any) => onChange('processedFoodFrequency', v)} />
-                </div>
-                <div className="mt-4">
-                    <TextArea label="Recetas Favoritas" value={formData.favoriteRecipes} onChange={(v: any) => onChange('favoriteRecipes', v)} />
+            {/* Frecuencia de Consumo */}
+            <Section title="Frecuencia de Consumo" icon={FileText}>
+                <div className="overflow-x-auto">
+                    <table className="w-full text-sm text-left">
+                        <thead>
+                            <tr className="border-b border-slate-700 text-slate-400">
+                                <th className="py-2 px-2">Grupo</th>
+                                {FREQUENCIES.map(f => (
+                                    <th key={f} className="py-2 px-2 text-center">{f}</th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {FOOD_GROUPS.map((group, idx) => (
+                                <tr key={group} className={`border-b border-slate-800/50 hover:bg-white/5 transition-colors ${idx % 2 === 0 ? 'bg-slate-900/30' : ''}`}>
+                                    <td className="py-2.5 px-2 font-medium text-white">{group}</td>
+                                    {FREQUENCIES.map(freq => (
+                                        <td key={freq} className="py-2.5 px-2 text-center">
+                                            <label className="cursor-pointer flex justify-center">
+                                                <input
+                                                    type="radio"
+                                                    name={`freq-${group}`}
+                                                    checked={formData.foodFrequencies?.[group] === freq}
+                                                    onChange={() => updateFrequency(group, freq)}
+                                                    className="w-4 h-4 text-[var(--primary)] bg-slate-800 border-slate-600 focus:ring-[var(--primary)] focus:ring-2"
+                                                />
+                                            </label>
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </Section>
 
-            {/* Recordatorio 24h */}
-            <Section title="Recordatorio 24 Horas" icon={Clock}>
-                <div className="space-y-3">
-                    <Input label="Desayuno" value={formData.recallBreakfast} onChange={(v: any) => onChange('recallBreakfast', v)} placeholder="Hora y alimentos..." />
-                    <Input label="Colación Mañana" value={formData.recallSnackAM} onChange={(v: any) => onChange('recallSnackAM', v)} />
-                    <Input label="Almuerzo" value={formData.recallLunch} onChange={(v: any) => onChange('recallLunch', v)} />
-                    <Input label="Colación Tarde" value={formData.recallSnackPM} onChange={(v: any) => onChange('recallSnackPM', v)} />
-                    <Input label="Cena" value={formData.recallDinner} onChange={(v: any) => onChange('recallDinner', v)} />
-                </div>
-            </Section>
         </div>
     );
 }
