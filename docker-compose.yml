@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build: .
@@ -10,3 +8,8 @@ services:
       - /app/node_modules
     environment:
       - CHOKIDAR_USEPOLLING=true
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token eyJhIjoiNmVhYjZlYTU3MDZkYjFiZTRjNmQ0NjZmMDMyYjlkNWEiLCJ0IjoiNjUxYjE4ZDMtYjAwZC00MzNhLTk3OTAtZDIyMTlkYzU2ZjA1IiwicyI6Ill6TmxZbVEyTVRNdE1EYzNaUzAwWlRrNUxXRTJOVEl0TVdNd1lqRTJPRFkyTkdRMyJ9
+    restart: unless-stopped
