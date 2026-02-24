@@ -52,7 +52,11 @@ export interface Lifestyle {
     meals: string;
     water: string;
     alcohol: boolean;
+    alcoholType?: string;
+    alcoholFrequency?: string;
     tobacco: boolean;
+    tobaccoType?: string;
+    tobaccoFrequency?: string;
   };
   bowelMovement?: string;
   foodAllergies?: string[]; // Changed to array
@@ -75,6 +79,19 @@ export interface Lifestyle {
     budget: 'Bajo' | 'Medio' | 'Alto';
     access: string;
     eatingOut: string;
+  };
+
+  nutritionalHabits?: {
+    dietType?: string;
+    mealsPerDay?: string;
+    cookingHabits?: string; // Do you cook or someone else?
+    mealTimes?: string;
+    eatingCompany?: string; // Alone, accompanied, with distractors?
+    favoriteRecipes?: string;
+    waterConsumption?: string;
+    coffeeConsumption?: string;
+    eatingOutFrequency?: string;
+    processedFoodFrequency?: string;
   };
 }
 
@@ -124,6 +141,8 @@ export interface ClinicalHistory {
       allergies: string;
     };
     symptoms?: string[]; // List of symptoms
+    currentSymptoms?: string;
+    pathologies?: string;
   };
   gyneco?: {
     g: string;
@@ -143,19 +162,6 @@ export interface ClinicalHistory {
     lunch: string;
     snackPM: string;
     dinner: string;
-  };
-  // New Nutritional Habits Section
-  nutritionalHabits?: {
-    dietType?: string;
-    mealsPerDay?: string;
-    cookingHabits?: string; // Do you cook or someone else?
-    mealTimes?: string;
-    eatingCompany?: string; // Alone, accompanied, with distractors?
-    favoriteRecipes?: string;
-    waterConsumption?: string;
-    coffeeConsumption?: string;
-    eatingOutFrequency?: string;
-    processedFoodFrequency?: string;
   };
   frequencies: Record<string, string>;
 }

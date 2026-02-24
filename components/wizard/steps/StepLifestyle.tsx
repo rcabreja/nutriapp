@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, Moon, Coffee, Wallet, AlertCircle } from 'lucide-react';
+import { Activity, Moon, Coffee, Wallet, AlertCircle, Utensils } from 'lucide-react';
 
 interface Props {
     formData: any;
@@ -119,8 +119,24 @@ export default function StepLifestyle({ formData, onChange }: Props) {
                         <Input label="Horarios Comida" value={formData.mealSchedules} onChange={(v: any) => onChange('mealSchedules', v)} />
 
                         <div className="grid grid-cols-2 gap-4 pt-2">
-                            <Checkbox label="Alcohol" checked={formData.alcohol} onChange={(c: any) => onChange('alcohol', c)} />
-                            <Checkbox label="Tabaco" checked={formData.tobacco} onChange={(c: any) => onChange('tobacco', c)} />
+                            <div className="flex flex-col p-2 bg-slate-900/20 rounded-lg rounded-t-xl gap-2 border border-slate-700">
+                                <Checkbox label="Alcohol" checked={formData.alcohol} onChange={(c: any) => onChange('alcohol', c)} />
+                                {formData.alcohol && (
+                                    <div className="grid grid-cols-1 gap-2 pt-2 border-t border-slate-700/50">
+                                        <Input label="Tipo" value={formData.alcoholType} onChange={(v: any) => onChange('alcoholType', v)} placeholder="Ej. Cerveza, Vino..." />
+                                        <Input label="Frecuencia" value={formData.alcoholFrequency} onChange={(v: any) => onChange('alcoholFrequency', v)} placeholder="Ej. Fines de sem..." />
+                                    </div>
+                                )}
+                            </div>
+                            <div className="flex flex-col p-2 bg-slate-900/20 rounded-lg rounded-t-xl gap-2 border border-slate-700">
+                                <Checkbox label="Tabaco" checked={formData.tobacco} onChange={(c: any) => onChange('tobacco', c)} />
+                                {formData.tobacco && (
+                                    <div className="grid grid-cols-1 gap-2 pt-2 border-t border-slate-700/50">
+                                        <Input label="Tipo" value={formData.tobaccoType} onChange={(v: any) => onChange('tobaccoType', v)} placeholder="Ej. Cigarrillo, Vape..." />
+                                        <Input label="Frecuencia" value={formData.tobaccoFrequency} onChange={(v: any) => onChange('tobaccoFrequency', v)} placeholder="Ej. 1 cajetilla/día" />
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </Section>
@@ -157,6 +173,26 @@ export default function StepLifestyle({ formData, onChange }: Props) {
                     </div>
                 </Section>
             </div>
+
+            {/* Hábitos Alimenticios */}
+            <Section title="Hábitos Alimenticios" icon={Utensils}>
+                <div className="grid grid-cols-2 gap-4">
+                    <Input label="Tipo de dieta actual" value={formData.dietType} onChange={(v: any) => onChange('dietType', v)} placeholder="-" />
+                    <TextArea label="Recetas favoritas" value={formData.favoriteRecipes} onChange={(v: any) => onChange('favoriteRecipes', v)} placeholder="-" />
+
+                    <Input label="Número de comidas al día" value={formData.numMeals} onChange={(v: any) => onChange('numMeals', v)} placeholder="-" />
+                    <Input label="Consumo Agua (vasos/litros)" value={formData.waterConsumption} onChange={(v: any) => onChange('waterConsumption', v)} placeholder="-" />
+
+                    <Input label="¿Quién cocina?" value={formData.cookingHabits} onChange={(v: any) => onChange('cookingHabits', v)} placeholder="-" />
+                    <Input label="Consumo Café (tazas)" value={formData.coffeeConsumption} onChange={(v: any) => onChange('coffeeConsumption', v)} placeholder="-" />
+
+                    <Input label="Horarios para comer" value={formData.mealTimes} onChange={(v: any) => onChange('mealTimes', v)} placeholder="-" />
+                    <Input label="Frecuencia comer fuera / a domicilio" value={formData.eatingOutFrequency} onChange={(v: any) => onChange('eatingOutFrequency', v)} placeholder="-" />
+
+                    <Input label="Compañía / Distractores al comer" value={formData.eatingCompany} onChange={(v: any) => onChange('eatingCompany', v)} placeholder="-" />
+                    <Input label="Frecuencia alimentos procesados" value={formData.processedFoodFrequency} onChange={(v: any) => onChange('processedFoodFrequency', v)} placeholder="-" />
+                </div>
+            </Section>
 
             {/* Preferencias y Economía */}
             <Section title="Preferencias y Economía" icon={Wallet}>

@@ -171,25 +171,77 @@ export default function LifestyleTab({ patient, updatePatient, readOnly }: Props
 
                         {/* Separated Alcohol and Tobacco */}
                         <div className="col-span-2 grid grid-cols-2 gap-4 mt-2">
-                            <div className={`p-3 rounded-lg border flex items-center justify-between ${data.diet.alcohol ? 'bg-red-500/10 border-red-500/30' : 'bg-slate-800 border-slate-700'}`}>
-                                <span className="text-sm font-bold text-slate-300">Alcohol</span>
-                                <input
-                                    type="checkbox"
-                                    disabled={!isEditing}
-                                    checked={data.diet.alcohol}
-                                    onChange={e => setData({ ...data, diet: { ...data.diet, alcohol: e.target.checked } })}
-                                    className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-red-500 focus:ring-red-500"
-                                />
+                            <div className={`p-3 rounded-lg border flex flex-col gap-2 transition-colors ${data.diet.alcohol ? 'bg-red-500/10 border-red-500/30' : 'bg-slate-800 border-slate-700'}`}>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-sm font-bold text-slate-300">Alcohol</span>
+                                    <input
+                                        type="checkbox"
+                                        disabled={!isEditing}
+                                        checked={data.diet.alcohol}
+                                        onChange={e => setData({ ...data, diet: { ...data.diet, alcohol: e.target.checked } })}
+                                        className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-red-500 focus:ring-red-500"
+                                    />
+                                </div>
+                                {data.diet.alcohol && (
+                                    <div className="grid grid-cols-2 gap-2 mt-1">
+                                        <div>
+                                            <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Tipo</label>
+                                            <input
+                                                disabled={!isEditing}
+                                                value={data.diet.alcoholType || ''}
+                                                onChange={e => setData({ ...data, diet: { ...data.diet, alcoholType: e.target.value } })}
+                                                placeholder="Ej. Cerveza, Vino..."
+                                                className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white text-xs focus:border-red-500 outline-none"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Frecuencia</label>
+                                            <input
+                                                disabled={!isEditing}
+                                                value={data.diet.alcoholFrequency || ''}
+                                                onChange={e => setData({ ...data, diet: { ...data.diet, alcoholFrequency: e.target.value } })}
+                                                placeholder="Ej. Fines de sem..."
+                                                className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white text-xs focus:border-red-500 outline-none"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-                            <div className={`p-3 rounded-lg border flex items-center justify-between ${data.diet.tobacco ? 'bg-orange-500/10 border-orange-500/30' : 'bg-slate-800 border-slate-700'}`}>
-                                <span className="text-sm font-bold text-slate-300">Tabaco</span>
-                                <input
-                                    type="checkbox"
-                                    disabled={!isEditing}
-                                    checked={data.diet.tobacco}
-                                    onChange={e => setData({ ...data, diet: { ...data.diet, tobacco: e.target.checked } })}
-                                    className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-orange-500 focus:ring-orange-500"
-                                />
+                            <div className={`p-3 rounded-lg border flex flex-col gap-2 transition-colors ${data.diet.tobacco ? 'bg-orange-500/10 border-orange-500/30' : 'bg-slate-800 border-slate-700'}`}>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-sm font-bold text-slate-300">Tabaco</span>
+                                    <input
+                                        type="checkbox"
+                                        disabled={!isEditing}
+                                        checked={data.diet.tobacco}
+                                        onChange={e => setData({ ...data, diet: { ...data.diet, tobacco: e.target.checked } })}
+                                        className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-orange-500 focus:ring-orange-500"
+                                    />
+                                </div>
+                                {data.diet.tobacco && (
+                                    <div className="grid grid-cols-2 gap-2 mt-1">
+                                        <div>
+                                            <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Tipo</label>
+                                            <input
+                                                disabled={!isEditing}
+                                                value={data.diet.tobaccoType || ''}
+                                                onChange={e => setData({ ...data, diet: { ...data.diet, tobaccoType: e.target.value } })}
+                                                placeholder="Ej. Cigarrillo..."
+                                                className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white text-xs focus:border-orange-500 outline-none"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Frecuencia</label>
+                                            <input
+                                                disabled={!isEditing}
+                                                value={data.diet.tobaccoFrequency || ''}
+                                                onChange={e => setData({ ...data, diet: { ...data.diet, tobaccoFrequency: e.target.value } })}
+                                                placeholder="Ej. 1 cajetilla/día"
+                                                className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white text-xs focus:border-orange-500 outline-none"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -386,6 +438,57 @@ export default function LifestyleTab({ patient, updatePatient, readOnly }: Props
                             onRemove={(i) => removeItem('foodIntolerances', i)}
                             isEditing={isEditing}
                         />
+                    </div>
+                </Section>
+                {/* Nutritional Habits Section */}
+                <Section title="Hábitos Alimenticios" icon={Utensils}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-3">
+                            <div>
+                                <label className="text-xs text-slate-500 font-bold block mb-1">Tipo de dieta actual</label>
+                                <input disabled={!isEditing} value={data.nutritionalHabits?.dietType || ''} onChange={e => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, dietType: e.target.value } })} className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors" />
+                            </div>
+                            <div>
+                                <label className="text-xs text-slate-500 font-bold block mb-1">Número de comidas al día</label>
+                                <input disabled={!isEditing} value={data.nutritionalHabits?.mealsPerDay || ''} onChange={e => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, mealsPerDay: e.target.value } })} className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors" />
+                            </div>
+                            <div>
+                                <label className="text-xs text-slate-500 font-bold block mb-1">¿Quién cocina?</label>
+                                <input disabled={!isEditing} value={data.nutritionalHabits?.cookingHabits || ''} onChange={e => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, cookingHabits: e.target.value } })} className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors" />
+                            </div>
+                            <div>
+                                <label className="text-xs text-slate-500 font-bold block mb-1">Horarios para comer</label>
+                                <input disabled={!isEditing} value={data.nutritionalHabits?.mealTimes || ''} onChange={e => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, mealTimes: e.target.value } })} className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors" />
+                            </div>
+                            <div>
+                                <label className="text-xs text-slate-500 font-bold block mb-1">Compañía / Distractores al comer</label>
+                                <input disabled={!isEditing} value={data.nutritionalHabits?.eatingCompany || ''} onChange={e => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, eatingCompany: e.target.value } })} className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors" />
+                            </div>
+                        </div>
+                        <div className="space-y-3">
+                            <div>
+                                <label className="text-xs text-slate-500 font-bold block mb-1">Recetas favoritas</label>
+                                <input disabled={!isEditing} value={data.nutritionalHabits?.favoriteRecipes || ''} onChange={e => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, favoriteRecipes: e.target.value } })} className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="text-xs text-slate-500 font-bold block mb-1">Agua (vasos/litros)</label>
+                                    <input disabled={!isEditing} value={data.nutritionalHabits?.waterConsumption || ''} onChange={e => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, waterConsumption: e.target.value } })} className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors" />
+                                </div>
+                                <div>
+                                    <label className="text-xs text-slate-500 font-bold block mb-1">Café (tazas)</label>
+                                    <input disabled={!isEditing} value={data.nutritionalHabits?.coffeeConsumption || ''} onChange={e => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, coffeeConsumption: e.target.value } })} className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors" />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="text-xs text-slate-500 font-bold block mb-1">Frecuencia comer fuera / a domicilio</label>
+                                <input disabled={!isEditing} value={data.nutritionalHabits?.eatingOutFrequency || ''} onChange={e => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, eatingOutFrequency: e.target.value } })} className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors" />
+                            </div>
+                            <div>
+                                <label className="text-xs text-slate-500 font-bold block mb-1">Frecuencia alimentos procesados</label>
+                                <input disabled={!isEditing} value={data.nutritionalHabits?.processedFoodFrequency || ''} onChange={e => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, processedFoodFrequency: e.target.value } })} className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors" />
+                            </div>
+                        </div>
                     </div>
                 </Section>
             </div>

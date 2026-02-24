@@ -121,11 +121,11 @@ export default function PatientDetail() {
 
   const tabs = [
     { id: 'notes', label: 'Notas Evolución' },
+    { id: 'clinical', label: 'Historia Clínica' },
     { id: 'lifestyle', label: 'Estilo de Vida' },
     { id: 'anthro', label: 'Antropometría' },
-    { id: 'clinical', label: 'Historia Clínica' },
-    { id: 'plans', label: 'Planes (Grid)' },
     { id: 'labs', label: 'Analíticas' },
+    { id: 'plans', label: 'Planes (Grid)' },
   ];
 
   return (
@@ -294,26 +294,26 @@ export default function PatientDetail() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                 <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Sexo</label>
-                    <select
-                      value={editForm.gender}
-                      onChange={e => setEditForm({ ...editForm, gender: e.target.value })}
-                      className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none appearance-none"
-                    >
-                      <option value="F">Femenino</option>
-                      <option value="M">Masculino</option>
-                    </select>
-                 </div>
-                 <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Correo Electrónico</label>
-                    <input
-                      type="email"
-                      value={editForm.email}
-                      onChange={e => setEditForm({ ...editForm, email: e.target.value })}
-                      className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
-                    />
-                 </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Sexo</label>
+                  <select
+                    value={editForm.gender}
+                    onChange={e => setEditForm({ ...editForm, gender: e.target.value })}
+                    className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none appearance-none"
+                  >
+                    <option value="F">Femenino</option>
+                    <option value="M">Masculino</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Correo Electrónico</label>
+                  <input
+                    type="email"
+                    value={editForm.email}
+                    onChange={e => setEditForm({ ...editForm, email: e.target.value })}
+                    className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
+                  />
+                </div>
               </div>
 
 

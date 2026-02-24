@@ -17,9 +17,9 @@ interface Props {
 
 const STEPS = [
     { id: 'basic', label: 'Datos Básicos' },
-    { id: 'lifestyle', label: 'Estilo de Vida' }, // Moved up
-    { id: 'anthro', label: 'Antropometría' }, // Moved up
-    { id: 'clinical', label: 'Historia Clínica' }, // Moved down
+    { id: 'clinical', label: 'Historia Clínica' },
+    { id: 'lifestyle', label: 'Estilo de Vida' },
+    { id: 'anthro', label: 'Antropometría' },
     { id: 'labs', label: 'Analíticas' },
 ];
 
@@ -65,7 +65,9 @@ export default function CreatePatientWizard({ onClose }: Props) {
         weightLossMeds: '', // Medicamentos peso
         otherHealthCare: '', // Cuidas salud de otra manera
 
-        alcohol: false, tobacco: false, water: '', bowel: '', dailyRoutine: '',
+        alcohol: false, alcoholType: '', alcoholFrequency: '',
+        tobacco: false, tobaccoType: '', tobaccoFrequency: '',
+        water: '', bowel: '', dailyRoutine: '',
         mealsPerDay: '', eatingOut: '',
         supplementation: '', foodIntolerances: '', foodAllergies: '', likes: '', dislikes: '',
         preferences: '', aversiones: '', budget: 'Medio', access: '', eatingOutStat: '', // Preferences & Economy
@@ -144,7 +146,11 @@ export default function CreatePatientWizard({ onClose }: Props) {
                     meals: formData.mealSchedules, // Mapped to mealSchedules
                     water: formData.water,
                     alcohol: formData.alcohol,
-                    tobacco: formData.tobacco
+                    alcoholType: formData.alcoholType,
+                    alcoholFrequency: formData.alcoholFrequency,
+                    tobacco: formData.tobacco,
+                    tobaccoType: formData.tobaccoType,
+                    tobaccoFrequency: formData.tobaccoFrequency
                 },
                 bowelMovement: formData.bowel,
                 foodAllergies: formData.foodAllergies ? formData.foodAllergies.split(',').map((s: string) => s.trim()) : [],
@@ -164,6 +170,18 @@ export default function CreatePatientWizard({ onClose }: Props) {
                     budget: formData.budget,
                     access: formData.access,
                     eatingOut: formData.eatingOutStat
+                },
+                nutritionalHabits: {
+                    dietType: formData.dietType,
+                    mealsPerDay: formData.numMeals,
+                    cookingHabits: formData.cookingHabits,
+                    eatingCompany: formData.eatingCompany,
+                    coffeeConsumption: formData.coffeeConsumption,
+                    eatingOutFrequency: formData.eatingOutFrequency, // Or eatingOutStat?
+                    processedFoodFrequency: formData.processedFoodFrequency,
+                    favoriteRecipes: formData.favoriteRecipes,
+                    waterConsumption: formData.waterConsumption,
+                    mealTimes: formData.mealTimes
                 }
             },
 
@@ -182,7 +200,9 @@ export default function CreatePatientWizard({ onClose }: Props) {
                         others: formData.others,
                         allergies: formData.allergies
                     },
-                    symptoms: formData.symptoms
+                    symptoms: formData.symptoms,
+                    currentSymptoms: formData.currentSymptoms,
+                    pathologies: formData.pathologiesDescription
                 },
                 gyneco: {
                     g: formData.g,
@@ -201,18 +221,6 @@ export default function CreatePatientWizard({ onClose }: Props) {
                     lunch: formData.recallLunch,
                     snackPM: formData.recallSnackPM,
                     dinner: formData.recallDinner
-                },
-                nutritionalHabits: {
-                    dietType: formData.dietType,
-                    mealsPerDay: formData.numMeals,
-                    cookingHabits: formData.cookingHabits,
-                    eatingCompany: formData.eatingCompany,
-                    coffeeConsumption: formData.coffeeConsumption,
-                    eatingOutFrequency: formData.eatingOutFrequency, // Or eatingOutStat?
-                    processedFoodFrequency: formData.processedFoodFrequency,
-                    favoriteRecipes: formData.favoriteRecipes,
-                    waterConsumption: formData.waterConsumption,
-                    mealTimes: formData.mealTimes
                 },
                 frequencies: formData.foodFrequencies
             }
@@ -304,9 +312,9 @@ export default function CreatePatientWizard({ onClose }: Props) {
                 <div className="flex-1 overflow-y-auto custom-scrollbar p-6 bg-[var(--card-bg)]">
                     <div className="max-w-4xl mx-auto">
                         {currentStep === 0 && <StepBasicInfo formData={formData} onChange={handleChange} />}
-                        {currentStep === 1 && <StepLifestyle formData={formData} onChange={handleChange} />}
-                        {currentStep === 2 && <StepAnthropometry formData={formData} onChange={handleChange} gender={formData.gender as 'M' | 'F'} dob={formData.dob} />}
-                        {currentStep === 3 && <StepClinical formData={formData} onChange={handleChange} />}
+                        {currentStep === 1 && <StepClinical formData={formData} onChange={handleChange} />}
+                        {currentStep === 2 && <StepLifestyle formData={formData} onChange={handleChange} />}
+                        {currentStep === 3 && <StepAnthropometry formData={formData} onChange={handleChange} gender={formData.gender as 'M' | 'F'} dob={formData.dob} />}
                         {currentStep === 4 && <StepLabs formData={formData} onChange={handleChange} />}
                     </div>
                 </div>

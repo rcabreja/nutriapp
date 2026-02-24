@@ -17,13 +17,6 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
         setIsEditing(false);
     };
 
-    const foodGroups = [
-        'Verduras', 'Frutas', 'Cereales', 'Tubérculos', 'Leguminosas',
-        'Carnes Rojas', 'Pollo / Pavo', 'Pescados', 'Huevo', 'Embutidos',
-        'Lácteos', 'Grasas', 'Azúcares'
-    ];
-    const frequencies = ['Diario', 'Semanal', 'Quincenal', 'Ocasional', 'Nunca'];
-
     const symptomsList = [
         'Dolores de cabeza', 'Fatiga', 'Diarrea', 'Estreñimiento', 'Dolor abdominal',
         'Distensión abdominal', 'Flatulencias', 'Reflujo', 'Acidez', 'Náuseas',
@@ -68,23 +61,24 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
                         </div>
                     </div>
 
-                    {/* Pathological Checkboxes */}
+                    {/* Pathological Checkboxes and Text */}
                     <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
                         <h4 className="text-sm font-bold text-blue-400 mb-4 uppercase border-b border-slate-800 pb-2">Patologías</h4>
-                        <div className="grid grid-cols-2 gap-y-3 gap-x-4">
-                            <Checkbox label="Diabetes" checked={data.background.pathological?.diabetes} editing={isEditing} onChange={c => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, diabetes: c } } })} />
-                            <Checkbox label="Cáncer" checked={data.background.pathological?.cancer} editing={isEditing} onChange={c => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, cancer: c } } })} />
-                            <Checkbox label="Dislipidemia" checked={data.background.pathological?.dislipidemia} editing={isEditing} onChange={c => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, dislipidemia: c } } })} />
-                            <Checkbox label="Anemia" checked={data.background.pathological?.anemia} editing={isEditing} onChange={c => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, anemia: c } } })} />
-                            <Checkbox label="Hipertensión" checked={data.background.pathological?.hypertension} editing={isEditing} onChange={c => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, hypertension: c } } })} />
-                            <Checkbox label="Enf. Renales" checked={data.background.pathological?.renal} editing={isEditing} onChange={c => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, renal: c } } })} />
+                        <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-4">
+                            <Checkbox label="Diabetes" checked={data.background.pathological?.diabetes} editing={isEditing} onChange={(c: any) => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, diabetes: c } } })} />
+                            <Checkbox label="Cáncer" checked={data.background.pathological?.cancer} editing={isEditing} onChange={(c: any) => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, cancer: c } } })} />
+                            <Checkbox label="Dislipidemia" checked={data.background.pathological?.dislipidemia} editing={isEditing} onChange={(c: any) => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, dislipidemia: c } } })} />
+                            <Checkbox label="Anemia" checked={data.background.pathological?.anemia} editing={isEditing} onChange={(c: any) => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, anemia: c } } })} />
+                            <Checkbox label="Hipertensión" checked={data.background.pathological?.hypertension} editing={isEditing} onChange={(c: any) => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, hypertension: c } } })} />
+                            <Checkbox label="Enf. Renales" checked={data.background.pathological?.renal} editing={isEditing} onChange={(c: any) => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, renal: c } } })} />
                         </div>
+                        <Field label="Patologías" value={data.background.pathologies} editing={isEditing} onChange={(v: any) => setData({ ...data, background: { ...data.background, pathologies: v } })} />
                     </div>
 
                     {/* Symptoms Section */}
                     <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
                         <h4 className="text-sm font-bold text-red-400 mb-4 uppercase border-b border-slate-800 pb-2">Sintomatología Actual</h4>
-                        <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm">
+                        <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm mb-4">
                             {symptomsList.map(sym => (
                                 <Checkbox
                                     key={sym}
@@ -95,6 +89,7 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
                                 />
                             ))}
                         </div>
+                        <Field label="Más Sintomatología" value={data.background.currentSymptoms} editing={isEditing} onChange={(v: any) => setData({ ...data, background: { ...data.background, currentSymptoms: v } })} />
                     </div>
                 </div>
 
@@ -147,57 +142,6 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
                 </div>
             </div>
 
-            {/* Nutritional Habits Section */}
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                <h4 className="text-sm font-bold text-green-400 mb-4 uppercase border-b border-slate-800 pb-2">Hábitos Alimenticios</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-3">
-                        <Field label="Tipo de dieta actual" value={data.nutritionalHabits?.dietType} editing={isEditing} onChange={v => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, dietType: v } })} />
-                        <Field label="Número de comidas al día" value={data.nutritionalHabits?.mealsPerDay} editing={isEditing} onChange={v => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, mealsPerDay: v } })} />
-                        <Field label="¿Quién cocina?" value={data.nutritionalHabits?.cookingHabits} editing={isEditing} onChange={v => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, cookingHabits: v } })} />
-                        <Field label="Horarios para comer" value={data.nutritionalHabits?.mealTimes} editing={isEditing} onChange={v => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, mealTimes: v } })} />
-                        <Field label="Compañía / Distractores al comer" value={data.nutritionalHabits?.eatingCompany} editing={isEditing} onChange={v => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, eatingCompany: v } })} />
-                    </div>
-                    <div className="space-y-3">
-                        <Field label="Recetas favoritas" value={data.nutritionalHabits?.favoriteRecipes} editing={isEditing} onChange={v => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, favoriteRecipes: v } })} />
-                        <div className="grid grid-cols-2 gap-4">
-                            <Field label="Consumo Agua (vasos/litros)" value={data.nutritionalHabits?.waterConsumption} editing={isEditing} onChange={v => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, waterConsumption: v } })} />
-                            <Field label="Consumo Café (tazas)" value={data.nutritionalHabits?.coffeeConsumption} editing={isEditing} onChange={v => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, coffeeConsumption: v } })} />
-                        </div>
-                        <Field label="Frecuencia comer fuera / a domicilio" value={data.nutritionalHabits?.eatingOutFrequency} editing={isEditing} onChange={v => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, eatingOutFrequency: v } })} />
-                        <Field label="Frecuencia alimentos procesados" value={data.nutritionalHabits?.processedFoodFrequency} editing={isEditing} onChange={v => setData({ ...data, nutritionalHabits: { ...data.nutritionalHabits, processedFoodFrequency: v } })} />
-                    </div>
-                </div>
-            </div>
-
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 overflow-hidden">
-                <h4 className="text-sm font-bold text-blue-400 mb-3 uppercase">Frecuencia de Consumo</h4>
-                <div className="overflow-x-auto">
-                    <table className="w-full text-sm min-w-[600px]">
-                        <thead>
-                            <tr className="text-slate-500 border-b border-slate-800">
-                                <th className="text-left py-2">Grupo</th>
-                                {frequencies.map(f => <th key={f} className="text-center py-2">{f}</th>)}
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-800">
-                            {foodGroups.map(group => (
-                                <tr key={group}>
-                                    <td className="py-2 text-slate-300 font-medium">{group}</td>
-                                    {frequencies.map(freq => (
-                                        <td key={freq} className="text-center py-2">
-                                            <div
-                                                onClick={() => isEditing && setData({ ...data, frequencies: { ...data.frequencies, [group]: freq } })}
-                                                className={`w-4 h-4 rounded-full mx-auto border cursor-pointer ${data.frequencies[group] === freq ? 'bg-green-500 border-green-500' : 'border-slate-600'} ${!isEditing && 'cursor-default'}`}
-                                            ></div>
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     );
 }

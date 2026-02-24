@@ -108,6 +108,9 @@ export default function StepClinical({ formData, onChange }: Props) {
                             <Checkbox label="Hipertensión" checked={formData.hypertension} onChange={(c: any) => onChange('hypertension', c)} />
                             <Checkbox label="Enf. Renales" checked={formData.renal} onChange={(c: any) => onChange('renal', c)} />
                         </div>
+                        <div className="mt-4">
+                            <TextArea label="Patologías" value={formData.pathologiesDescription} onChange={(v: any) => onChange('pathologiesDescription', v)} placeholder="Describa de ser necesario..." />
+                        </div>
                     </Section>
 
                     {/* Gineco (Conditional) */}
@@ -156,37 +159,19 @@ export default function StepClinical({ formData, onChange }: Props) {
                         />
                     ))}
                 </div>
+                <div className="mt-4">
+                    <TextArea label="Más Sintomatología" value={formData.currentSymptoms} onChange={(v: any) => onChange('currentSymptoms', v)} placeholder="Escriba síntomas adicionales o describa los actuales..." />
+                </div>
             </Section>
 
             {/* Recordatorio 24h & Hábitos Alimenticios */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Section title="Recordatorio 24H (Básico)" icon={Clock}>
-                    <div className="space-y-4">
-                        <TextArea label="Desayuno" value={formData.recallBreakfast} onChange={(v: any) => onChange('recallBreakfast', v)} placeholder="-" />
-                        <TextArea label="Comida" value={formData.recallLunch} onChange={(v: any) => onChange('recallLunch', v)} placeholder="-" />
-                        <TextArea label="Cena" value={formData.recallDinner} onChange={(v: any) => onChange('recallDinner', v)} placeholder="-" />
-                    </div>
-                </Section>
-
-                <Section title="Hábitos Alimenticios" icon={Utensils}>
-                    <div className="grid grid-cols-2 gap-4">
-                        <Input label="Tipo de dieta actual" value={formData.dietType} onChange={(v: any) => onChange('dietType', v)} placeholder="-" />
-                        <TextArea label="Recetas favoritas" value={formData.favoriteRecipes} onChange={(v: any) => onChange('favoriteRecipes', v)} placeholder="-" />
-
-                        <Input label="Número de comidas al día" value={formData.numMeals} onChange={(v: any) => onChange('numMeals', v)} placeholder="-" />
-                        <Input label="Consumo Agua (vasos/litros)" value={formData.waterConsumption} onChange={(v: any) => onChange('waterConsumption', v)} placeholder="-" />
-
-                        <Input label="¿Quién cocina?" value={formData.cookingHabits} onChange={(v: any) => onChange('cookingHabits', v)} placeholder="-" />
-                        <Input label="Consumo Café (tazas)" value={formData.coffeeConsumption} onChange={(v: any) => onChange('coffeeConsumption', v)} placeholder="-" />
-
-                        <Input label="Horarios para comer" value={formData.mealTimes} onChange={(v: any) => onChange('mealTimes', v)} placeholder="-" />
-                        <Input label="Frecuencia comer fuera / a domicilio" value={formData.eatingOutFrequency} onChange={(v: any) => onChange('eatingOutFrequency', v)} placeholder="-" />
-
-                        <Input label="Compañía / Distractores al comer" value={formData.eatingCompany} onChange={(v: any) => onChange('eatingCompany', v)} placeholder="-" />
-                        <Input label="Frecuencia alimentos procesados" value={formData.processedFoodFrequency} onChange={(v: any) => onChange('processedFoodFrequency', v)} placeholder="-" />
-                    </div>
-                </Section>
-            </div>
+            <Section title="Recordatorio 24H (Básico)" icon={Clock}>
+                <div className="space-y-4">
+                    <TextArea label="Desayuno" value={formData.recallBreakfast} onChange={(v: any) => onChange('recallBreakfast', v)} placeholder="-" />
+                    <TextArea label="Comida" value={formData.recallLunch} onChange={(v: any) => onChange('recallLunch', v)} placeholder="-" />
+                    <TextArea label="Cena" value={formData.recallDinner} onChange={(v: any) => onChange('recallDinner', v)} placeholder="-" />
+                </div>
+            </Section>
 
             {/* Frecuencia de Consumo */}
             <Section title="Frecuencia de Consumo" icon={FileText}>
@@ -223,7 +208,6 @@ export default function StepClinical({ formData, onChange }: Props) {
                     </table>
                 </div>
             </Section>
-
         </div>
     );
 }
