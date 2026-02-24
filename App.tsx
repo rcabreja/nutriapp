@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate, useLocation, Link } from 'react-router-dom';
 import { NutriProvider, useNutri } from './context';
-import { LayoutDashboard, Users, Calculator as CalcIcon, LogOut, Menu, UserCircle, X, Palette } from 'lucide-react';
+import { LayoutDashboard, Users, LogOut, Menu, UserCircle, X, Palette } from 'lucide-react';
 import Dashboard from './components/Dashboard';
 import PatientsList from './components/PatientsList';
 import PatientDetail from './components/PatientDetail';
-import Calculator from './components/Calculator';
+
 import ThemeSettings from './components/ThemeSettings';
 import Login from './components/Login';
 
@@ -21,7 +21,7 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
     <>
       {/* Mobile Overlay */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm"
           onClick={closeMenu}
         />
@@ -44,7 +44,7 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
             <X size={24} />
           </button>
         </div>
-        
+
         <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
           {currentUser?.role === 'admin' && (
             <>
@@ -58,7 +58,7 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
               </Link>
             </>
           )}
-          
+
           {currentUser?.role === 'patient' && (
             <Link to={`/patients/${currentUser.patientId}`} onClick={closeMenu} className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive(`/patients/${currentUser.patientId}`)}`}>
               <UserCircle size={20} />
@@ -66,15 +66,12 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
             </Link>
           )}
 
-          <Link to="/calculator" onClick={closeMenu} className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive('/calculator')}`}>
-            <CalcIcon size={20} />
-            <span>Calculadora</span>
-          </Link>
+
 
           {currentUser?.role === 'admin' && (
             <Link to="/settings" onClick={closeMenu} className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive('/settings')}`}>
-                <Palette size={20} />
-                <span>Diseño</span>
+              <Palette size={20} />
+              <span>Diseño</span>
             </Link>
           )}
         </nav>
@@ -101,7 +98,7 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
 
 const PrivateRoute = ({ children, adminOnly = false }: { children?: React.ReactNode, adminOnly?: boolean }) => {
   const { currentUser } = useNutri();
-  
+
   if (!currentUser) return <Navigate to="/" />;
   if (adminOnly && currentUser.role !== 'admin') return <Navigate to={`/patients/${currentUser.patientId}`} />;
 
@@ -114,11 +111,11 @@ const MainLayout = ({ children }: { children?: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-[var(--app-bg)] text-[var(--text-main)] font-[family-name:var(--font-family)]">
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-      
+
       {/* Mobile Header for Menu Toggle */}
       <div className="md:hidden bg-[var(--card-bg)] border-b border-slate-800 p-4 flex items-center justify-between sticky top-0 z-30">
         <h1 className="text-lg font-bold text-white flex items-center gap-2">
-           <span className="bg-[var(--primary)] px-2 py-1 rounded text-xs">N</span> NutriClinical
+          <span className="bg-[var(--primary)] px-2 py-1 rounded text-xs">N</span> NutriClinical
         </h1>
         <button onClick={() => setIsSidebarOpen(true)} className="text-slate-300 hover:text-white">
           <Menu size={24} />
@@ -141,7 +138,7 @@ const AppContent = () => {
       <Route path="/dashboard" element={<PrivateRoute><MainLayout><Dashboard /></MainLayout></PrivateRoute>} />
       <Route path="/patients" element={<PrivateRoute><MainLayout><PatientsList /></MainLayout></PrivateRoute>} />
       <Route path="/patients/:id" element={<PrivateRoute><MainLayout><PatientDetail /></MainLayout></PrivateRoute>} />
-      <Route path="/calculator" element={<PrivateRoute><MainLayout><Calculator /></MainLayout></PrivateRoute>} />
+
       <Route path="/settings" element={<PrivateRoute adminOnly><MainLayout><ThemeSettings /></MainLayout></PrivateRoute>} />
     </Routes>
   );

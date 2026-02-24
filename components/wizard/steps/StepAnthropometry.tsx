@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect } from 'react';
+import { getBodyCompositionCategory } from '../../../utils/bodyComposition';
 import { Activity, Calculator, FileText } from 'lucide-react';
 
 interface Props {
@@ -98,6 +99,18 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
         return { sum, avg };
     }, [data.folds]);
 
+    // Calculate Age
+    const age = useMemo(() => {
+        if (!dob) return 0;
+        const birthDate = new Date(dob);
+        const diff = Date.now() - birthDate.getTime();
+        return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+    }, [dob]);
+
+    const bodyComp = useMemo(() => {
+        return getBodyCompositionCategory(gender, age, foldsMetrics.avg);
+    }, [gender, age, foldsMetrics.avg]);
+
     return (
         <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -156,7 +169,12 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
                 <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700">
                     <div className="flex justify-between items-center mb-4 border-b border-slate-700 pb-2">
                         <h4 className="text-white font-bold">Pliegues (mm)</h4>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 flex-wrap justify-end">
+                            {bodyComp && (
+                                <span className={`text-xs font-bold ${bodyComp.color} bg-slate-700/50 px-2 py-1 rounded border border-slate-600 flex items-center gap-1`}>
+                                    {bodyComp.label}
+                                </span>
+                            )}
                             <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-2 py-1 rounded border border-blue-500/20 flex items-center gap-1">
                                 <Calculator size={10} /> Prom: {foldsMetrics.avg.toFixed(1)} mm
                             </span>

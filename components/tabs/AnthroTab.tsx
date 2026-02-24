@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { getBodyCompositionCategory } from '../../utils/bodyComposition';
 import { Patient, Anthropometry } from '../../types';
 import { Line } from 'react-chartjs-2';
 import { Plus, Calculator, Edit2, Trash2, X, AlertTriangle, Activity } from 'lucide-react';
@@ -165,7 +166,13 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
         labels: sortedRecords.map(r => new Date(r.date).toLocaleDateString()),
         datasets: [
             { label: 'Cintura', data: sortedRecords.map(r => r.circumference.waist), borderColor: '#8b5cf6', maintainAspectRatio: false },
-            { label: 'Cadera', data: sortedRecords.map(r => r.circumference.hip), borderColor: '#f43f5e', maintainAspectRatio: false }
+            { label: 'Cadera', data: sortedRecords.map(r => r.circumference.hip), borderColor: '#f43f5e', maintainAspectRatio: false },
+            { label: 'Abdomen', data: sortedRecords.map(r => r.circumference.abdomen), borderColor: '#06b6d4', maintainAspectRatio: false },
+            { label: 'Pecho', data: sortedRecords.map(r => r.circumference.chest), borderColor: '#f97316', maintainAspectRatio: false },
+            { label: 'Brazo D.', data: sortedRecords.map(r => r.circumference.armR), borderColor: '#10b981', maintainAspectRatio: false },
+            { label: 'Brazo I.', data: sortedRecords.map(r => r.circumference.armL), borderColor: '#ec4899', maintainAspectRatio: false },
+            { label: 'Muslo', data: sortedRecords.map(r => r.circumference.thigh), borderColor: '#eab308', maintainAspectRatio: false },
+            { label: 'Pantorrilla', data: sortedRecords.map(r => r.circumference.calf), borderColor: '#64748b', maintainAspectRatio: false }
         ]
     };
 
@@ -180,6 +187,18 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
             x: { grid: { display: false } }
         }
     };
+
+    // Calculate Age
+    const age = useMemo(() => {
+        if (!patient.dob) return 0;
+        const birthDate = new Date(patient.dob);
+        const diff = Date.now() - birthDate.getTime();
+        return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+    }, [patient.dob]);
+
+    const bodyComp = useMemo(() => {
+        return getBodyCompositionCategory(patient.gender, age, foldsMetrics.avg);
+    }, [patient.gender, age, foldsMetrics.avg]);
 
     return (
         <div className="space-y-6">
@@ -272,6 +291,12 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                                 <th className="px-4 py-3">IMC</th>
                                 <th className="px-4 py-3">Cintura</th>
                                 <th className="px-4 py-3">Cadera</th>
+                                <th className="px-4 py-3">Abdomen</th>
+                                <th className="px-4 py-3">Pecho</th>
+                                <th className="px-4 py-3">B. Der</th>
+                                <th className="px-4 py-3">B. Izq</th>
+                                <th className="px-4 py-3">Muslo</th>
+                                <th className="px-4 py-3">Pantorrilla</th>
                                 <th className="px-4 py-3 text-right">Acciones</th>
                             </tr>
                         </thead>
@@ -285,6 +310,12 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                                     <td className="px-4 py-3 font-bold">{r.imc}</td>
                                     <td className="px-4 py-3">{r.circumference.waist}</td>
                                     <td className="px-4 py-3">{r.circumference.hip}</td>
+                                    <td className="px-4 py-3">{r.circumference.abdomen}</td>
+                                    <td className="px-4 py-3">{r.circumference.chest}</td>
+                                    <td className="px-4 py-3">{r.circumference.armR}</td>
+                                    <td className="px-4 py-3">{r.circumference.armL}</td>
+                                    <td className="px-4 py-3">{r.circumference.thigh}</td>
+                                    <td className="px-4 py-3">{r.circumference.calf}</td>
                                     <td className="px-4 py-3 text-right">
                                         {!readOnly && (
                                             <div className="flex justify-end gap-2">
@@ -301,7 +332,7 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                             ))}
                             {patient.anthropometry.length === 0 && (
                                 <tr>
-                                    <td colSpan={6} className="px-4 py-8 text-center text-slate-500 italic">No hay registros de medidas.</td>
+                                    <td colSpan={12} className="px-4 py-8 text-center text-slate-500 italic">No hay registros de medidas.</td>
                                 </tr>
                             )}
                         </tbody>
@@ -400,10 +431,15 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                             </div>
 
                             {/* Folds */}
-                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700 relative">
+                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
                                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
                                     <h4 className="text-sm font-bold text-orange-400 uppercase tracking-wider">Pliegues (mm)</h4>
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-2 flex-wrap">
+                                        {bodyComp && (
+                                            <div className={`text-xs font-bold ${bodyComp.color} bg-slate-700/50 px-3 py-1 rounded-full border border-slate-600 flex items-center gap-2`}>
+                                                {bodyComp.label}
+                                            </div>
+                                        )}
                                         <div className="bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full text-xs font-bold border border-blue-500/20 flex items-center gap-2">
                                             <Calculator size={12} /> Prom: {foldsMetrics.avg.toFixed(1)} mm
                                         </div>
