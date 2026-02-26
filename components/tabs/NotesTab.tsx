@@ -96,9 +96,17 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
         }
     };
 
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
-            const newUrls = Array.from(e.target.files).map(file => URL.createObjectURL(file as Blob));
+            const files = Array.from(e.target.files) as File[];
+            const base64Promises = files.map(file => {
+                return new Promise<string>((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result as string);
+                    reader.readAsDataURL(file);
+                });
+            });
+            const newUrls = await Promise.all(base64Promises);
             setImages(prev => [...prev, ...newUrls]);
         }
     };
