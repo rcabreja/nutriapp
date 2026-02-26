@@ -10,6 +10,7 @@ import StepClinical from './steps/StepClinical';
 import StepLifestyle from './steps/StepLifestyle';
 import StepAnthropometry from './steps/StepAnthropometry';
 import StepLabs from './steps/StepLabs';
+import StepEvolution from './steps/StepEvolution';
 
 interface Props {
     onClose: () => void;
@@ -21,6 +22,7 @@ const STEPS = [
     { id: 'lifestyle', label: 'Estilo de Vida' },
     { id: 'anthro', label: 'Antropometría' },
     { id: 'labs', label: 'Analíticas' },
+    { id: 'evolution', label: 'Notas Evolución' },
 ];
 
 export default function CreatePatientWizard({ onClose }: Props) {
@@ -86,6 +88,26 @@ export default function CreatePatientWizard({ onClose }: Props) {
             date: new Date().toISOString().slice(0, 16),
             name: '',
             glucose: '', cholesterol: '', triglycerides: '', hemoglobin: '', hematocrit: ''
+        },
+
+        // Evolution Notes (New)
+        evolutionDate: new Date().toISOString().slice(0, 16),
+        evolutionNextAppt: '',
+        evolutionObjective: 'Primera visita - Ingreso',
+        evolutionObservations: '',
+        evolution: {
+            feelingWithPlan: '',
+            hungerOrAnxiety: '',
+            inflammation: '',
+            constipation: '',
+            stress: '',
+            adherence: '',
+            sleep: '',
+            water: '',
+            eatingOut: '',
+            exercise: '',
+            modifications: '',
+            management: '',
         }
     });
 
@@ -265,6 +287,19 @@ export default function CreatePatientWizard({ onClose }: Props) {
             }
         }
 
+        // Add Initial Evolution Note
+        if (formData.evolutionObjective || formData.evolutionObservations) {
+            newPatient.notes.push({
+                id: Date.now().toString(),
+                date: formData.evolutionDate || new Date().toISOString().slice(0, 16),
+                objective: formData.evolutionObjective,
+                observations: formData.evolutionObservations,
+                nextAppointment: formData.evolutionNextAppt,
+                evolution: formData.evolution,
+                images: []
+            });
+        }
+
         addPatient(newPatient);
         onClose();
         navigate(`/patients/${newId}`);
@@ -316,6 +351,7 @@ export default function CreatePatientWizard({ onClose }: Props) {
                         {currentStep === 2 && <StepLifestyle formData={formData} onChange={handleChange} />}
                         {currentStep === 3 && <StepAnthropometry formData={formData} onChange={handleChange} gender={formData.gender as 'M' | 'F'} dob={formData.dob} />}
                         {currentStep === 4 && <StepLabs formData={formData} onChange={handleChange} />}
+                        {currentStep === 5 && <StepEvolution formData={formData} onChange={handleChange} />}
                     </div>
                 </div>
 
