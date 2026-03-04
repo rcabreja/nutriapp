@@ -134,14 +134,14 @@ export default function PatientDetail() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-[var(--card-bg)] border border-slate-800 rounded-xl p-6 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6">
+      <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6">
         <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-          <div className="w-20 h-20 sm:w-16 sm:h-16 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center text-slate-900 text-2xl font-bold border-2 border-slate-700 shrink-0">
+          <div className="w-20 h-20 sm:w-16 sm:h-16 rounded-full bg-[#fdf7e7] overflow-hidden flex items-center justify-center text-[#3c584b] text-2xl font-bold border-2 border-[#cbd9ce] shrink-0">
             {patient.avatarUrl ? <img src={patient.avatarUrl} alt="" className="w-full h-full object-cover" /> : patient.name.charAt(0)}
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-white">{patient.name}</h2>
-            <div className="flex flex-wrap justify-center sm:justify-start items-center gap-3 sm:gap-4 text-slate-400 text-sm mt-1">
+            <h2 className="text-2xl font-bold text-[#3c584b]">{patient.name}</h2>
+            <div className="flex flex-wrap justify-center sm:justify-start items-center gap-3 sm:gap-4 text-[#3c584b] text-sm mt-1">
               <span className="flex items-center gap-1"><Calendar size={14} /> {age} años</span>
               <span className="flex items-center gap-1"><Phone size={14} /> {patient.phone}</span>
               <span className="flex items-center gap-1"><Mail size={14} /> {patient.email}</span>
@@ -153,11 +153,11 @@ export default function PatientDetail() {
           <div className="flex flex-wrap justify-center gap-3 w-full lg:w-auto">
             <button
               onClick={openEditProfile}
-              className="flex-1 lg:flex-none bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors border border-slate-700 whitespace-nowrap"
+              className="flex-1 lg:flex-none bg-[#fdf7e7] hover:bg-[#fdf7e7] text-[#3c584b] px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors border border-[#cbd9ce] whitespace-nowrap"
             >
               <Edit2 size={16} /> Editar Perfil
             </button>
-            <button onClick={openReminderModal} className="flex-1 lg:flex-none bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg shadow-green-900/20 whitespace-nowrap">
+            <button onClick={openReminderModal} className="flex-1 lg:flex-none bg-[#cbd9ce] hover:bg-[#cbd9ce] text-[#3c584b] px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg shadow-md whitespace-nowrap">
               <Send size={16} /> Recordatorio
             </button>
           </div>
@@ -165,7 +165,7 @@ export default function PatientDetail() {
       </div>
 
       {/* Tabs Nav */}
-      <div className="border-b border-slate-800 pb-1">
+      <div className="border-b border-[#cbd9ce] pb-1">
         <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
           {tabs.map(tab => (
             <button
@@ -174,8 +174,8 @@ export default function PatientDetail() {
               className={clsx(
                 "px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all flex-shrink-0",
                 activeTab === tab.id
-                  ? "bg-[var(--card-bg)] text-[var(--primary)] border border-slate-700 shadow-sm"
-                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+                  ? "bg-[#fdf7e7] text-[#cbd9ce] border border-[#cbd9ce] shadow-sm"
+                  : "text-[#3c584b] hover:text-[#3c584b] hover:bg-[#fdf7e7]"
               )}
             >
               {tab.label}
@@ -197,33 +197,33 @@ export default function PatientDetail() {
 
       {/* Reminder Modal */}
       {showReminderModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-[var(--card-bg)] border border-slate-800 rounded-xl p-6 w-full max-w-md shadow-2xl">
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <Send size={20} className="text-green-500" /> Enviar Recordatorio
+        <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 w-full max-w-md shadow-2xl">
+            <h3 className="text-xl font-bold text-[#3c584b] mb-4 flex items-center gap-2">
+              <Send size={20} className="text-[#3c584b]" /> Enviar Recordatorio
             </h3>
             <div className="space-y-4">
-              <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
-                <p className="text-xs text-slate-400 mb-1 uppercase font-bold">Enviar a:</p>
-                <p className="text-white font-mono flex items-center gap-2">
-                  <Phone size={14} className="text-green-500" /> {patient.phone || 'Sin número'}
+              <div className="bg-[#fdf7e7] p-4 rounded-lg border border-[#cbd9ce]">
+                <p className="text-xs text-[#3c584b] mb-1 uppercase font-bold">Enviar a:</p>
+                <p className="text-[#3c584b] font-mono flex items-center gap-2">
+                  <Phone size={14} className="text-[#3c584b]" /> {patient.phone || 'Sin número'}
                 </p>
               </div>
 
               <div>
-                <label className="block text-sm text-slate-400 mb-1">Mensaje (WhatsApp)</label>
+                <label className="block text-sm text-[#3c584b] mb-1">Mensaje (WhatsApp)</label>
                 <textarea
                   value={reminderMessage}
                   onChange={e => setReminderMessage(e.target.value)}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white h-32 focus:border-green-500 outline-none transition-colors resize-none"
+                  className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] h-32 focus:border-[#cbd9ce] outline-none transition-colors resize-none"
                 ></textarea>
               </div>
 
               <div className="flex gap-3 justify-end pt-2">
-                <button onClick={() => setShowReminderModal(false)} className="px-4 py-2 text-slate-400 hover:text-white transition-colors">Cancelar</button>
+                <button onClick={() => setShowReminderModal(false)} className="px-4 py-2 text-[#3c584b] hover:text-[#3c584b] transition-colors">Cancelar</button>
                 <button
                   onClick={handleSendReminder}
-                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-green-900/20 transition-all active:scale-95"
+                  className="bg-[#cbd9ce] hover:bg-[#cbd9ce] text-[#3c584b] px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-md transition-all active:scale-95"
                 >
                   <Send size={16} /> Enviar WhatsApp
                 </button>
@@ -235,11 +235,11 @@ export default function PatientDetail() {
 
       {/* Edit Profile Modal */}
       {showEditProfileModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-[var(--card-bg)] border border-slate-700 rounded-xl w-full max-w-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="bg-[var(--primary)] p-4 flex justify-between items-center">
-              <h3 className="text-white font-bold text-lg">Editar Perfil de Paciente</h3>
-              <button onClick={() => setShowEditProfileModal(false)} className="text-white/80 hover:text-white transition-colors">
+        <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl w-full max-w-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div className="bg-[#cbd9ce] p-4 flex justify-between items-center">
+              <h3 className="text-[#3c584b] font-bold text-lg">Editar Perfil de Paciente</h3>
+              <button onClick={() => setShowEditProfileModal(false)} className="text-[#3c584b] hover:text-[#3c584b] transition-colors">
                 <X size={24} />
               </button>
             </div>
@@ -248,16 +248,16 @@ export default function PatientDetail() {
               {/* Avatar Upload */}
               <div className="flex justify-center mb-4">
                 <div className="relative group">
-                  <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-slate-600 group-hover:border-[var(--primary)] transition-colors bg-slate-800 flex items-center justify-center">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-[#cbd9ce] group-hover:border-[#cbd9ce] transition-colors bg-[#fdf7e7] flex items-center justify-center">
                     {editForm.avatarUrl ? (
                       <img src={editForm.avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
                     ) : (
-                      <span className="text-2xl font-bold text-slate-500">{editForm.name.charAt(0)}</span>
+                      <span className="text-2xl font-bold text-[#3c584b]">{editForm.name.charAt(0)}</span>
                     )}
                   </div>
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="absolute bottom-0 right-0 bg-[var(--primary)] text-white p-2 rounded-full hover:opacity-90 transition-colors shadow-lg"
+                    className="absolute bottom-0 right-0 bg-[#cbd9ce] text-[#3c584b] p-2 rounded-full hover:opacity-90 transition-colors shadow-lg"
                   >
                     <Camera size={14} />
                   </button>
@@ -266,55 +266,55 @@ export default function PatientDetail() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Nombre Completo</label>
+                <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Nombre Completo</label>
                 <input
                   type="text"
                   value={editForm.name}
                   onChange={e => setEditForm({ ...editForm, name: e.target.value })}
-                  className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
+                  className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] focus:border-[#cbd9ce] outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Teléfono</label>
+                  <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Teléfono</label>
                   <input
                     type="text"
                     value={editForm.phone}
                     onChange={e => setEditForm({ ...editForm, phone: e.target.value })}
-                    className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
+                    className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] focus:border-[#cbd9ce] outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Fecha Nacimiento</label>
+                  <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Fecha Nacimiento</label>
                   <input
                     type="date"
                     value={editForm.dob}
                     onChange={e => setEditForm({ ...editForm, dob: e.target.value })}
-                    className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
+                    className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] focus:border-[#cbd9ce] outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Sexo</label>
+                  <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Sexo</label>
                   <select
                     value={editForm.gender}
                     onChange={e => setEditForm({ ...editForm, gender: e.target.value })}
-                    className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none appearance-none"
+                    className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] focus:border-[#cbd9ce] outline-none appearance-none"
                   >
                     <option value="F">Femenino</option>
                     <option value="M">Masculino</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Correo Electrónico</label>
+                  <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Correo Electrónico</label>
                   <input
                     type="email"
                     value={editForm.email}
                     onChange={e => setEditForm({ ...editForm, email: e.target.value })}
-                    className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
+                    className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] focus:border-[#cbd9ce] outline-none"
                   />
                 </div>
               </div>
@@ -323,37 +323,37 @@ export default function PatientDetail() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Estado Civil</label>
+                  <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Estado Civil</label>
                   <input
                     type="text"
                     value={editForm.maritalStatus}
                     onChange={e => setEditForm({ ...editForm, maritalStatus: e.target.value })}
-                    className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
+                    className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] focus:border-[#cbd9ce] outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Ocupación</label>
+                  <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Ocupación</label>
                   <input
                     type="text"
                     value={editForm.occupation}
                     onChange={e => setEditForm({ ...editForm, occupation: e.target.value })}
-                    className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
+                    className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] focus:border-[#cbd9ce] outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Dirección</label>
+                <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Dirección</label>
                 <input
                   type="text"
                   value={editForm.address}
                   onChange={e => setEditForm({ ...editForm, address: e.target.value })}
-                  className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none"
+                  className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] focus:border-[#cbd9ce] outline-none"
                 />
               </div>
 
               <div className="pt-2">
-                <button onClick={saveProfile} className="w-full bg-[var(--primary)] hover:opacity-90 text-white font-bold py-3.5 rounded-lg transition-colors shadow-lg shadow-blue-900/20">
+                <button onClick={saveProfile} className="w-full bg-[#cbd9ce] hover:opacity-90 text-[#3c584b] font-bold py-3.5 rounded-lg transition-colors shadow-lg shadow-md">
                   Guardar Cambios
                 </button>
               </div>

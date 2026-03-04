@@ -8,12 +8,12 @@ interface Props {
 
 const InputQ = ({ label, value, onChange }: any) => (
     <div>
-        <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">{label}</label>
+        <label className="block text-[#3c584b] font-bold text-[#3c584b] uppercase mb-1">{label}</label>
         <input
             type="text"
             value={value || ''}
             onChange={e => onChange(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors"
+            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded p-2 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none transition-colors"
         />
     </div>
 );
@@ -29,24 +29,24 @@ export default function StepEvolution({ formData, onChange }: Props) {
 
     return (
         <div className="space-y-6">
-            <h2 className="text-xl font-bold text-white border-b border-slate-800 pb-2">Registro Inicial de Evolución</h2>
+            <h2 className="text-xl font-bold text-[#3c584b] border-b border-[#cbd9ce] pb-2">Registro Inicial de Evolución</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">FECHA Y HORA VISITA</label>
+                    <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">FECHA Y HORA VISITA</label>
                     <div className="relative">
                         <input
                             type="datetime-local"
                             value={formData.evolutionDate}
                             onChange={e => onChange('evolutionDate', e.target.value)}
-                            className="w-full bg-[var(--card-bg)] border border-slate-700 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none transition-all"
+                            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] focus:border-[#cbd9ce] outline-none transition-all"
                         />
-                        <Calendar className="absolute right-3 top-3 text-slate-500 pointer-events-none" size={18} />
+                        <Calendar className="absolute right-3 top-3 text-[#3c584b] pointer-events-none" size={18} />
                     </div>
                 </div>
 
                 <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1 flex items-center gap-1">
+                    <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1 flex items-center gap-1">
                         <Clock size={12} /> FECHA Y HORA PRÓXIMA CITA
                     </label>
                     <div className="relative">
@@ -54,26 +54,26 @@ export default function StepEvolution({ formData, onChange }: Props) {
                             type="datetime-local"
                             value={formData.evolutionNextAppt}
                             onChange={e => onChange('evolutionNextAppt', e.target.value)}
-                            className="w-full bg-[var(--card-bg)] border border-slate-700 rounded-lg p-3 text-white focus:border-[var(--primary)] outline-none transition-all"
+                            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] focus:border-[#cbd9ce] outline-none transition-all"
                         />
-                        <Calendar className="absolute right-3 top-3 text-slate-500 pointer-events-none" size={18} />
+                        <Calendar className="absolute right-3 top-3 text-[#3c584b] pointer-events-none" size={18} />
                     </div>
                 </div>
             </div>
 
             <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase mb-1">OBJETIVO DE LA VISITA</label>
+                <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">OBJETIVO DE LA VISITA</label>
                 <input
                     type="text"
                     placeholder="Ej. Revisión de apego, Ajuste calórico..."
                     value={formData.evolutionObjective}
                     onChange={e => onChange('evolutionObjective', e.target.value)}
-                    className="w-full bg-[var(--card-bg)] border border-slate-700 rounded-lg p-3 text-white placeholder-slate-600 focus:border-[var(--primary)] outline-none transition-all"
+                    className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] placeholder-slate-600 focus:border-[#cbd9ce] outline-none transition-all"
                 />
             </div>
 
-            <div className="bg-slate-800/30 border border-slate-700 p-4 rounded-xl space-y-4">
-                <h4 className="text-sm font-bold text-[var(--primary)] uppercase border-b border-slate-700 pb-2">Cuestionario de Evolución</h4>
+            <div className="bg-[#fdf7e7] border border-[#cbd9ce] p-4 rounded-xl space-y-4">
+                <h4 className="text-sm font-bold text-[#cbd9ce] uppercase border-b border-[#cbd9ce] pb-2">Cuestionario de Evolución</h4>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <InputQ label="¿Cómo te sentiste con el plan? (Gustos/Disgustos)" value={formData.evolution?.feelingWithPlan} onChange={(v: string) => handleEvolutionChange('feelingWithPlan', v)} />
@@ -95,11 +95,11 @@ export default function StepEvolution({ formData, onChange }: Props) {
                         <InputQ label="¿Modificaciones deseadas?" value={formData.evolution?.modifications} onChange={(v: string) => handleEvolutionChange('modifications', v)} />
                     </div>
                     <div className="md:col-span-2">
-                        <label className="block text-xs font-bold text-green-500 uppercase mb-1">PLAN / MANEJO</label>
+                        <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">PLAN / MANEJO</label>
                         <textarea
                             value={formData.evolution?.management || ''}
                             onChange={e => handleEvolutionChange('management', e.target.value)}
-                            className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white text-sm h-20 focus:border-[var(--primary)] outline-none transition-all resize-none"
+                            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2 text-[#3c584b] text-sm h-20 focus:border-[#cbd9ce] outline-none transition-all resize-none"
                             placeholder="Plan de acción..."
                         ></textarea>
                     </div>
@@ -107,12 +107,12 @@ export default function StepEvolution({ formData, onChange }: Props) {
             </div>
 
             <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase mb-1">OBSERVACIONES / ANÁLISIS CLÍNICO</label>
+                <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">OBSERVACIONES / ANÁLISIS CLÍNICO</label>
                 <textarea
                     placeholder="Ej. Paciente refiere sentirse con más energía..."
                     value={formData.evolutionObservations}
                     onChange={e => onChange('evolutionObservations', e.target.value)}
-                    className="w-full bg-[var(--card-bg)] border border-slate-700 rounded-lg p-3 text-white placeholder-slate-600 h-32 focus:border-[var(--primary)] outline-none transition-all resize-none"
+                    className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] placeholder-slate-600 h-32 focus:border-[#cbd9ce] outline-none transition-all resize-none"
                 ></textarea>
             </div>
         </div>

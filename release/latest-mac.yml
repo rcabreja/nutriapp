@@ -1,0 +1,11 @@
+version: 0.0.0
+files:
+  - url: NutriClinical-Pro-0.0.0-arm64-mac.zip
+    sha512: kFnnKF/FMB/nJgmFdfxAPgSx3V2p5dJyDA0lbVSF4r+NRNfQFWivULqLuwwSb+T4IgT3OZJ0L82NGuaAVxt7TA==
+    size: 123842542
+  - url: NutriClinical-Pro-0.0.0-arm64.dmg
+    sha512: vdr43BXw0HZPRCBlICQQivZI/IN1QcYqD8xvGDkWOQJ4ZfBL402qEuNbGCfP5CdYbpo2lmiviLzbC203fRM5+g==
+    size: 129325857
+path: NutriClinical-Pro-0.0.0-arm64-mac.zip
+sha512: kFnnKF/FMB/nJgmFdfxAPgSx3V2p5dJyDA0lbVSF4r+NRNfQFWivULqLuwwSb+T4IgT3OZJ0L82NGuaAVxt7TA==
+releaseDate: '2026-03-04T22:25:52.339Z'

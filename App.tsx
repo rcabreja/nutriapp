@@ -13,7 +13,7 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
   const { currentUser, logout } = useNutri();
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path ? 'bg-[var(--primary)] text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white';
+  const isActive = (path: string) => location.pathname === path ? 'bg-[#cbd9ce] text-[#3c584b]' : 'text-[#3c584b] hover:bg-[#fdf7e7] hover:text-[#3c584b]';
 
   const closeMenu = () => setIsOpen(false);
 
@@ -22,25 +22,25 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm"
+          className="fixed inset-0 bg-[#fdf7e7] z-40 md:hidden backdrop-blur-sm"
           onClick={closeMenu}
         />
       )}
 
       {/* Sidebar Container */}
       <div className={`
-        fixed top-0 left-0 h-full w-64 bg-[var(--card-bg)] border-r border-slate-800 flex flex-col z-50 transition-transform duration-300 ease-in-out
+        fixed top-0 left-0 h-full w-64 bg-[#fdf7e7] border-r border-[#cbd9ce] flex flex-col z-50 transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0
       `}>
         <div className="p-6 flex justify-between items-center">
           <div>
-            <h1 className="text-xl font-bold text-white flex items-center gap-2">
-              <span className="bg-[var(--primary)] px-2 py-1 rounded text-sm">N</span> NutriClinical
+            <h1 className="text-xl font-bold text-[#3c584b] flex items-center gap-2">
+              <span className="bg-[#cbd9ce] px-2 py-1 rounded text-sm">N</span> NutriClinical
             </h1>
-            <p className="text-xs text-blue-400 mt-1 uppercase tracking-wider font-semibold ml-8">Pro System</p>
+            <p className="text-xs text-[#3c584b] mt-1 uppercase tracking-wider font-semibold ml-8">Pro System</p>
           </div>
           {/* Close button for mobile */}
-          <button onClick={closeMenu} className="md:hidden text-slate-400 hover:text-white">
+          <button onClick={closeMenu} className="md:hidden text-[#3c584b] hover:text-[#3c584b]">
             <X size={24} />
           </button>
         </div>
@@ -76,17 +76,17 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
           )}
         </nav>
 
-        <div className="p-4 border-t border-slate-800">
+        <div className="p-4 border-t border-[#cbd9ce]">
           <div className="flex items-center gap-3 px-4 py-2 mb-2">
-            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#cbd9ce] flex items-center justify-center text-[#3c584b] font-bold shrink-0">
               {currentUser?.name.charAt(0)}
             </div>
             <div className="overflow-hidden">
-              <p className="text-sm font-medium text-white truncate">{currentUser?.name}</p>
-              <p className="text-xs text-slate-400 capitalize">{currentUser?.role}</p>
+              <p className="text-sm font-medium text-[#3c584b] truncate">{currentUser?.name}</p>
+              <p className="text-xs text-[#3c584b] capitalize">{currentUser?.role}</p>
             </div>
           </div>
-          <button onClick={logout} className="flex items-center gap-2 w-full px-4 py-2 text-red-400 hover:bg-red-400/10 rounded-lg transition-colors text-sm">
+          <button onClick={logout} className="flex items-center gap-2 w-full px-4 py-2 text-[#3c584b] hover:bg-[#cbd9ce] rounded-lg transition-colors text-sm">
             <LogOut size={16} />
             <span>Cerrar Sesión</span>
           </button>
@@ -109,15 +109,15 @@ const MainLayout = ({ children }: { children?: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[var(--app-bg)] text-[var(--text-main)] font-[family-name:var(--font-family)]">
+    <div className="min-h-screen bg-[#fdf7e7] text-[#3c584b] font-[family-name:var(--font-family)]">
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
 
       {/* Mobile Header for Menu Toggle */}
-      <div className="md:hidden bg-[var(--card-bg)] border-b border-slate-800 p-4 flex items-center justify-between sticky top-0 z-30">
-        <h1 className="text-lg font-bold text-white flex items-center gap-2">
-          <span className="bg-[var(--primary)] px-2 py-1 rounded text-xs">N</span> NutriClinical
+      <div className="md:hidden bg-[#fdf7e7] border-b border-[#cbd9ce] p-4 flex items-center justify-between sticky top-0 z-30">
+        <h1 className="text-lg font-bold text-[#3c584b] flex items-center gap-2">
+          <span className="bg-[#cbd9ce] px-2 py-1 rounded text-xs">N</span> NutriClinical
         </h1>
-        <button onClick={() => setIsSidebarOpen(true)} className="text-slate-300 hover:text-white">
+        <button onClick={() => setIsSidebarOpen(true)} className="text-[#3c584b] hover:text-[#3c584b]">
           <Menu size={24} />
         </button>
       </div>

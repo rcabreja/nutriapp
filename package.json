@@ -3,27 +3,55 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "dist-electron/main.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:mac": "vite build && electron-builder -m",
     "preview": "vite preview"
   },
+  "build": {
+    "appId": "com.nutriclinical.pro",
+    "productName": "NutriClinical Pro",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip",
+        "dir"
+      ],
+      "icon": "public/icon.png"
+    }
+  },
   "dependencies": {
-    "react": "^19.2.3",
-    "react-router-dom": "^7.12.0",
-    "lucide-react": "^0.562.0",
-    "react-dom": "^19.2.3",
-    "react-chartjs-2": "^5.3.1",
-    "clsx": "^2.1.1",
-    "jspdf-autotable": "^5.0.7",
     "chart.js": "^4.5.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "jspdf": "^4.0.0",
-    "date-fns": "^4.1.0"
+    "jspdf-autotable": "^5.0.7",
+    "lucide-react": "^0.562.0",
+    "react": "^19.2.3",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "^19.2.3",
+    "react-router-dom": "^7.12.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.27",
+    "electron": "^40.6.1",
+    "electron-builder": "^26.8.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19",
     "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "vite-plugin-electron": "^0.29.0",
+    "vite-plugin-electron-renderer": "^0.14.6"
   }
 }

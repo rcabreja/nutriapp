@@ -40,9 +40,9 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
-                <h3 className="text-xl font-bold text-white">Historia Clínica Nutricional</h3>
+                <h3 className="text-xl font-bold text-[#3c584b]">Historia Clínica Nutricional</h3>
                 {!readOnly && (
-                    <button onClick={() => isEditing ? handleSave() : setIsEditing(true)} className={`${isEditing ? 'bg-green-600' : 'bg-slate-800'} text-white px-4 py-2 rounded-lg flex items-center gap-2 border border-slate-700 transition-colors`}>
+                    <button onClick={() => isEditing ? handleSave() : setIsEditing(true)} className={`${isEditing ? 'bg-[#cbd9ce]' : 'bg-[#fdf7e7]'} text-[#3c584b] px-4 py-2 rounded-lg flex items-center gap-2 border border-[#cbd9ce] transition-colors`}>
                         <Edit2 size={16} /> {isEditing ? 'Guardar' : 'Editar'}
                     </button>
                 )}
@@ -50,8 +50,8 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-6">
-                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                        <h4 className="text-sm font-bold text-blue-400 mb-4 uppercase border-b border-slate-800 pb-2">Antecedentes Clínicos</h4>
+                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                        <h4 className="text-sm font-bold text-[#3c584b] mb-4 uppercase border-b border-[#cbd9ce] pb-2">Antecedentes Clínicos</h4>
                         <div className="space-y-3">
                             <Field label="Motivo Consulta" value={data.background.motive} editing={isEditing} onChange={v => setData({ ...data, background: { ...data.background, motive: v } })} />
                             <Field label="Medicamentos" value={data.background.medications} editing={isEditing} onChange={v => setData({ ...data, background: { ...data.background, medications: v } })} />
@@ -62,8 +62,8 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
                     </div>
 
                     {/* Pathological Checkboxes and Text */}
-                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                        <h4 className="text-sm font-bold text-blue-400 mb-4 uppercase border-b border-slate-800 pb-2">Patologías</h4>
+                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                        <h4 className="text-sm font-bold text-[#3c584b] mb-4 uppercase border-b border-[#cbd9ce] pb-2">Patologías</h4>
                         <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-4">
                             <Checkbox label="Diabetes" checked={data.background.pathological?.diabetes} editing={isEditing} onChange={(c: any) => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, diabetes: c } } })} />
                             <Checkbox label="Cáncer" checked={data.background.pathological?.cancer} editing={isEditing} onChange={(c: any) => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, cancer: c } } })} />
@@ -76,8 +76,8 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
                     </div>
 
                     {/* Symptoms Section */}
-                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                        <h4 className="text-sm font-bold text-red-400 mb-4 uppercase border-b border-slate-800 pb-2">Sintomatología Actual</h4>
+                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                        <h4 className="text-sm font-bold text-[#3c584b] mb-4 uppercase border-b border-[#cbd9ce] pb-2">Sintomatología Actual</h4>
                         <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm mb-4">
                             {symptomsList.map(sym => (
                                 <Checkbox
@@ -95,8 +95,8 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
 
                 <div className="space-y-6">
                     {/* Gyneco */}
-                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                        <h4 className="text-sm font-bold text-purple-400 mb-4 uppercase border-b border-slate-800 pb-2">Gineco-obstétricos</h4>
+                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                        <h4 className="text-sm font-bold text-[#3c584b] mb-4 uppercase border-b border-[#cbd9ce] pb-2">Gineco-obstétricos</h4>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                             <Field label="G" value={data.gyneco?.g} editing={isEditing} onChange={v => setData({ ...data, gyneco: { ...data.gyneco!, g: v } })} />
                             <Field label="P" value={data.gyneco?.p} editing={isEditing} onChange={v => setData({ ...data, gyneco: { ...data.gyneco!, p: v } })} />
@@ -111,19 +111,19 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
                             <div className="grid grid-cols-2 gap-4">
                                 <Field label="Duración Ciclo (días)" value={data.gyneco?.cycleDuration} editing={isEditing} onChange={v => setData({ ...data, gyneco: { ...data.gyneco!, cycleDuration: v } })} />
                                 <div>
-                                    <label className="text-xs text-slate-500 font-bold block mb-1">Regularidad</label>
+                                    <label className="text-xs text-[#3c584b] font-bold block mb-1">Regularidad</label>
                                     {isEditing ? (
                                         <select
                                             value={data.gyneco?.cycleRegularity || ''}
                                             onChange={e => setData({ ...data, gyneco: { ...data.gyneco!, cycleRegularity: e.target.value as any } })}
-                                            className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none"
+                                            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded p-2 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none"
                                         >
                                             <option value="">Seleccionar</option>
                                             <option value="Regular">Regular</option>
                                             <option value="Irregular">Irregular</option>
                                         </select>
                                     ) : (
-                                        <p className="text-sm text-slate-200 border-b border-slate-800 pb-1 h-[30px] flex items-center">{data.gyneco?.cycleRegularity || '-'}</p>
+                                        <p className="text-sm text-[#3c584b] border-b border-[#cbd9ce] pb-1 h-[30px] flex items-center">{data.gyneco?.cycleRegularity || '-'}</p>
                                     )}
                                 </div>
                             </div>
@@ -131,8 +131,8 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
                         </div>
                     </div>
 
-                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                        <h4 className="text-sm font-bold text-blue-400 mb-4 uppercase border-b border-slate-800 pb-2">Recordatorio 24H (Básico)</h4>
+                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                        <h4 className="text-sm font-bold text-[#3c584b] mb-4 uppercase border-b border-[#cbd9ce] pb-2">Recordatorio 24H (Básico)</h4>
                         <div className="space-y-3">
                             <Field label="Desayuno" value={data.recall24h.breakfast} editing={isEditing} onChange={v => setData({ ...data, recall24h: { ...data.recall24h, breakfast: v } })} />
                             <Field label="Comida" value={data.recall24h.lunch} editing={isEditing} onChange={v => setData({ ...data, recall24h: { ...data.recall24h, lunch: v } })} />
@@ -148,26 +148,26 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
 
 const Field = ({ label, value, editing, onChange, type = "text" }: any) => (
     <div>
-        <label className="text-xs text-slate-500 font-bold block mb-1">{label}</label>
+        <label className="text-xs text-[#3c584b] font-bold block mb-1">{label}</label>
         {editing ? (
             <input
                 type={type}
-                className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm focus:border-blue-500 outline-none transition-colors"
+                className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded p-2 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none transition-colors"
                 value={value || ''}
                 onChange={e => onChange(e.target.value)}
             />
         ) : (
-            <p className="text-sm text-slate-200 border-b border-slate-800 pb-1 h-[30px] flex items-center">{value || '-'}</p>
+            <p className="text-sm text-[#3c584b] border-b border-[#cbd9ce] pb-1 h-[30px] flex items-center">{value || '-'}</p>
         )}
     </div>
 );
 
 const Checkbox = ({ label, checked, editing, onChange }: any) => (
     <label className={`flex items-center gap-2 ${editing ? 'cursor-pointer group' : 'cursor-default opacity-80'}`}>
-        <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${checked ? 'bg-[var(--primary)] border-[var(--primary)]' : 'bg-slate-800 border-slate-600 group-hover:border-[var(--primary)]'}`}>
-            {checked && <X size={12} className="text-white" />}
+        <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${checked ? 'bg-[#cbd9ce] border-[#cbd9ce]' : 'bg-[#fdf7e7] border-[#cbd9ce] group-hover:border-[#cbd9ce]'}`}>
+            {checked && <X size={12} className="text-[#3c584b]" />}
         </div>
-        <span className={`text-sm ${checked ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>{label}</span>
+        <span className={`text-sm ${checked ? 'text-[#3c584b]' : 'text-[#3c584b] group-hover:text-[#3c584b]'}`}>{label}</span>
         {/* Hidden input for semantics */}
         <input type="checkbox" disabled={!editing} checked={checked || false} onChange={e => onChange(e.target.checked)} className="hidden" />
     </label>

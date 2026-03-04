@@ -5,10 +5,10 @@ import { Bar } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 
 const KPICard = ({ title, value, icon: Icon, color }: { title: string, value: string | number, icon: any, color: string }) => (
-  <div className="bg-[var(--card-bg)] border border-slate-800 p-6 rounded-xl flex items-center justify-between">
+  <div className="bg-[#fdf7e7] border border-[#cbd9ce] p-6 rounded-xl flex items-center justify-between">
     <div>
-      <p className="text-slate-400 text-sm font-medium mb-1">{title}</p>
-      <h3 className="text-3xl font-bold text-white">{value}</h3>
+      <p className="text-[#3c584b] text-sm font-medium mb-1">{title}</p>
+      <h3 className="text-3xl font-bold text-[#3c584b]">{value}</h3>
     </div>
     <div className={`p-3 rounded-lg bg-opacity-10 ${color.replace('text-', 'bg-')} ${color}`}>
       <Icon size={24} />
@@ -138,23 +138,23 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">Panel General</h2>
+      <h2 className="text-2xl font-bold text-[#3c584b]">Panel General</h2>
 
       <AlertsSection patients={patients} />
 
       {/* 1. KPIs Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <KPICard title="PACIENTES TOTALES" value={totalPatients} icon={Users} color="text-blue-500" />
-        <KPICard title="CONSULTAS SEMANA ACTUAL" value={totalWeeklyConsults} icon={Activity} color="text-green-500" />
+        <KPICard title="PACIENTES TOTALES" value={totalPatients} icon={Users} color="text-[#3c584b]" />
+        <KPICard title="CONSULTAS SEMANA ACTUAL" value={totalWeeklyConsults} icon={Activity} color="text-[#3c584b]" />
       </div>
 
       {/* 2. Chart Section (Weekly Activity) */}
-      <div className="bg-[var(--card-bg)] border border-slate-800 rounded-xl p-6">
+      <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-            <TrendingUp size={20} className="text-blue-500" /> Actividad de la Semana
+          <h3 className="text-lg font-semibold text-[#3c584b] flex items-center gap-2">
+            <TrendingUp size={20} className="text-[#3c584b]" /> Actividad de la Semana
           </h3>
-          <span className="text-xs text-slate-500 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
+          <span className="text-xs text-[#3c584b] bg-[#fdf7e7] px-3 py-1 rounded-full border border-[#cbd9ce]">
             {new Date(weekDays[0]).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })} - {new Date(weekDays[6]).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}
           </span>
         </div>
@@ -167,32 +167,32 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* COL 1: Agenda / Calendar Widget */}
-        <div className="bg-[var(--card-bg)] border border-slate-800 rounded-xl flex flex-col h-[400px]">
-          <div className="p-4 border-b border-slate-800 bg-slate-900/50 rounded-t-xl">
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              <Calendar size={18} className="text-purple-400" /> Agenda del Día
+        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl flex flex-col h-[400px]">
+          <div className="p-4 border-b border-[#cbd9ce] bg-[#fdf7e7] rounded-t-xl">
+            <h3 className="text-lg font-semibold text-[#3c584b] mb-4 flex items-center gap-2">
+              <Calendar size={18} className="text-[#3c584b]" /> Agenda del Día
             </h3>
-            <div className="flex items-center justify-between bg-slate-800 p-2 rounded-lg border border-slate-700">
-              <button onClick={() => changeDate(-1)} className="p-1 hover:bg-slate-700 rounded text-slate-400 hover:text-white"><ChevronLeft size={20} /></button>
+            <div className="flex items-center justify-between bg-[#fdf7e7] p-2 rounded-lg border border-[#cbd9ce]">
+              <button onClick={() => changeDate(-1)} className="p-1 hover:bg-[#fdf7e7] rounded text-[#3c584b] hover:text-[#3c584b]"><ChevronLeft size={20} /></button>
               <div className="text-center">
-                <span className="block text-white font-bold capitalize text-sm">{displayDate.toLocaleDateString('es-ES', { weekday: 'long' })}</span>
-                <span className="block text-xs text-slate-400">{displayDate.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })}</span>
+                <span className="block text-[#3c584b] font-bold capitalize text-sm">{displayDate.toLocaleDateString('es-ES', { weekday: 'long' })}</span>
+                <span className="block text-xs text-[#3c584b]">{displayDate.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })}</span>
               </div>
-              <button onClick={() => changeDate(1)} className="p-1 hover:bg-slate-700 rounded text-slate-400 hover:text-white"><ChevronRight size={20} /></button>
+              <button onClick={() => changeDate(1)} className="p-1 hover:bg-[#fdf7e7] rounded text-[#3c584b] hover:text-[#3c584b]"><ChevronRight size={20} /></button>
             </div>
           </div>
 
           <div className="p-4 flex-1 overflow-y-auto custom-scrollbar space-y-3">
             {agendaPatients.length > 0 ? (
               agendaPatients.map(patient => (
-                <div key={patient.id} className="flex items-center justify-between p-3 bg-slate-800/40 border border-slate-800 rounded-lg hover:border-purple-500/50 transition-colors group">
+                <div key={patient.id} className="flex items-center justify-between p-3 bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg hover:border-[#cbd9ce] transition-colors group">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-300">
+                    <div className="w-8 h-8 rounded-full bg-[#fdf7e7] flex items-center justify-center text-xs font-bold text-[#3c584b]">
                       {patient.avatarUrl ? <img src={patient.avatarUrl} alt="" className="w-full h-full object-cover rounded-full" /> : patient.name.charAt(0)}
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-white leading-tight">{patient.name}</p>
-                      <p className="text-[10px] text-purple-400 flex items-center gap-1 mt-0.5">
+                      <p className="text-sm font-bold text-[#3c584b] leading-tight">{patient.name}</p>
+                      <p className="text-[#3c584b] text-[#3c584b] flex items-center gap-1 mt-0.5">
                         <Clock size={10} />
                         {patient.appointmentNote?.nextAppointment
                           ? new Date(patient.appointmentNote.nextAppointment).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })
@@ -200,13 +200,13 @@ export default function Dashboard() {
                       </p>
                     </div>
                   </div>
-                  <Link to={`/patients/${patient.id}`} className="p-1.5 text-slate-500 hover:text-white hover:bg-purple-600 rounded-lg transition-colors">
+                  <Link to={`/patients/${patient.id}`} className="p-1.5 text-[#3c584b] hover:text-[#3c584b] hover:bg-[#cbd9ce] rounded-lg transition-colors">
                     <ArrowRight size={16} />
                   </Link>
                 </div>
               ))
             ) : (
-              <div className="text-center py-12 text-slate-500 flex flex-col items-center">
+              <div className="text-center py-12 text-[#3c584b] flex flex-col items-center">
                 <Calendar size={32} className="mb-2 opacity-20" />
                 <p className="text-sm">Sin citas para este día.</p>
               </div>
@@ -215,36 +215,36 @@ export default function Dashboard() {
         </div>
 
         {/* COL 2: Upcoming Appointments List */}
-        <div className="bg-[var(--card-bg)] border border-slate-800 rounded-xl flex flex-col h-[400px]">
-          <div className="p-4 border-b border-slate-800 rounded-t-xl">
-            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-              <CalendarDays size={18} className="text-blue-400" /> Próximas Citas
+        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl flex flex-col h-[400px]">
+          <div className="p-4 border-b border-[#cbd9ce] rounded-t-xl">
+            <h3 className="text-lg font-semibold text-[#3c584b] flex items-center gap-2">
+              <CalendarDays size={18} className="text-[#3c584b]" /> Próximas Citas
             </h3>
           </div>
           <div className="p-4 flex-1 overflow-y-auto custom-scrollbar space-y-3">
             {upcomingAppointments.length > 0 ? (
               upcomingAppointments.map((apt, idx) => (
-                <div key={`${apt.patientId}-${idx}`} className="flex items-start gap-3 p-3 bg-slate-800/20 border border-slate-800 rounded-lg">
-                  <div className="bg-blue-900/30 text-blue-400 rounded-lg px-2 py-1 text-center min-w-[50px] border border-blue-900/50">
+                <div key={`${apt.patientId}-${idx}`} className="flex items-start gap-3 p-3 bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg">
+                  <div className="bg-[#cbd9ce] text-[#3c584b] rounded-lg px-2 py-1 text-center min-w-[50px] border border-blue-900/50">
                     <span className="block text-xs font-bold uppercase">{new Date(apt.date).toLocaleDateString('es-ES', { month: 'short' })}</span>
                     <span className="block text-lg font-bold leading-none">{new Date(apt.date).getDate()}</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h4 className="text-sm font-bold text-white truncate">{apt.patientName}</h4>
+                    <h4 className="text-sm font-bold text-[#3c584b] truncate">{apt.patientName}</h4>
                     <div className="flex justify-between items-center mt-1">
-                      <p className="text-xs text-slate-400 truncate">{apt.objective || 'Revisión'}</p>
-                      <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">
+                      <p className="text-xs text-[#3c584b] truncate">{apt.objective || 'Revisión'}</p>
+                      <span className="text-[#3c584b] bg-[#fdf7e7] px-1.5 py-0.5 rounded text-[#3c584b]">
                         {new Date(apt.date).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
                       </span>
                     </div>
                   </div>
-                  <Link to={`/patients/${apt.patientId}`} className="text-slate-500 hover:text-blue-400 pt-1">
+                  <Link to={`/patients/${apt.patientId}`} className="text-[#3c584b] hover:text-[#3c584b] pt-1">
                     <ArrowRight size={16} />
                   </Link>
                 </div>
               ))
             ) : (
-              <div className="text-center py-12 text-slate-500">
+              <div className="text-center py-12 text-[#3c584b]">
                 <p className="text-sm">No hay citas futuras registradas.</p>
               </div>
             )}
@@ -252,29 +252,29 @@ export default function Dashboard() {
         </div>
 
         {/* COL 3: Recent Patients */}
-        <div className="bg-[var(--card-bg)] border border-slate-800 rounded-xl flex flex-col h-[400px]">
-          <div className="p-4 border-b border-slate-800 rounded-t-xl">
-            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-              <Users size={18} className="text-slate-400" /> Recientes
+        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl flex flex-col h-[400px]">
+          <div className="p-4 border-b border-[#cbd9ce] rounded-t-xl">
+            <h3 className="text-lg font-semibold text-[#3c584b] flex items-center gap-2">
+              <Users size={18} className="text-[#3c584b]" /> Recientes
             </h3>
           </div>
           <div className="p-4 flex-1 overflow-y-auto custom-scrollbar space-y-3">
             {patients.slice(0, 5).map(patient => (
-              <div key={patient.id} className="flex items-center justify-between p-3 bg-slate-800/20 rounded-lg hover:bg-slate-800 transition-colors group">
+              <div key={patient.id} className="flex items-center justify-between p-3 bg-[#fdf7e7] rounded-lg hover:bg-[#fdf7e7] transition-colors group">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold border border-slate-600">
+                  <div className="w-9 h-9 rounded-full bg-[#fdf7e7] flex items-center justify-center text-xs font-bold border border-[#cbd9ce]">
                     {patient.avatarUrl ? <img src={patient.avatarUrl} alt="" className="w-full h-full object-cover rounded-full" /> : patient.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white">{patient.name}</p>
-                    <p className="text-[10px] text-slate-500">
+                    <p className="text-sm font-medium text-[#3c584b]">{patient.name}</p>
+                    <p className="text-[#3c584b] text-[#3c584b]">
                       {patient.notes.length > 0
                         ? `Última: ${new Date(patient.notes[0].date).toLocaleDateString()}`
                         : 'Nuevo ingreso'}
                     </p>
                   </div>
                 </div>
-                <Link to={`/patients/${patient.id}`} className="p-2 text-slate-500 hover:text-white hover:bg-slate-700 rounded-full transition-colors opacity-0 group-hover:opacity-100">
+                <Link to={`/patients/${patient.id}`} className="p-2 text-[#3c584b] hover:text-[#3c584b] hover:bg-[#fdf7e7] rounded-full transition-colors opacity-0 group-hover:opacity-100">
                   <ArrowRight size={14} />
                 </Link>
               </div>

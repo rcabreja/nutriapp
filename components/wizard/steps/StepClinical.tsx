@@ -8,44 +8,44 @@ interface Props {
 
 const Input = ({ label, value, onChange, placeholder, type = "text" }: any) => (
     <div className="flex-1">
-        <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">{label}</label>
+        <label className="block text-xs font-bold text-[#3c584b] mb-1 uppercase tracking-wider">{label}</label>
         <input
             type={type}
             value={value}
             onChange={e => onChange(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors focus:bg-slate-900"
+            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none transition-colors focus:bg-[#fdf7e7]"
         />
     </div>
 );
 
 const TextArea = ({ label, value, onChange, placeholder }: any) => (
     <div className="flex-1">
-        <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">{label}</label>
+        <label className="block text-xs font-bold text-[#3c584b] mb-1 uppercase tracking-wider">{label}</label>
         <textarea
             value={value}
             onChange={e => onChange(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors h-20 resize-none focus:bg-slate-900"
+            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none transition-colors h-20 resize-none focus:bg-[#fdf7e7]"
         />
     </div>
 );
 
 const Checkbox = ({ label, checked, onChange }: any) => (
     <label className="flex items-center gap-2 cursor-pointer group">
-        <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${checked ? 'bg-[var(--primary)] border-[var(--primary)]' : 'bg-slate-800 border-slate-600 group-hover:border-[var(--primary)]'}`}>
-            {checked && <div className="w-2.5 h-2.5 bg-white rounded-sm" />}
+        <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${checked ? 'bg-[#cbd9ce] border-[#cbd9ce]' : 'bg-[#fdf7e7] border-[#cbd9ce] group-hover:border-[#cbd9ce]'}`}>
+            {checked && <div className="w-2.5 h-2.5 bg-[#fdf7e7] rounded-sm" />}
         </div>
-        <span className={`text-sm ${checked ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>{label}</span>
+        <span className={`text-sm ${checked ? 'text-[#3c584b]' : 'text-[#3c584b] group-hover:text-[#3c584b]'}`}>{label}</span>
         <input type="checkbox" checked={checked} onChange={e => onChange(e.target.checked)} className="hidden" />
     </label>
 );
 
 const Section = ({ title, icon: Icon, children }: any) => (
-    <div className="bg-slate-800/40 border border-slate-700 rounded-xl p-5 mb-6">
-        <div className="flex items-center gap-2 mb-5 text-[var(--primary)] border-b border-slate-700/50 pb-3">
+    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-5 mb-6">
+        <div className="flex items-center gap-2 mb-5 text-[#cbd9ce] border-b border-[#cbd9ce] pb-3">
             <Icon size={20} />
-            <h4 className="font-bold uppercase text-sm tracking-wider text-white">{title}</h4>
+            <h4 className="font-bold uppercase text-sm tracking-wider text-[#3c584b]">{title}</h4>
         </div>
         {children}
     </div>
@@ -127,11 +127,11 @@ export default function StepClinical({ formData, onChange }: Props) {
                                 <Input label="Menarca" value={formData.menarche} onChange={(v: any) => onChange('menarche', v)} placeholder="-" />
                                 <Input label="Duración Ciclo" value={formData.cycleDuration} onChange={(v: any) => onChange('cycleDuration', v)} placeholder="-" />
                                 <div>
-                                    <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">Regularidad</label>
+                                    <label className="block text-xs font-bold text-[#3c584b] mb-1 uppercase tracking-wider">Regularidad</label>
                                     <select
                                         value={formData.cycleRegularity}
                                         onChange={e => onChange('cycleRegularity', e.target.value)}
-                                        className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none"
+                                        className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none"
                                     >
                                         <option value="">-</option>
                                         <option value="Regular">Regular</option>
@@ -178,7 +178,7 @@ export default function StepClinical({ formData, onChange }: Props) {
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm text-left">
                         <thead>
-                            <tr className="border-b border-slate-700 text-slate-400">
+                            <tr className="border-b border-[#cbd9ce] text-[#3c584b]">
                                 <th className="py-2 px-2">Grupo</th>
                                 {FREQUENCIES.map(f => (
                                     <th key={f} className="py-2 px-2 text-center">{f}</th>
@@ -187,8 +187,8 @@ export default function StepClinical({ formData, onChange }: Props) {
                         </thead>
                         <tbody>
                             {FOOD_GROUPS.map((group, idx) => (
-                                <tr key={group} className={`border-b border-slate-800/50 hover:bg-white/5 transition-colors ${idx % 2 === 0 ? 'bg-slate-900/30' : ''}`}>
-                                    <td className="py-2.5 px-2 font-medium text-white">{group}</td>
+                                <tr key={group} className={`border-b border-[#cbd9ce] hover:bg-[#fdf7e7] transition-colors ${idx % 2 === 0 ? 'bg-[#fdf7e7]' : ''}`}>
+                                    <td className="py-2.5 px-2 font-medium text-[#3c584b]">{group}</td>
                                     {FREQUENCIES.map(freq => (
                                         <td key={freq} className="py-2.5 px-2 text-center">
                                             <label className="cursor-pointer flex justify-center">
@@ -197,7 +197,7 @@ export default function StepClinical({ formData, onChange }: Props) {
                                                     name={`freq-${group}`}
                                                     checked={formData.foodFrequencies?.[group] === freq}
                                                     onChange={() => updateFrequency(group, freq)}
-                                                    className="w-4 h-4 text-[var(--primary)] bg-slate-800 border-slate-600 focus:ring-[var(--primary)] focus:ring-2"
+                                                    className="w-4 h-4 text-[#cbd9ce] bg-[#fdf7e7] border-[#cbd9ce] focus:ring-[#cbd9ce] focus:ring-2"
                                                 />
                                             </label>
                                         </td>

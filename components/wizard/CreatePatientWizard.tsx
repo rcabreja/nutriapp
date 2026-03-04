@@ -306,37 +306,37 @@ export default function CreatePatientWizard({ onClose }: Props) {
     };
 
     return (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-[var(--card-bg)] border border-slate-700 rounded-xl w-full max-w-5xl shadow-2xl flex flex-col max-h-[90vh] animate-in fade-in zoom-in duration-200">
+        <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl w-full max-w-5xl shadow-2xl flex flex-col max-h-[90vh] animate-in fade-in zoom-in duration-200">
                 {/* Header */}
-                <div className="bg-[var(--primary)] p-4 flex justify-between items-center shrink-0 rounded-t-xl">
-                    <h3 className="text-white font-bold text-lg flex items-center gap-2">Nuevo Paciente</h3>
-                    <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
+                <div className="bg-[#cbd9ce] p-4 flex justify-between items-center shrink-0 rounded-t-xl">
+                    <h3 className="text-[#3c584b] font-bold text-lg flex items-center gap-2">Nuevo Paciente</h3>
+                    <button onClick={onClose} className="text-[#3c584b] hover:text-[#3c584b] transition-colors">
                         <X size={24} />
                     </button>
                 </div>
 
                 {/* Steps Indicator */}
-                <div className="bg-slate-900 border-b border-slate-800 p-4 shrink-0 overflow-x-auto">
+                <div className="bg-[#fdf7e7] border-b border-[#cbd9ce] p-4 shrink-0 overflow-x-auto">
                     <div className="flex items-center justify-between min-w-[600px] max-w-4xl mx-auto">
                         {STEPS.map((step, idx) => (
                             <div key={step.id} className="flex flex-col items-center relative z-10">
                                 <div
                                     className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 border-2 ${idx === currentStep
-                                        ? 'bg-[var(--primary)] border-[var(--primary)] text-white scale-110 shadow-[0_0_15px_rgba(59,130,246,0.5)]'
+                                        ? 'bg-[#cbd9ce] border-[#cbd9ce] text-[#3c584b] scale-110 shadow-md_0_15px_rgba(59,130,246,0.5)]'
                                         : idx < currentStep
-                                            ? 'bg-green-500 border-green-500 text-white'
-                                            : 'bg-slate-800 border-slate-600 text-slate-500'
+                                            ? 'bg-[#cbd9ce] border-[#cbd9ce] text-[#3c584b]'
+                                            : 'bg-[#fdf7e7] border-[#cbd9ce] text-[#3c584b]'
                                         }`}
                                 >
                                     {idx < currentStep ? <Check size={20} /> : idx + 1}
                                 </div>
-                                <span className={`text-xs mt-2 font-medium ${idx === currentStep ? 'text-white' : 'text-slate-500'}`}>
+                                <span className={`text-xs mt-2 font-medium ${idx === currentStep ? 'text-[#3c584b]' : 'text-[#3c584b]'}`}>
                                     {step.label}
                                 </span>
                                 {/* Line connector */}
                                 {idx < STEPS.length - 1 && (
-                                    <div className={`absolute top-5 left-1/2 w-full h-0.5 -z-10 ${idx < currentStep ? 'bg-green-500' : 'bg-slate-700'} w-[calc(100%_-_2.5rem)] translate-x-[1.25rem]`} style={{ width: 'calc(100% + 4rem)', left: '50%', transform: 'translateX(0)' }} />
+                                    <div className={`absolute top-5 left-1/2 w-full h-0.5 -z-10 ${idx < currentStep ? 'bg-[#cbd9ce]' : 'bg-[#fdf7e7]'} w-[calc(100%_-_2.5rem)] translate-x-[1.25rem]`} style={{ width: 'calc(100% + 4rem)', left: '50%', transform: 'translateX(0)' }} />
                                 )}
                             </div>
                         ))}
@@ -344,7 +344,7 @@ export default function CreatePatientWizard({ onClose }: Props) {
                 </div>
 
                 {/* Body */}
-                <div className="flex-1 overflow-y-auto custom-scrollbar p-6 bg-[var(--card-bg)]">
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-6 bg-[#fdf7e7]">
                     <div className="max-w-4xl mx-auto">
                         {currentStep === 0 && <StepBasicInfo formData={formData} onChange={handleChange} />}
                         {currentStep === 1 && <StepClinical formData={formData} onChange={handleChange} />}
@@ -356,11 +356,11 @@ export default function CreatePatientWizard({ onClose }: Props) {
                 </div>
 
                 {/* Footer Buttons */}
-                <div className="p-4 border-t border-slate-800 bg-slate-900/50 shrink-0 rounded-b-xl flex justify-between items-center">
+                <div className="p-4 border-t border-[#cbd9ce] bg-[#fdf7e7] shrink-0 rounded-b-xl flex justify-between items-center">
                     <button
                         onClick={handleBack}
                         disabled={currentStep === 0}
-                        className={`px-6 py-2 rounded-lg font-medium flex items-center gap-2 transition-colors ${currentStep === 0 ? 'text-slate-600 cursor-not-allowed' : 'text-slate-300 hover:bg-slate-800 hover:text-white'}`}
+                        className={`px-6 py-2 rounded-lg font-medium flex items-center gap-2 transition-colors ${currentStep === 0 ? 'text-[#3c584b] cursor-not-allowed' : 'text-[#3c584b] hover:bg-[#fdf7e7] hover:text-[#3c584b]'}`}
                     >
                         <ChevronLeft size={20} /> Anterior
                     </button>
@@ -368,14 +368,14 @@ export default function CreatePatientWizard({ onClose }: Props) {
                     {currentStep < STEPS.length - 1 ? (
                         <button
                             onClick={handleNext}
-                            className="bg-[var(--primary)] hover:opacity-90 text-white px-8 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-blue-900/20 transition-all active:scale-95"
+                            className="bg-[#cbd9ce] hover:opacity-90 text-[#3c584b] px-8 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-md transition-all active:scale-95"
                         >
                             Siguiente <ChevronRight size={20} />
                         </button>
                     ) : (
                         <button
                             onClick={handleSave}
-                            className="bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-green-900/20 transition-all active:scale-95"
+                            className="bg-[#cbd9ce] hover:bg-[#cbd9ce] text-[#3c584b] px-8 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-md transition-all active:scale-95"
                         >
                             <Save size={20} /> Guardar Paciente
                         </button>

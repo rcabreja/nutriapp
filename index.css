@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --app-bg: #fdf7e7;
+    --card-bg: #ffffff;
+    --text-main: #3c584b;
+    --primary: #cbd9ce;
+    --font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-family);
+    background-color: var(--app-bg);
+    color: var(--text-main);
+  }
+}
+
+/* Apply theme to common utility classes overrides */
+.bg-theme-app {
+  background-color: var(--app-bg);
+}
+
+.bg-theme-card {
+  background-color: var(--card-bg);
+}
+
+.text-theme-main {
+  color: var(--text-main);
+}
+
+.bg-theme-primary {
+  background-color: var(--primary);
+}
+
+.border-theme-card {
+  border-color: rgba(60, 88, 75, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fdf7e7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd9ce;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a3b8a8;
+}

@@ -8,7 +8,7 @@ interface Props {
 
 const InputGroup = ({ label, children }: { label: string, children?: React.ReactNode }) => (
     <div>
-        <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5">{label}</label>
+        <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1.5">{label}</label>
         {children}
     </div>
 )
@@ -20,7 +20,7 @@ const InputMetric = ({ label, value, onChange }: { label: string, value: string,
             placeholder="0"
             value={value}
             onChange={e => onChange(e.target.value)}
-            className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2.5 text-white outline-none focus:border-[var(--primary)]"
+            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b] outline-none focus:border-[#cbd9ce]"
         />
     </InputGroup>
 )
@@ -34,10 +34,10 @@ export default function StepLabs({ formData, onChange }: Props) {
 
     return (
         <div className="space-y-6">
-            <div className="bg-slate-800/40 border border-slate-700 rounded-xl p-4">
-                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 mb-6 flex gap-3 items-start">
-                    <AlertTriangle className="text-blue-400 shrink-0 mt-0.5" size={18} />
-                    <p className="text-sm text-blue-200">
+            <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-lg p-3 mb-6 flex gap-3 items-start">
+                    <AlertTriangle className="text-[#3c584b] shrink-0 mt-0.5" size={18} />
+                    <p className="text-sm text-[#3c584b]">
                         Opcional: Si el paciente tiene análisis recientes, puedes registrarlos aquí. Se creará un registro con la fecha actual.
                     </p>
                 </div>
@@ -49,9 +49,9 @@ export default function StepLabs({ formData, onChange }: Props) {
                                 type="datetime-local"
                                 value={data.date || new Date().toISOString().slice(0, 16)}
                                 onChange={e => updateLab('date', e.target.value)}
-                                className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2.5 text-white outline-none focus:border-[var(--primary)]"
+                                className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b] outline-none focus:border-[#cbd9ce]"
                             />
-                            <Calendar className="absolute right-3 top-3 text-slate-400 pointer-events-none" size={16} />
+                            <Calendar className="absolute right-3 top-3 text-[#3c584b] pointer-events-none" size={16} />
                         </div>
                     </InputGroup>
                     <InputGroup label="NOMBRE DE PERFIL">
@@ -60,7 +60,7 @@ export default function StepLabs({ formData, onChange }: Props) {
                             placeholder="Ej. Perfil Inicial"
                             value={data.name || ''}
                             onChange={e => updateLab('name', e.target.value)}
-                            className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2.5 text-white outline-none focus:border-[var(--primary)] placeholder-slate-500"
+                            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b] outline-none focus:border-[#cbd9ce] placeholder-slate-500"
                         />
                     </InputGroup>
                 </div>

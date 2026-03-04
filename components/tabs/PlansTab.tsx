@@ -270,10 +270,10 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
         const entry = patient.adherence.find(a => a.date === dateStr);
         const score = entry ? entry.completed : 0;
 
-        let bg = 'bg-transparent text-slate-400 hover:bg-slate-800';
-        if (score >= 4) bg = 'bg-[#0070b8] text-white shadow-lg shadow-blue-500/30'; // Excelent
-        else if (score >= 2) bg = 'bg-[#4ade80] text-slate-900'; // Med
-        else if (score > 0) bg = 'bg-[#bbf7d0] text-slate-900'; // Low
+        let bg = 'bg-transparent text-[#3c584b] hover:bg-[#fdf7e7]';
+        if (score >= 4) bg = 'bg-[#cbd9ce] text-[#3c584b] shadow-lg shadow-sm'; // Excelent
+        else if (score >= 2) bg = 'bg-[#cbd9ce] text-[#3c584b]'; // Med
+        else if (score > 0) bg = 'bg-[#cbd9ce] text-[#3c584b]'; // Low
 
         const isSelected = selectedDate === dateStr;
 
@@ -281,7 +281,7 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
             <button
                 key={dateStr}
                 onClick={() => setSelectedDate(dateStr)}
-                className={`w-9 h-9 mx-auto rounded-lg flex items-center justify-center text-sm transition-all font-medium ${bg} ${isSelected ? 'ring-2 ring-white ring-offset-2 ring-offset-slate-900 z-10' : ''}`}
+                className={`w-9 h-9 mx-auto rounded-lg flex items-center justify-center text-sm transition-all font-medium ${bg} ${isSelected ? 'ring-2 ring-[#cbd9ce] ring-offset-2 ring-offset-slate-900 z-10' : ''}`}
             >
                 {d}
             </button>
@@ -291,35 +291,35 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
     return (
         <div className="space-y-8">
             {/* SECTION 1: ADHERENCE (Blue Card) */}
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-                <h3 className="flex items-center gap-2 font-bold text-white mb-6 text-lg">
-                    <CheckCircle className="text-blue-500" size={24} /> Seguimiento y Adherencia
+            <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6">
+                <h3 className="flex items-center gap-2 font-bold text-[#3c584b] mb-6 text-lg">
+                    <CheckCircle className="text-[#3c584b]" size={24} /> Seguimiento y Adherencia
                 </h3>
 
                 <div className="flex flex-col xl:flex-row gap-8">
                     {/* Left: Progress Card */}
-                    <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-6 text-slate-800 shadow-sm">
-                        <h4 className="text-xs font-bold text-slate-500 uppercase mb-4 tracking-wider">PROGRESO DEL DÍA SELECCIONADO</h4>
+                    <div className="flex-1 bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 text-[#3c584b] shadow-sm">
+                        <h4 className="text-xs font-bold text-[#3c584b] uppercase mb-4 tracking-wider">PROGRESO DEL DÍA SELECCIONADO</h4>
 
                         <div className="flex justify-between items-end mb-2">
-                            <div className="text-xl font-bold capitalize text-slate-900">
+                            <div className="text-xl font-bold capitalize text-[#3c584b]">
                                 {new Date(selectedDate + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
                             </div>
-                            <div className="text-3xl font-bold text-blue-600">{currentAdherence.completed}/4</div>
+                            <div className="text-3xl font-bold text-[#3c584b]">{currentAdherence.completed}/4</div>
                         </div>
 
-                        <div className="w-full h-4 bg-slate-200 rounded-full overflow-hidden mb-3">
+                        <div className="w-full h-4 bg-[#fdf7e7] rounded-full overflow-hidden mb-3">
                             <div
-                                className="h-full bg-blue-500 transition-all duration-500 ease-out"
+                                className="h-full bg-[#cbd9ce] transition-all duration-500 ease-out"
                                 style={{ width: `${(currentAdherence.completed / 4) * 100}%` }}
                             ></div>
                         </div>
 
-                        <p className="text-xs text-center text-slate-500 italic mb-6">Marca las casillas en el plan inferior para registrar tu progreso.</p>
+                        <p className="text-xs text-center text-[#3c584b] italic mb-6">Marca las casillas en el plan inferior para registrar tu progreso.</p>
 
                         {/* Chart within Adherence Card */}
-                        <div className="mt-6 pt-6 border-t border-slate-200">
-                            <h5 className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase mb-4">
+                        <div className="mt-6 pt-6 border-t border-[#cbd9ce]">
+                            <h5 className="flex items-center gap-2 text-xs font-bold text-[#3c584b] uppercase mb-4">
                                 <TrendingUp size={14} /> Tendencia (Últimos 10 días)
                             </h5>
                             <div className="h-32 w-full">
@@ -331,38 +331,38 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                     {/* Right: Calendar & Legend */}
                     <div className="flex-1 flex flex-col justify-between">
                         <div>
-                            <div className="flex justify-between items-center mb-6 px-2 bg-slate-800 rounded-lg p-2">
-                                <button onClick={() => changeMonth(-1)} className="p-1 hover:bg-slate-700 rounded text-slate-400 hover:text-white transition-colors">
+                            <div className="flex justify-between items-center mb-6 px-2 bg-[#fdf7e7] rounded-lg p-2">
+                                <button onClick={() => changeMonth(-1)} className="p-1 hover:bg-[#fdf7e7] rounded text-[#3c584b] hover:text-[#3c584b] transition-colors">
                                     <ChevronLeft size={20} />
                                 </button>
-                                <span className="font-bold text-white text-lg capitalize">
+                                <span className="font-bold text-[#3c584b] text-lg capitalize">
                                     {viewDate.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}
                                 </span>
-                                <button onClick={() => changeMonth(1)} className="p-1 hover:bg-slate-700 rounded text-slate-400 hover:text-white transition-colors">
+                                <button onClick={() => changeMonth(1)} className="p-1 hover:bg-[#fdf7e7] rounded text-[#3c584b] hover:text-[#3c584b] transition-colors">
                                     <ChevronRight size={20} />
                                 </button>
                             </div>
                             <div className="grid grid-cols-7 gap-y-4 gap-x-2 text-center mb-6">
-                                {['D', 'L', 'M', 'M', 'J', 'V', 'S'].map(d => <div key={d} className="text-xs text-slate-500 font-bold">{d}</div>)}
+                                {['D', 'L', 'M', 'M', 'J', 'V', 'S'].map(d => <div key={d} className="text-xs text-[#3c584b] font-bold">{d}</div>)}
                                 {calendarCells}
                             </div>
                         </div>
 
                         {/* Legend */}
-                        <div className="border-t border-slate-800 pt-4">
-                            <p className="text-xs font-bold text-slate-500 uppercase mb-3">LEYENDA DE CUMPLIMIENTO</p>
+                        <div className="border-t border-[#cbd9ce] pt-4">
+                            <p className="text-xs font-bold text-[#3c584b] uppercase mb-3">LEYENDA DE CUMPLIMIENTO</p>
                             <div className="space-y-2">
                                 <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 rounded bg-[#bbf7d0]"></div>
-                                    <span className="text-xs text-slate-400">Cumplimiento Parcial (Bajo)</span>
+                                    <div className="w-3 h-3 rounded bg-[#cbd9ce]"></div>
+                                    <span className="text-xs text-[#3c584b]">Cumplimiento Parcial (Bajo)</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 rounded bg-[#4ade80]"></div>
-                                    <span className="text-xs text-slate-400">Cumplimiento Parcial (Medio)</span>
+                                    <div className="w-3 h-3 rounded bg-[#cbd9ce]"></div>
+                                    <span className="text-xs text-[#3c584b]">Cumplimiento Parcial (Medio)</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 rounded bg-[#0070b8]"></div>
-                                    <span className="text-xs text-slate-400">Cumplimiento Total (Excelente)</span>
+                                    <div className="w-3 h-3 rounded bg-[#cbd9ce]"></div>
+                                    <span className="text-xs text-[#3c584b]">Cumplimiento Total (Excelente)</span>
                                 </div>
                             </div>
                         </div>
@@ -371,43 +371,43 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
             </div>
 
             {/* SECTION 2: PLAN DETAIL (White/Gray card style in Dark Mode) */}
-            <div className="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 shadow-xl">
+            <div className="bg-[#fdf7e7] rounded-xl overflow-hidden border border-[#cbd9ce] shadow-xl">
                 {/* Header */}
-                <div className="bg-white p-6 border-b border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div className="bg-[#fdf7e7] p-6 border-b border-[#cbd9ce] flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
-                        <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                        <h2 className="text-2xl font-bold text-[#3c584b] flex items-center gap-3">
                             {activePlan.name}
                             {!readOnly && (
-                                <button onClick={() => { setEditedPlan(JSON.parse(JSON.stringify(activePlan))); setShowEditModal(true); }} className="text-slate-400 hover:text-blue-600 transition-colors">
+                                <button onClick={() => { setEditedPlan(JSON.parse(JSON.stringify(activePlan))); setShowEditModal(true); }} className="text-[#3c584b] hover:text-[#3c584b] transition-colors">
                                     <Edit2 size={18} />
                                 </button>
                             )}
                         </h2>
-                        <div className="mt-2 inline-flex items-center gap-1.5 bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                        <div className="mt-2 inline-flex items-center gap-1.5 bg-[#cbd9ce] text-[#3c584b] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
                             <Flame size={12} fill="currentColor" /> {activePlan.kcalTarget} kcal
                         </div>
                     </div>
 
                     {/* Macronutrients Display */}
                     {activePlan.macronutrients && (
-                        <div className="mt-4 grid grid-cols-3 gap-4 border-t border-slate-200 pt-4">
+                        <div className="mt-4 grid grid-cols-3 gap-4 border-t border-[#cbd9ce] pt-4">
                             <div className="text-center">
-                                <div className="text-xs font-bold text-slate-500 uppercase">Proteínas</div>
-                                <div className="text-lg font-bold text-blue-600">{activePlan.macronutrients.protein}%</div>
-                                <div className="text-xs text-slate-400">{Math.round((activePlan.kcalTarget * activePlan.macronutrients.protein) / 100 / 4)}g ({Math.round((activePlan.kcalTarget * activePlan.macronutrients.protein) / 100)} kcal)</div>
-                                <div className="text-xs font-semibold text-slate-500 mt-0.5">{((activePlan.kcalTarget * activePlan.macronutrients.protein / 100 / 4) / currentWeight).toFixed(1)} g/kg</div>
+                                <div className="text-xs font-bold text-[#3c584b] uppercase">Proteínas</div>
+                                <div className="text-lg font-bold text-[#3c584b]">{activePlan.macronutrients.protein}%</div>
+                                <div className="text-xs text-[#3c584b]">{Math.round((activePlan.kcalTarget * activePlan.macronutrients.protein) / 100 / 4)}g ({Math.round((activePlan.kcalTarget * activePlan.macronutrients.protein) / 100)} kcal)</div>
+                                <div className="text-xs font-semibold text-[#3c584b] mt-0.5">{((activePlan.kcalTarget * activePlan.macronutrients.protein / 100 / 4) / currentWeight).toFixed(1)} g/kg</div>
                             </div>
-                            <div className="text-center border-l border-slate-200">
-                                <div className="text-xs font-bold text-slate-500 uppercase">Carbohidratos</div>
-                                <div className="text-lg font-bold text-green-600">{activePlan.macronutrients.carbs}%</div>
-                                <div className="text-xs text-slate-400">{Math.round((activePlan.kcalTarget * activePlan.macronutrients.carbs) / 100 / 4)}g ({Math.round((activePlan.kcalTarget * activePlan.macronutrients.carbs) / 100)} kcal)</div>
-                                <div className="text-xs font-semibold text-slate-500 mt-0.5">{((activePlan.kcalTarget * activePlan.macronutrients.carbs / 100 / 4) / currentWeight).toFixed(1)} g/kg</div>
+                            <div className="text-center border-l border-[#cbd9ce]">
+                                <div className="text-xs font-bold text-[#3c584b] uppercase">Carbohidratos</div>
+                                <div className="text-lg font-bold text-[#3c584b]">{activePlan.macronutrients.carbs}%</div>
+                                <div className="text-xs text-[#3c584b]">{Math.round((activePlan.kcalTarget * activePlan.macronutrients.carbs) / 100 / 4)}g ({Math.round((activePlan.kcalTarget * activePlan.macronutrients.carbs) / 100)} kcal)</div>
+                                <div className="text-xs font-semibold text-[#3c584b] mt-0.5">{((activePlan.kcalTarget * activePlan.macronutrients.carbs / 100 / 4) / currentWeight).toFixed(1)} g/kg</div>
                             </div>
-                            <div className="text-center border-l border-slate-200">
-                                <div className="text-xs font-bold text-slate-500 uppercase">Grasas</div>
-                                <div className="text-lg font-bold text-orange-600">{activePlan.macronutrients.fats}%</div>
-                                <div className="text-xs text-slate-400">{Math.round((activePlan.kcalTarget * activePlan.macronutrients.fats) / 100 / 9)}g ({Math.round((activePlan.kcalTarget * activePlan.macronutrients.fats) / 100)} kcal)</div>
-                                <div className="text-xs font-semibold text-slate-500 mt-0.5">{((activePlan.kcalTarget * activePlan.macronutrients.fats / 100 / 9) / currentWeight).toFixed(1)} g/kg</div>
+                            <div className="text-center border-l border-[#cbd9ce]">
+                                <div className="text-xs font-bold text-[#3c584b] uppercase">Grasas</div>
+                                <div className="text-lg font-bold text-[#3c584b]">{activePlan.macronutrients.fats}%</div>
+                                <div className="text-xs text-[#3c584b]">{Math.round((activePlan.kcalTarget * activePlan.macronutrients.fats) / 100 / 9)}g ({Math.round((activePlan.kcalTarget * activePlan.macronutrients.fats) / 100)} kcal)</div>
+                                <div className="text-xs font-semibold text-[#3c584b] mt-0.5">{((activePlan.kcalTarget * activePlan.macronutrients.fats / 100 / 9) / currentWeight).toFixed(1)} g/kg</div>
                             </div>
                         </div>
                     )}
@@ -417,14 +417,14 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                     {!readOnly && (
                         <button
                             onClick={() => { setEditedPlan(JSON.parse(JSON.stringify(activePlan))); setShowEditModal(true); }}
-                            className="px-4 py-2 rounded-lg border border-slate-300 text-slate-600 font-medium hover:bg-slate-50 flex items-center gap-2 transition-colors text-sm"
+                            className="px-4 py-2 rounded-lg border border-[#cbd9ce] text-[#3c584b] font-medium hover:bg-[#fdf7e7] flex items-center gap-2 transition-colors text-sm"
                         >
                             <Edit2 size={16} /> Editar
                         </button>
                     )}
                     <button
                         onClick={generatePDF}
-                        className="px-4 py-2 rounded-lg bg-slate-900 text-white font-medium hover:bg-slate-800 flex items-center gap-2 transition-colors text-sm shadow-lg shadow-slate-900/20"
+                        className="px-4 py-2 rounded-lg bg-[#fdf7e7] text-[#3c584b] font-medium hover:bg-[#fdf7e7] flex items-center gap-2 transition-colors text-sm shadow-lg shadow-md"
                     >
                         <FileDown size={16} /> PDF
                     </button>
@@ -432,35 +432,35 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
             </div>
 
             {/* Plan Content */}
-            <div className="p-8 space-y-8 bg-[#fafafa]">
+            <div className="p-8 space-y-8 bg-[#fdf7e7]">
                 {activePlan.sections.map((sec, idx) => {
                     const key = mapTitleToKey(sec.title);
                     const isChecked = key ? currentChecks[key] : false;
 
                     return (
                         <div key={idx} className="relative">
-                            <h4 className="flex items-center gap-2 text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">
-                                <div className={`w-3 h-3 rounded-full border-2 ${isChecked ? 'bg-green-500 border-green-500' : 'border-slate-400'}`}></div>
+                            <h4 className="flex items-center gap-2 text-sm font-bold text-[#3c584b] uppercase tracking-widest mb-4">
+                                <div className={`w-3 h-3 rounded-full border-2 ${isChecked ? 'bg-[#cbd9ce] border-[#cbd9ce]' : 'border-[#cbd9ce]'}`}></div>
                                 {sec.title}
-                                {isChecked && <span className="text-green-600 text-xs ml-2 bg-green-100 px-2 py-0.5 rounded">Completado</span>}
+                                {isChecked && <span className="text-[#3c584b] text-xs ml-2 bg-[#cbd9ce] px-2 py-0.5 rounded">Completado</span>}
                             </h4>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {sec.options.map((opt, optIdx) => (
-                                    <div key={opt.id} className={`bg-white border rounded-lg p-5 shadow-sm hover:shadow-md transition-all relative ${isChecked ? 'border-green-200 ring-1 ring-green-100' : 'border-slate-200'}`}>
+                                    <div key={opt.id} className={`bg-[#fdf7e7] border rounded-lg p-5 shadow-sm hover:shadow-md transition-all relative ${isChecked ? 'border-[#cbd9ce] ring-1 ring-[#cbd9ce]' : 'border-[#cbd9ce]'}`}>
                                         <div className="flex justify-between items-start mb-2">
-                                            <div className="text-xs font-bold text-[#0070b8] uppercase">Opción {optIdx + 1}:</div>
+                                            <div className="text-xs font-bold text-[#3c584b] uppercase">Opción {optIdx + 1}:</div>
 
                                             {/* CHECKBOX FOR MEAL */}
                                             {key && (
                                                 <div
                                                     onClick={() => handleCheck(key)}
-                                                    className={`cursor-pointer w-6 h-6 rounded border flex items-center justify-center transition-colors ${isChecked ? 'bg-green-500 border-green-500 text-white' : 'bg-slate-100 border-slate-300 text-transparent hover:border-blue-400'}`}
+                                                    className={`cursor-pointer w-6 h-6 rounded border flex items-center justify-center transition-colors ${isChecked ? 'bg-[#cbd9ce] border-[#cbd9ce] text-[#3c584b]' : 'bg-[#fdf7e7] border-[#cbd9ce] text-transparent hover:border-blue-400'}`}
                                                 >
                                                     <CheckCircle size={14} />
                                                 </div>
                                             )}
                                         </div>
-                                        <p className="text-slate-700 font-medium leading-relaxed">{opt.description}</p>
+                                        <p className="text-[#3c584b] font-medium leading-relaxed">{opt.description}</p>
                                     </div>
                                 ))}
                             </div>
@@ -470,26 +470,26 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
 
                 {/* Footer Boxes */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                    <div className={`bg-blue-50 border rounded-xl p-5 relative transition-all ${currentChecks.supplements ? 'border-green-300 ring-1 ring-green-200' : 'border-blue-100'}`}>
+                    <div className={`bg-[#cbd9ce] border rounded-xl p-5 relative transition-all ${currentChecks.supplements ? 'border-[#cbd9ce] ring-1 ring-[#cbd9ce]' : 'border-blue-100'}`}>
                         <div className="flex justify-between items-start mb-2">
-                            <h5 className="font-bold text-blue-800 text-xs uppercase flex items-center gap-2">
+                            <h5 className="font-bold text-[#3c584b] text-xs uppercase flex items-center gap-2">
                                 💊 Suplementos
                             </h5>
                             <div
                                 onClick={() => handleCheck('supplements')}
-                                className={`cursor-pointer w-6 h-6 rounded border flex items-center justify-center transition-colors ${currentChecks.supplements ? 'bg-green-500 border-green-500 text-white' : 'bg-white border-blue-200 text-transparent hover:border-blue-400'}`}
+                                className={`cursor-pointer w-6 h-6 rounded border flex items-center justify-center transition-colors ${currentChecks.supplements ? 'bg-[#cbd9ce] border-[#cbd9ce] text-[#3c584b]' : 'bg-[#fdf7e7] border-blue-200 text-transparent hover:border-blue-400'}`}
                             >
                                 <CheckCircle size={14} />
                             </div>
                         </div>
-                        <p className="text-sm text-blue-900/80 leading-relaxed">{activePlan.supplements || 'Sin suplementación.'}</p>
+                        <p className="text-sm text-[#3c584b] leading-relaxed">{activePlan.supplements || 'Sin suplementación.'}</p>
                     </div>
 
-                    <div className="bg-red-50 border border-red-100 rounded-xl p-5">
-                        <h5 className="font-bold text-red-800 text-xs uppercase mb-2 flex items-center gap-2">
+                    <div className="bg-[#cbd9ce] border border-red-100 rounded-xl p-5">
+                        <h5 className="font-bold text-[#3c584b] text-xs uppercase mb-2 flex items-center gap-2">
                             🚫 Evitar
                         </h5>
-                        <p className="text-sm text-red-900/80 leading-relaxed">{activePlan.avoid || 'Ninguno.'}</p>
+                        <p className="text-sm text-[#3c584b] leading-relaxed">{activePlan.avoid || 'Ninguno.'}</p>
                     </div>
                 </div>
             </div>
@@ -497,12 +497,12 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
             {/* EDIT MODAL */}
             {
                 showEditModal && (
-                    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                        <div className="bg-slate-900 border border-slate-700 rounded-xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl">
+                    <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl">
                             {/* Header */}
-                            <div className="bg-[#0070b8] p-4 flex justify-between items-center shrink-0 rounded-t-xl">
-                                <h3 className="text-white font-bold text-lg">Editar Plan Nutricional</h3>
-                                <button onClick={() => setShowEditModal(false)} className="text-white/80 hover:text-white"><X size={24} /></button>
+                            <div className="bg-[#cbd9ce] p-4 flex justify-between items-center shrink-0 rounded-t-xl">
+                                <h3 className="text-[#3c584b] font-bold text-lg">Editar Plan Nutricional</h3>
+                                <button onClick={() => setShowEditModal(false)} className="text-[#3c584b] hover:text-[#3c584b]"><X size={24} /></button>
                             </div>
 
                             {/* Scrollable Body */}
@@ -510,108 +510,108 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                                 {/* Basic Info */}
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     <div className="md:col-span-2">
-                                        <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Nombre del Plan</label>
+                                        <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Nombre del Plan</label>
                                         <input
                                             type="text"
                                             value={editedPlan.name}
                                             onChange={e => setEditedPlan({ ...editedPlan, name: e.target.value })}
-                                            className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2.5 text-white"
+                                            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b]"
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Kcal Objetivo</label>
+                                        <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Kcal Objetivo</label>
                                         <input
                                             type="number"
                                             value={editedPlan.kcalTarget}
                                             onChange={e => setEditedPlan({ ...editedPlan, kcalTarget: Number(e.target.value) })}
-                                            className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2.5 text-white"
+                                            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b]"
                                         />
                                     </div>
                                 </div>
 
                                 {/* Macronutrients Edit Section */}
-                                <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                                    <h4 className="text-sm font-bold text-blue-400 uppercase mb-4 text-center">Distribución de Macronutrientes</h4>
+                                <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                                    <h4 className="text-sm font-bold text-[#3c584b] uppercase mb-4 text-center">Distribución de Macronutrientes</h4>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                         {/* Protein */}
-                                        <div className="bg-slate-900 rounded-lg p-3 border border-slate-700">
-                                            <label className="block text-xs font-bold text-blue-400 uppercase mb-1 text-center">Proteínas (%)</label>
+                                        <div className="bg-[#fdf7e7] rounded-lg p-3 border border-[#cbd9ce]">
+                                            <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1 text-center">Proteínas (%)</label>
                                             <div className="flex items-center gap-2 justify-center">
                                                 <input
                                                     type="number"
                                                     value={editedPlan.macronutrients?.protein || 0}
                                                     onChange={e => handleMacroChange('protein', Number(e.target.value))}
-                                                    className="w-20 bg-slate-800 border border-slate-600 rounded p-1 text-center text-white font-bold"
+                                                    className="w-20 bg-[#fdf7e7] border border-[#cbd9ce] rounded p-1 text-center text-[#3c584b] font-bold"
                                                 />
                                             </div>
-                                            <div className="text-center mt-2 text-xs text-slate-400">
+                                            <div className="text-center mt-2 text-xs text-[#3c584b]">
                                                 {Math.round((editedPlan.kcalTarget * (editedPlan.macronutrients?.protein || 0)) / 100)} kcal
                                             </div>
-                                            <div className="text-center mt-1 text-xs text-blue-400 font-bold">
+                                            <div className="text-center mt-1 text-xs text-[#3c584b] font-bold">
                                                 {((editedPlan.kcalTarget * (editedPlan.macronutrients?.protein || 0) / 100 / 4) / currentWeight).toFixed(1)} g/kg
                                             </div>
                                         </div>
 
                                         {/* Carbs */}
-                                        <div className="bg-slate-900 rounded-lg p-3 border border-slate-700">
-                                            <label className="block text-xs font-bold text-green-400 uppercase mb-1 text-center">Carbohidratos (%)</label>
+                                        <div className="bg-[#fdf7e7] rounded-lg p-3 border border-[#cbd9ce]">
+                                            <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1 text-center">Carbohidratos (%)</label>
                                             <div className="flex items-center gap-2 justify-center">
                                                 <input
                                                     type="number"
                                                     value={editedPlan.macronutrients?.carbs || 0}
                                                     onChange={e => handleMacroChange('carbs', Number(e.target.value))}
-                                                    className="w-20 bg-slate-800 border border-slate-600 rounded p-1 text-center text-white font-bold"
+                                                    className="w-20 bg-[#fdf7e7] border border-[#cbd9ce] rounded p-1 text-center text-[#3c584b] font-bold"
                                                 />
                                             </div>
-                                            <div className="text-center mt-2 text-xs text-slate-400">
+                                            <div className="text-center mt-2 text-xs text-[#3c584b]">
                                                 {Math.round((editedPlan.kcalTarget * (editedPlan.macronutrients?.carbs || 0)) / 100)} kcal
                                             </div>
-                                            <div className="text-center mt-1 text-xs text-green-400 font-bold">
+                                            <div className="text-center mt-1 text-xs text-[#3c584b] font-bold">
                                                 {((editedPlan.kcalTarget * (editedPlan.macronutrients?.carbs || 0) / 100 / 4) / currentWeight).toFixed(1)} g/kg
                                             </div>
                                         </div>
 
                                         {/* Fats */}
-                                        <div className="bg-slate-900 rounded-lg p-3 border border-slate-700">
-                                            <label className="block text-xs font-bold text-orange-400 uppercase mb-1 text-center">Grasas (%)</label>
+                                        <div className="bg-[#fdf7e7] rounded-lg p-3 border border-[#cbd9ce]">
+                                            <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1 text-center">Grasas (%)</label>
                                             <div className="flex items-center gap-2 justify-center">
                                                 <input
                                                     type="number"
                                                     value={editedPlan.macronutrients?.fats || 0}
                                                     onChange={e => handleMacroChange('fats', Number(e.target.value))}
-                                                    className="w-20 bg-slate-800 border border-slate-600 rounded p-1 text-center text-white font-bold"
+                                                    className="w-20 bg-[#fdf7e7] border border-[#cbd9ce] rounded p-1 text-center text-[#3c584b] font-bold"
                                                 />
                                             </div>
-                                            <div className="text-center mt-2 text-xs text-slate-400">
+                                            <div className="text-center mt-2 text-xs text-[#3c584b]">
                                                 {Math.round((editedPlan.kcalTarget * (editedPlan.macronutrients?.fats || 0)) / 100)} kcal
                                             </div>
-                                            <div className="text-center mt-1 text-xs text-orange-400 font-bold">
+                                            <div className="text-center mt-1 text-xs text-[#3c584b] font-bold">
                                                 {((editedPlan.kcalTarget * (editedPlan.macronutrients?.fats || 0) / 100 / 9) / currentWeight).toFixed(1)} g/kg
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mt-2 text-center text-xs text-slate-500">
+                                    <div className="mt-2 text-center text-xs text-[#3c584b]">
                                         Total: {(editedPlan.macronutrients?.protein || 0) + (editedPlan.macronutrients?.carbs || 0) + (editedPlan.macronutrients?.fats || 0)}%
                                     </div>
                                 </div>
 
                                 {/* Meal Sections */}
                                 <div className="space-y-6">
-                                    <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-                                        <h4 className="text-sm font-bold text-blue-400 uppercase">Comidas y Opciones</h4>
+                                    <div className="flex justify-between items-center border-b border-[#cbd9ce] pb-2">
+                                        <h4 className="text-sm font-bold text-[#3c584b] uppercase">Comidas y Opciones</h4>
                                         <button
                                             onClick={() => setEditedPlan({
                                                 ...editedPlan,
                                                 sections: [...editedPlan.sections, { title: 'Nueva Comida', options: [] }]
                                             })}
-                                            className="text-xs bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded flex items-center gap-1"
+                                            className="text-xs bg-[#fdf7e7] hover:bg-[#fdf7e7] text-[#3c584b] px-3 py-1.5 rounded flex items-center gap-1"
                                         >
                                             <Plus size={14} /> Agregar Tiempo de Comida
                                         </button>
                                     </div>
 
                                     {editedPlan.sections.map((section, sIdx) => (
-                                        <div key={sIdx} className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+                                        <div key={sIdx} className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
                                             <div className="flex justify-between items-center mb-3">
                                                 <input
                                                     type="text"
@@ -621,7 +621,7 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                                                         newSections[sIdx].title = e.target.value;
                                                         setEditedPlan({ ...editedPlan, sections: newSections });
                                                     }}
-                                                    className="bg-transparent border-b border-slate-600 text-white font-bold text-sm focus:border-blue-500 outline-none w-1/2"
+                                                    className="bg-transparent border-b border-[#cbd9ce] text-[#3c584b] font-bold text-sm focus:border-[#cbd9ce] outline-none w-1/2"
                                                 />
                                                 <div className="flex gap-2">
                                                     <button
@@ -630,7 +630,7 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                                                             newSections[sIdx].options.push({ id: Date.now().toString(), name: `Opción ${section.options.length + 1}`, description: '' });
                                                             setEditedPlan({ ...editedPlan, sections: newSections });
                                                         }}
-                                                        className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1"
+                                                        className="text-xs text-[#3c584b] hover:text-[#3c584b] flex items-center gap-1"
                                                     >
                                                         <Plus size={12} /> Opción
                                                     </button>
@@ -639,7 +639,7 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                                                             const newSections = editedPlan.sections.filter((_, i) => i !== sIdx);
                                                             setEditedPlan({ ...editedPlan, sections: newSections });
                                                         }}
-                                                        className="text-xs text-red-400 hover:text-red-300"
+                                                        className="text-xs text-[#3c584b] hover:text-[#3c584b]"
                                                     >
                                                         <Trash2 size={14} />
                                                     </button>
@@ -658,7 +658,7 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                                                                     newSections[sIdx].options[oIdx].name = e.target.value;
                                                                     setEditedPlan({ ...editedPlan, sections: newSections });
                                                                 }}
-                                                                className="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-xs text-blue-300 mb-1"
+                                                                className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded p-1.5 text-xs text-[#3c584b] mb-1"
                                                                 placeholder="Nombre Opción"
                                                             />
                                                             <textarea
@@ -668,7 +668,7 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                                                                     newSections[sIdx].options[oIdx].description = e.target.value;
                                                                     setEditedPlan({ ...editedPlan, sections: newSections });
                                                                 }}
-                                                                className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-sm text-white resize-none h-20"
+                                                                className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded p-2 text-sm text-[#3c584b] resize-none h-20"
                                                                 placeholder="Descripción de la comida..."
                                                             />
                                                         </div>
@@ -678,13 +678,13 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                                                                 newSections[sIdx].options = newSections[sIdx].options.filter((_, i) => i !== oIdx);
                                                                 setEditedPlan({ ...editedPlan, sections: newSections });
                                                             }}
-                                                            className="text-slate-600 hover:text-red-400 mt-2"
+                                                            className="text-[#3c584b] hover:text-[#3c584b] mt-2"
                                                         >
                                                             <X size={14} />
                                                         </button>
                                                     </div>
                                                 ))}
-                                                {section.options.length === 0 && <p className="text-xs text-slate-500 italic">Sin opciones.</p>}
+                                                {section.options.length === 0 && <p className="text-xs text-[#3c584b] italic">Sin opciones.</p>}
                                             </div>
                                         </div>
                                     ))}
@@ -693,28 +693,28 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                                 {/* Footer Info */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Suplementos</label>
+                                        <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Suplementos</label>
                                         <textarea
                                             value={editedPlan.supplements}
                                             onChange={e => setEditedPlan({ ...editedPlan, supplements: e.target.value })}
-                                            className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white h-24"
+                                            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] h-24"
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Evitar</label>
+                                        <label className="block text-xs font-bold text-[#3c584b] uppercase mb-1">Evitar</label>
                                         <textarea
                                             value={editedPlan.avoid}
                                             onChange={e => setEditedPlan({ ...editedPlan, avoid: e.target.value })}
-                                            className="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white h-24"
+                                            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-3 text-[#3c584b] h-24"
                                         />
                                     </div>
                                 </div>
                             </div>
 
                             {/* Footer Actions */}
-                            <div className="p-4 border-t border-slate-800 flex justify-end gap-3 bg-slate-900 shrink-0 rounded-b-xl">
-                                <button onClick={() => setShowEditModal(false)} className="px-6 py-2 text-slate-400 hover:text-white font-medium">Cancelar</button>
-                                <button onClick={handleSavePlan} className="bg-[#0085db] hover:bg-[#0070b8] text-white px-6 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg">
+                            <div className="p-4 border-t border-[#cbd9ce] flex justify-end gap-3 bg-[#fdf7e7] shrink-0 rounded-b-xl">
+                                <button onClick={() => setShowEditModal(false)} className="px-6 py-2 text-[#3c584b] hover:text-[#3c584b] font-medium">Cancelar</button>
+                                <button onClick={handleSavePlan} className="bg-[#cbd9ce] hover:bg-[#cbd9ce] text-[#3c584b] px-6 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg">
                                     <Save size={18} /> Guardar Plan
                                 </button>
                             </div>

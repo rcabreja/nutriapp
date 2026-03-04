@@ -19,14 +19,14 @@ const ACTIVITY_FACTORS = [
 
 const Input = ({ label, value, onChange, type = "number", readOnly = false, placeholder }: any) => (
     <div>
-        <label className="block text-xs font-bold text-slate-400 mb-1 truncate" title={label}>{label}</label>
+        <label className="block text-xs font-bold text-[#3c584b] mb-1 truncate" title={label}>{label}</label>
         <input
             type={type}
             value={value}
             onChange={e => onChange && onChange(e.target.value)}
             readOnly={readOnly}
             placeholder={placeholder}
-            className={`w-full bg-slate-800 border border-slate-600 rounded-lg p-2 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors ${readOnly ? 'opacity-50 cursor-not-allowed bg-slate-900' : ''}`}
+            className={`w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none transition-colors ${readOnly ? 'opacity-50 cursor-not-allowed bg-[#fdf7e7]' : ''}`}
         />
     </div>
 );
@@ -115,8 +115,8 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
         <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Basics */}
-                <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700">
-                    <h4 className="text-white font-bold mb-4 border-b border-slate-700 pb-2">Medidas Básicas</h4>
+                <div className="bg-[#fdf7e7] p-4 rounded-xl border border-[#cbd9ce]">
+                    <h4 className="text-[#3c584b] font-bold mb-4 border-b border-[#cbd9ce] pb-2">Medidas Básicas</h4>
                     <div className="grid grid-cols-2 gap-4">
                         <Input label="Fecha y Hora" type="datetime-local" value={data.date || new Date().toISOString().slice(0, 16)} onChange={(v: any) => updateAuthro('date', v)} />
                         <Input label="Peso (kg)" value={data.weight} onChange={(v: any) => updateAuthro('weight', v)} />
@@ -126,17 +126,17 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
                 </div>
 
                 {/* Energy */}
-                <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700">
-                    <h4 className="text-white font-bold mb-4 border-b border-slate-700 pb-2 flex items-center gap-2">
-                        <Activity size={16} className="text-green-500" /> Cálculo Energético (Mifflin-St Jeor)
+                <div className="bg-[#fdf7e7] p-4 rounded-xl border border-[#cbd9ce]">
+                    <h4 className="text-[#3c584b] font-bold mb-4 border-b border-[#cbd9ce] pb-2 flex items-center gap-2">
+                        <Activity size={16} className="text-[#3c584b]" /> Cálculo Energético (Mifflin-St Jeor)
                     </h4>
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-xs font-bold text-slate-400 mb-1 truncate">Factor Actividad</label>
+                            <label className="block text-xs font-bold text-[#3c584b] mb-1 truncate">Factor Actividad</label>
                             <select
                                 value={data.activity || 1.2}
                                 onChange={e => updateAuthro('activity', e.target.value)}
-                                className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 text-white text-sm focus:border-[var(--primary)] outline-none"
+                                className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none"
                             >
                                 {ACTIVITY_FACTORS.map(f => (
                                     <option key={f.value} value={f.value}>{f.label}</option>
@@ -151,8 +151,8 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
                 </div>
 
                 {/* Circumferences */}
-                <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700">
-                    <h4 className="text-white font-bold mb-4 border-b border-slate-700 pb-2">Circunferencias (cm)</h4>
+                <div className="bg-[#fdf7e7] p-4 rounded-xl border border-[#cbd9ce]">
+                    <h4 className="text-[#3c584b] font-bold mb-4 border-b border-[#cbd9ce] pb-2">Circunferencias (cm)</h4>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         <Input label="Cintura" value={data.circumference?.waist} onChange={(v: any) => updateNested('circumference', 'waist', v)} />
                         <Input label="Cadera" value={data.circumference?.hip} onChange={(v: any) => updateNested('circumference', 'hip', v)} />
@@ -166,19 +166,19 @@ export default function StepAnthropometry({ formData, onChange, gender, dob }: P
                 </div>
 
                 {/* Folds */}
-                <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700">
-                    <div className="flex justify-between items-center mb-4 border-b border-slate-700 pb-2">
-                        <h4 className="text-white font-bold">Pliegues (mm)</h4>
+                <div className="bg-[#fdf7e7] p-4 rounded-xl border border-[#cbd9ce]">
+                    <div className="flex justify-between items-center mb-4 border-b border-[#cbd9ce] pb-2">
+                        <h4 className="text-[#3c584b] font-bold">Pliegues (mm)</h4>
                         <div className="flex gap-2 flex-wrap justify-end">
                             {bodyComp && (
-                                <span className={`text-xs font-bold ${bodyComp.color} bg-slate-700/50 px-2 py-1 rounded border border-slate-600 flex items-center gap-1`}>
+                                <span className={`text-xs font-bold ${bodyComp.color} bg-[#fdf7e7] px-2 py-1 rounded border border-[#cbd9ce] flex items-center gap-1`}>
                                     {bodyComp.label}
                                 </span>
                             )}
-                            <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-2 py-1 rounded border border-blue-500/20 flex items-center gap-1">
+                            <span className="text-xs font-bold text-[#3c584b] bg-[#cbd9ce] px-2 py-1 rounded border border-[#cbd9ce] flex items-center gap-1">
                                 <Calculator size={10} /> Prom: {foldsMetrics.avg.toFixed(1)} mm
                             </span>
-                            <span className="text-xs font-bold text-orange-400 bg-orange-500/10 px-2 py-1 rounded border border-orange-500/20 flex items-center gap-1">
+                            <span className="text-xs font-bold text-[#3c584b] bg-[#cbd9ce] px-2 py-1 rounded border border-[#cbd9ce] flex items-center gap-1">
                                 <Calculator size={10} /> Σ {foldsMetrics.sum.toFixed(1)} mm
                             </span>
                         </div>

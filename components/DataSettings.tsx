@@ -91,9 +91,9 @@ export default function DataSettings() {
     };
 
     return (
-        <div className="bg-[var(--card-bg)] border border-slate-700/30 rounded-xl p-6 space-y-6 shadow-sm">
-            <h3 className="text-xl font-bold text-[var(--text-main)] flex items-center gap-2 mb-4 pb-2 border-b border-slate-700/30">
-                <Database size={20} className="text-[var(--primary)]" /> Gestión de Datos
+        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 space-y-6 shadow-sm">
+            <h3 className="text-xl font-bold text-[#3c584b] flex items-center gap-2 mb-4 pb-2 border-b border-[#cbd9ce]">
+                <Database size={20} className="text-[#cbd9ce]" /> Gestión de Datos
             </h3>
 
             <div className="space-y-4">
@@ -102,9 +102,9 @@ export default function DataSettings() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                     {/* JSON Export */}
-                    <div className="p-4 rounded-lg bg-[var(--app-bg)] border border-slate-700/30 flex flex-col justify-between group hover:border-[var(--primary)] transition-colors">
+                    <div className="p-4 rounded-lg bg-[#fdf7e7] border border-[#cbd9ce] flex flex-col justify-between group hover:border-[#cbd9ce] transition-colors">
                         <div>
-                            <div className="flex items-center gap-2 mb-2 text-[var(--primary)]">
+                            <div className="flex items-center gap-2 mb-2 text-[#cbd9ce]">
                                 <FileJson size={24} />
                                 <h4 className="font-bold">Copia de Seguridad (JSON)</h4>
                             </div>
@@ -114,16 +114,16 @@ export default function DataSettings() {
                         </div>
                         <button
                             onClick={handleExportJSON}
-                            className="w-full py-2 bg-[var(--primary)] text-white rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                            className="w-full py-2 bg-[#cbd9ce] text-[#3c584b] rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
                         >
                             <Download size={16} /> Descargar Respaldo
                         </button>
                     </div>
 
                     {/* CSV Export */}
-                    <div className="p-4 rounded-lg bg-[var(--app-bg)] border border-slate-700/30 flex flex-col justify-between group hover:border-green-500 transition-colors">
+                    <div className="p-4 rounded-lg bg-[#fdf7e7] border border-[#cbd9ce] flex flex-col justify-between group hover:border-[#cbd9ce] transition-colors">
                         <div>
-                            <div className="flex items-center gap-2 mb-2 text-green-500">
+                            <div className="flex items-center gap-2 mb-2 text-[#3c584b]">
                                 <FileSpreadsheet size={24} />
                                 <h4 className="font-bold">Exportar Pacientes (CSV)</h4>
                             </div>
@@ -133,7 +133,7 @@ export default function DataSettings() {
                         </div>
                         <button
                             onClick={handleExportCSV}
-                            className="w-full py-2 bg-green-600 text-white rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                            className="w-full py-2 bg-[#cbd9ce] text-[#3c584b] rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
                         >
                             <Download size={16} /> Exportar Excel/CSV
                         </button>
@@ -141,14 +141,14 @@ export default function DataSettings() {
                 </div>
 
                 {/* Restore Section */}
-                <div className="mt-6 pt-6 border-t border-slate-700/30">
-                    <h4 className="font-bold text-[var(--text-main)] mb-2 flex items-center gap-2">
+                <div className="mt-6 pt-6 border-t border-[#cbd9ce]">
+                    <h4 className="font-bold text-[#3c584b] mb-2 flex items-center gap-2">
                         <Upload size={18} /> Restaurar Datos
                     </h4>
-                    <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 mb-4">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-lg p-4 mb-4">
                         <div className="flex gap-3">
-                            <AlertTriangle className="text-orange-500 shrink-0" size={20} />
-                            <p className="text-sm text-orange-200">
+                            <AlertTriangle className="text-[#3c584b] shrink-0" size={20} />
+                            <p className="text-sm text-[#3c584b]">
                                 <span className="font-bold">Atención:</span> Importar un archivo reemplazará <strong>todos</strong> los datos actuales. Asegúrate de hacer una copia de seguridad antes de continuar.
                             </p>
                         </div>
@@ -164,7 +164,7 @@ export default function DataSettings() {
                         />
                         <button
                             onClick={() => fileInputRef.current?.click()}
-                            className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-colors flex items-center gap-2"
+                            className="px-4 py-2 bg-[#fdf7e7] text-[#3c584b] rounded-lg hover:bg-[#fdf7e7] transition-colors flex items-center gap-2"
                         >
                             <Upload size={16} /> Seleccionar Archivo de Respaldo (.json)
                         </button>

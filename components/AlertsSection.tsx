@@ -29,10 +29,10 @@ export default function AlertsSection({ patients }: Props) {
     return (
         <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center animate-pulse">
+                <div className="w-8 h-8 rounded-full bg-[#cbd9ce] text-[#3c584b] flex items-center justify-center animate-pulse">
                     <Bell size={18} />
                 </div>
-                <h2 className="text-xl font-bold text-white">Recordatorios para Mañana</h2>
+                <h2 className="text-xl font-bold text-[#3c584b]">Recordatorios para Mañana</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -44,17 +44,17 @@ export default function AlertsSection({ patients }: Props) {
                         <Link
                             key={`${appt.patient.id}-${idx}`}
                             to={`/patients/${appt.patient.id}`}
-                            className="bg-slate-900 border border-amber-500/30 hover:border-amber-500/60 rounded-xl p-4 flex items-center gap-4 transition-all group"
+                            className="bg-[#fdf7e7] border border-[#cbd9ce] hover:border-[#cbd9ce] rounded-xl p-4 flex items-center gap-4 transition-all group"
                         >
-                            <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-xl font-bold text-amber-500 shrink-0">
+                            <div className="w-12 h-12 rounded-full bg-[#fdf7e7] flex items-center justify-center text-xl font-bold text-[#3c584b] shrink-0">
                                 {appt.patient.name.charAt(0)}
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="font-bold text-white truncate group-hover:text-amber-400 transition-colors">
+                                <p className="font-bold text-[#3c584b] truncate group-hover:text-[#3c584b] transition-colors">
                                     {appt.patient.name}
                                 </p>
-                                <div className="flex items-center gap-3 text-sm text-slate-400 mt-1">
-                                    <span className="flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded text-xs font-bold">
+                                <div className="flex items-center gap-3 text-sm text-[#3c584b] mt-1">
+                                    <span className="flex items-center gap-1 bg-[#cbd9ce] text-[#3c584b] px-2 py-0.5 rounded text-xs font-bold">
                                         <Clock size={12} /> {timeStr}
                                     </span>
                                     <span className="text-xs">Cita de Seguimiento</span>

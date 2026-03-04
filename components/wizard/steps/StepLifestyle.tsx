@@ -8,44 +8,44 @@ interface Props {
 
 const Input = ({ label, value, onChange, placeholder, type = "text" }: any) => (
     <div className="flex-1">
-        <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">{label}</label>
+        <label className="block text-xs font-bold text-[#3c584b] mb-1 uppercase tracking-wider">{label}</label>
         <input
             type={type}
             value={value}
             onChange={e => onChange(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors focus:bg-slate-900"
+            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none transition-colors focus:bg-[#fdf7e7]"
         />
     </div>
 );
 
 const TextArea = ({ label, value, onChange, placeholder }: any) => (
     <div className="flex-1">
-        <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">{label}</label>
+        <label className="block text-xs font-bold text-[#3c584b] mb-1 uppercase tracking-wider">{label}</label>
         <textarea
             value={value}
             onChange={e => onChange(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none transition-colors h-20 resize-none focus:bg-slate-900"
+            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none transition-colors h-20 resize-none focus:bg-[#fdf7e7]"
         />
     </div>
 );
 
 const Checkbox = ({ label, checked, onChange }: any) => (
-    <label className="flex items-center gap-3 cursor-pointer group bg-slate-900/30 p-3 rounded-lg border border-slate-700 hover:border-slate-600 transition-colors">
-        <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${checked ? 'bg-[var(--primary)] border-[var(--primary)]' : 'bg-slate-800 border-slate-600 group-hover:border-[var(--primary)]'}`}>
-            {checked && <div className="w-2.5 h-2.5 bg-white rounded-sm" />}
+    <label className="flex items-center gap-3 cursor-pointer group bg-[#fdf7e7] p-3 rounded-lg border border-[#cbd9ce] hover:border-[#cbd9ce] transition-colors">
+        <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${checked ? 'bg-[#cbd9ce] border-[#cbd9ce]' : 'bg-[#fdf7e7] border-[#cbd9ce] group-hover:border-[#cbd9ce]'}`}>
+            {checked && <div className="w-2.5 h-2.5 bg-[#fdf7e7] rounded-sm" />}
         </div>
-        <span className={`text-sm font-medium ${checked ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>{label}</span>
+        <span className={`text-sm font-medium ${checked ? 'text-[#3c584b]' : 'text-[#3c584b] group-hover:text-[#3c584b]'}`}>{label}</span>
         <input type="checkbox" checked={checked} onChange={e => onChange(e.target.checked)} className="hidden" />
     </label>
 );
 
 const Section = ({ title, icon: Icon, children }: any) => (
-    <div className="bg-slate-800/40 border border-slate-700 rounded-xl p-5 mb-6">
-        <div className="flex items-center gap-2 mb-5 text-[var(--primary)] border-b border-slate-700/50 pb-3">
+    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-5 mb-6">
+        <div className="flex items-center gap-2 mb-5 text-[#cbd9ce] border-b border-[#cbd9ce] pb-3">
             <Icon size={20} />
-            <h4 className="font-bold uppercase text-sm tracking-wider text-white">{title}</h4>
+            <h4 className="font-bold uppercase text-sm tracking-wider text-[#3c584b]">{title}</h4>
         </div>
         {children}
     </div>
@@ -102,11 +102,11 @@ export default function StepLifestyle({ formData, onChange }: Props) {
                         <div className="grid grid-cols-2 gap-4">
                             <Input label="Horas Sueño" value={formData.sleepHours} onChange={(v: any) => onChange('sleepHours', v)} />
                             <div>
-                                <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">Nivel Estrés (General)</label>
+                                <label className="block text-xs font-bold text-[#3c584b] mb-1 uppercase tracking-wider">Nivel Estrés (General)</label>
                                 <select
                                     value={formData.stress}
                                     onChange={e => onChange('stress', e.target.value)}
-                                    className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none"
+                                    className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none"
                                 >
                                     <option value="">No especificado</option>
                                     <option value="Bajo">Bajo</option>
@@ -119,19 +119,19 @@ export default function StepLifestyle({ formData, onChange }: Props) {
                         <Input label="Horarios Comida" value={formData.mealSchedules} onChange={(v: any) => onChange('mealSchedules', v)} />
 
                         <div className="grid grid-cols-2 gap-4 pt-2">
-                            <div className="flex flex-col p-2 bg-slate-900/20 rounded-lg rounded-t-xl gap-2 border border-slate-700">
+                            <div className="flex flex-col p-2 bg-[#fdf7e7] rounded-lg rounded-t-xl gap-2 border border-[#cbd9ce]">
                                 <Checkbox label="Alcohol" checked={formData.alcohol} onChange={(c: any) => onChange('alcohol', c)} />
                                 {formData.alcohol && (
-                                    <div className="grid grid-cols-1 gap-2 pt-2 border-t border-slate-700/50">
+                                    <div className="grid grid-cols-1 gap-2 pt-2 border-t border-[#cbd9ce]">
                                         <Input label="Tipo" value={formData.alcoholType} onChange={(v: any) => onChange('alcoholType', v)} placeholder="Ej. Cerveza, Vino..." />
                                         <Input label="Frecuencia" value={formData.alcoholFrequency} onChange={(v: any) => onChange('alcoholFrequency', v)} placeholder="Ej. Fines de sem..." />
                                     </div>
                                 )}
                             </div>
-                            <div className="flex flex-col p-2 bg-slate-900/20 rounded-lg rounded-t-xl gap-2 border border-slate-700">
+                            <div className="flex flex-col p-2 bg-[#fdf7e7] rounded-lg rounded-t-xl gap-2 border border-[#cbd9ce]">
                                 <Checkbox label="Tabaco" checked={formData.tobacco} onChange={(c: any) => onChange('tobacco', c)} />
                                 {formData.tobacco && (
-                                    <div className="grid grid-cols-1 gap-2 pt-2 border-t border-slate-700/50">
+                                    <div className="grid grid-cols-1 gap-2 pt-2 border-t border-[#cbd9ce]">
                                         <Input label="Tipo" value={formData.tobaccoType} onChange={(v: any) => onChange('tobaccoType', v)} placeholder="Ej. Cigarrillo, Vape..." />
                                         <Input label="Frecuencia" value={formData.tobaccoFrequency} onChange={(v: any) => onChange('tobaccoFrequency', v)} placeholder="Ej. 1 cajetilla/día" />
                                     </div>
@@ -200,11 +200,11 @@ export default function StepLifestyle({ formData, onChange }: Props) {
                     <div className="space-y-4">
                         <TextArea label="Preferencias" value={formData.likes} onChange={(v: any) => onChange('likes', v)} />
                         <div>
-                            <label className="block text-xs font-bold text-slate-400 mb-1 uppercase tracking-wider">Presupuesto</label>
+                            <label className="block text-xs font-bold text-[#3c584b] mb-1 uppercase tracking-wider">Presupuesto</label>
                             <select
                                 value={formData.budget}
                                 onChange={e => onChange('budget', e.target.value)}
-                                className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-[var(--primary)] outline-none"
+                                className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded-lg p-2.5 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none"
                             >
                                 <option value="Bajo">Bajo</option>
                                 <option value="Medio">Medio</option>

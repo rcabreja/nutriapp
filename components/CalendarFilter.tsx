@@ -49,15 +49,15 @@ export default function CalendarFilter({ notes, selectedDate, onSelectDate }: Ca
     const renderHeader = () => {
         return (
             <div className="flex items-center justify-between mb-4">
-                <h3 className="text-white font-bold text-lg capitalize flex items-center gap-2">
-                    <CalendarIcon size={18} className="text-blue-500" />
+                <h3 className="text-[#3c584b] font-bold text-lg capitalize flex items-center gap-2">
+                    <CalendarIcon size={18} className="text-[#3c584b]" />
                     {format(currentMonth, 'MMMM yyyy', { locale: es })}
                 </h3>
                 <div className="flex gap-1">
-                    <button onClick={prevMonth} className="p-1 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors">
+                    <button onClick={prevMonth} className="p-1 hover:bg-[#fdf7e7] rounded-lg text-[#3c584b] hover:text-[#3c584b] transition-colors">
                         <ChevronLeft size={20} />
                     </button>
-                    <button onClick={nextMonth} className="p-1 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors">
+                    <button onClick={nextMonth} className="p-1 hover:bg-[#fdf7e7] rounded-lg text-[#3c584b] hover:text-[#3c584b] transition-colors">
                         <ChevronRight size={20} />
                     </button>
                 </div>
@@ -70,7 +70,7 @@ export default function CalendarFilter({ notes, selectedDate, onSelectDate }: Ca
         return (
             <div className="grid grid-cols-7 mb-2">
                 {days.map(day => (
-                    <div key={day} className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest py-1">
+                    <div key={day} className="text-center text-xs font-bold text-[#3c584b] uppercase tracking-widest py-1">
                         {day}
                     </div>
                 ))}
@@ -109,9 +109,9 @@ export default function CalendarFilter({ notes, selectedDate, onSelectDate }: Ca
                             key={dayItem.toString()}
                             className={`
                             relative h-10 w-full flex items-center justify-center rounded-lg cursor-pointer transition-all border
-                            ${!isCurrentMonth ? 'text-slate-600 border-transparent hover:bg-slate-800/30' : 'text-slate-300 border-slate-800/50 hover:bg-slate-800'}
-                            ${isSelected ? 'bg-blue-600 text-white border-blue-500 shadow-lg shadow-blue-900/50 scale-105 z-10' : ''}
-                            ${isDayToday && !isSelected ? 'bg-slate-800 text-blue-400 border-blue-500/30' : ''}
+                            ${!isCurrentMonth ? 'text-[#3c584b] border-transparent hover:bg-[#fdf7e7]' : 'text-[#3c584b] border-[#cbd9ce] hover:bg-[#fdf7e7]'}
+                            ${isSelected ? 'bg-[#cbd9ce] text-[#3c584b] border-[#cbd9ce] shadow-lg shadow-md scale-105 z-10' : ''}
+                            ${isDayToday && !isSelected ? 'bg-[#fdf7e7] text-[#3c584b] border-[#cbd9ce]' : ''}
                         `}
                             onClick={() => onSelectDate(format(dayItem, 'yyyy-MM-dd'))}
                         >
@@ -120,10 +120,10 @@ export default function CalendarFilter({ notes, selectedDate, onSelectDate }: Ca
                             {/* Indicators */}
                             <div className="absolute bottom-1 flex gap-0.5">
                                 {hasNoteEvent && (
-                                    <div className={`w-1 h-1 rounded-full ${isSelected ? 'bg-white' : 'bg-blue-500'}`}></div>
+                                    <div className={`w-1 h-1 rounded-full ${isSelected ? 'bg-[#fdf7e7]' : 'bg-[#cbd9ce]'}`}></div>
                                 )}
                                 {hasApptEvent && (
-                                    <div className={`w-1 h-1 rounded-full ${isSelected ? 'bg-white' : 'bg-green-500'}`}></div>
+                                    <div className={`w-1 h-1 rounded-full ${isSelected ? 'bg-[#fdf7e7]' : 'bg-[#cbd9ce]'}`}></div>
                                 )}
                             </div>
                         </div>
@@ -134,19 +134,19 @@ export default function CalendarFilter({ notes, selectedDate, onSelectDate }: Ca
     };
 
     return (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 h-fit">
+        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4 h-fit">
             {renderHeader()}
             {renderDays()}
             {renderCells()}
 
             {selectedDate && (
-                <div className="mt-4 pt-4 border-t border-slate-800 flex justify-between items-center animate-in fade-in slide-in-from-top-2">
-                    <span className="text-sm text-slate-300">
-                        Filtro: <span className="font-bold text-white">{format(parseISO(selectedDate), "dd 'de' MMMM", { locale: es })}</span>
+                <div className="mt-4 pt-4 border-t border-[#cbd9ce] flex justify-between items-center animate-in fade-in slide-in-from-top-2">
+                    <span className="text-sm text-[#3c584b]">
+                        Filtro: <span className="font-bold text-[#3c584b]">{format(parseISO(selectedDate), "dd 'de' MMMM", { locale: es })}</span>
                     </span>
                     <button
                         onClick={resetDate}
-                        className="text-xs flex items-center gap-1 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded transition-colors"
+                        className="text-xs flex items-center gap-1 bg-[#fdf7e7] hover:bg-[#fdf7e7] text-[#3c584b] px-2 py-1 rounded transition-colors"
                     >
                         <X size={12} /> Limpiar
                     </button>
@@ -154,12 +154,12 @@ export default function CalendarFilter({ notes, selectedDate, onSelectDate }: Ca
             )}
 
             {!selectedDate && (
-                <div className="mt-4 pt-4 border-t border-slate-800 flex gap-4 justify-center text-[10px] text-slate-500 uppercase font-bold tracking-wider">
+                <div className="mt-4 pt-4 border-t border-[#cbd9ce] flex gap-4 justify-center text-[#3c584b] text-[#3c584b] uppercase font-bold tracking-wider">
                     <div className="flex items-center gap-1">
-                        <div className="w-2 h-2 rounded-full bg-blue-500"></div> Visita
+                        <div className="w-2 h-2 rounded-full bg-[#cbd9ce]"></div> Visita
                     </div>
                     <div className="flex items-center gap-1">
-                        <div className="w-2 h-2 rounded-full bg-green-500"></div> Cita
+                        <div className="w-2 h-2 rounded-full bg-[#cbd9ce]"></div> Cita
                     </div>
                 </div>
             )}

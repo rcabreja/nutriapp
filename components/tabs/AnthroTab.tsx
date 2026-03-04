@@ -204,31 +204,31 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
         <div className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* IMC Chart */}
-                <div className="bg-[var(--card-bg)] border border-slate-800 rounded-xl p-4 sm:p-6">
-                    <h3 className="text-sm font-bold text-white mb-4">Evolución Peso vs IMC</h3>
+                <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4 sm:p-6">
+                    <h3 className="text-sm font-bold text-[#3c584b] mb-4">Evolución Peso vs IMC</h3>
                     <div className="h-64 w-full relative">
                         <Line data={imcData} options={chartOptions} />
                     </div>
                 </div>
 
                 {/* Reference Table */}
-                <div className="bg-[var(--card-bg)] border border-slate-800 rounded-xl p-4 sm:p-6 overflow-x-auto">
-                    <h3 className="text-sm font-bold text-white mb-4">Referencia IMC (OMS)</h3>
-                    <table className="w-full text-xs text-slate-300 min-w-[200px]">
-                        <thead><tr className="border-b border-slate-700"><th className="text-left py-2">Categoría</th><th className="text-right">Rango</th></tr></thead>
+                <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4 sm:p-6 overflow-x-auto">
+                    <h3 className="text-sm font-bold text-[#3c584b] mb-4">Referencia IMC (OMS)</h3>
+                    <table className="w-full text-xs text-[#3c584b] min-w-[200px]">
+                        <thead><tr className="border-b border-[#cbd9ce]"><th className="text-left py-2">Categoría</th><th className="text-right">Rango</th></tr></thead>
                         <tbody className="divide-y divide-slate-800">
-                            <tr><td className="py-2 text-blue-400">Bajo Peso</td><td className="text-right text-blue-400">&lt; 18.5</td></tr>
-                            <tr><td className="py-2 text-green-400">Normal</td><td className="text-right text-green-400">18.5 - 24.9</td></tr>
-                            <tr><td className="py-2 text-yellow-400">Sobrepeso</td><td className="text-right text-yellow-400">25.0 - 29.9</td></tr>
-                            <tr><td className="py-2 text-orange-400">Obesidad I</td><td className="text-right text-orange-400">30.0 - 34.9</td></tr>
-                            <tr><td className="py-2 text-red-400">Obesidad II</td><td className="text-right text-red-400">35.0 - 39.9</td></tr>
+                            <tr><td className="py-2 text-[#3c584b]">Bajo Peso</td><td className="text-right text-[#3c584b]">&lt; 18.5</td></tr>
+                            <tr><td className="py-2 text-[#3c584b]">Normal</td><td className="text-right text-[#3c584b]">18.5 - 24.9</td></tr>
+                            <tr><td className="py-2 text-[#3c584b]">Sobrepeso</td><td className="text-right text-[#3c584b]">25.0 - 29.9</td></tr>
+                            <tr><td className="py-2 text-[#3c584b]">Obesidad I</td><td className="text-right text-[#3c584b]">30.0 - 34.9</td></tr>
+                            <tr><td className="py-2 text-[#3c584b]">Obesidad II</td><td className="text-right text-[#3c584b]">35.0 - 39.9</td></tr>
                         </tbody>
                     </table>
                 </div>
 
                 {/* Measures Chart */}
-                <div className="col-span-1 lg:col-span-2 bg-[var(--card-bg)] border border-slate-800 rounded-xl p-4 sm:p-6">
-                    <h3 className="text-sm font-bold text-white mb-4">Evolución de Medidas (cm)</h3>
+                <div className="col-span-1 lg:col-span-2 bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4 sm:p-6">
+                    <h3 className="text-sm font-bold text-[#3c584b] mb-4">Evolución de Medidas (cm)</h3>
                     <div className="h-64 w-full relative">
                         <Line data={measureData} options={{ ...chartOptions, scales: { y: { grid: { color: '#1e293b' } }, x: { grid: { display: false } } } }} />
                     </div>
@@ -237,34 +237,34 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
 
             {/* Energy Expenditure Card (Latest) */}
             {sortedRecords.length > 0 && (
-                <div className="bg-[var(--card-bg)] border border-slate-800 rounded-xl p-6 relative overflow-hidden group">
+                <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <Activity size={100} className="text-[var(--primary)]" />
+                        <Activity size={100} className="text-[#cbd9ce]" />
                     </div>
-                    <h3 className="text-sm font-bold text-white mb-6 flex items-center gap-2">
-                        <Activity size={18} className="text-[var(--primary)]" />
+                    <h3 className="text-sm font-bold text-[#3c584b] mb-6 flex items-center gap-2">
+                        <Activity size={18} className="text-[#cbd9ce]" />
                         Estimación Energética (Mifflin-St Jeor)
-                        <span className="text-xs font-normal text-slate-500 ml-2">Basado en último pesaje</span>
+                        <span className="text-xs font-normal text-[#3c584b] ml-2">Basado en último pesaje</span>
                     </h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
-                            <p className="text-xs text-slate-400 font-bold uppercase mb-1">Metabolismo Basal (BMR)</p>
-                            <div className="text-3xl font-bold text-white">
-                                {sortedRecords[sortedRecords.length - 1].bmr || '-'} <span className="text-sm font-normal text-slate-500">kcal/día</span>
+                        <div className="bg-[#fdf7e7] rounded-lg p-4 border border-[#cbd9ce]">
+                            <p className="text-xs text-[#3c584b] font-bold uppercase mb-1">Metabolismo Basal (BMR)</p>
+                            <div className="text-3xl font-bold text-[#3c584b]">
+                                {sortedRecords[sortedRecords.length - 1].bmr || '-'} <span className="text-sm font-normal text-[#3c584b]">kcal/día</span>
                             </div>
                         </div>
 
-                        <div className="bg-gradient-to-br from-[var(--primary)] to-blue-800 rounded-lg p-4 text-white shadow-lg">
-                            <p className="text-xs text-blue-200 font-bold uppercase mb-1">Gasto Energético Total (TDEE)</p>
+                        <div className="bg-gradient-to-br from-[var(--primary)] to-blue-800 rounded-lg p-4 text-[#3c584b] shadow-lg">
+                            <p className="text-xs text-[#3c584b] font-bold uppercase mb-1">Gasto Energético Total (TDEE)</p>
                             <div className="text-3xl font-bold">
-                                {sortedRecords[sortedRecords.length - 1].tdee || '-'} <span className="text-sm font-normal text-blue-200">kcal/día</span>
+                                {sortedRecords[sortedRecords.length - 1].tdee || '-'} <span className="text-sm font-normal text-[#3c584b]">kcal/día</span>
                             </div>
                         </div>
 
-                        <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700 flex flex-col justify-center">
-                            <p className="text-xs text-slate-400 font-bold uppercase mb-1">Factor de Actividad Pasado</p>
-                            <div className="text-lg font-medium text-slate-300">
+                        <div className="bg-[#fdf7e7] rounded-lg p-4 border border-[#cbd9ce] flex flex-col justify-center">
+                            <p className="text-xs text-[#3c584b] font-bold uppercase mb-1">Factor de Actividad Pasado</p>
+                            <div className="text-lg font-medium text-[#3c584b]">
                                 {ACTIVITY_FACTORS.find(f => f.value === sortedRecords[sortedRecords.length - 1].activity)?.label || 'No registrado'}
                             </div>
                         </div>
@@ -273,18 +273,18 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
             )}
 
             {/* Table & Action */}
-            <div className="bg-[var(--card-bg)] border border-slate-800 rounded-xl overflow-hidden">
-                <div className="p-4 border-b border-slate-800 flex justify-between items-center">
-                    <h3 className="text-white font-bold">Registro de Medidas</h3>
+            <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl overflow-hidden">
+                <div className="p-4 border-b border-[#cbd9ce] flex justify-between items-center">
+                    <h3 className="text-[#3c584b] font-bold">Registro de Medidas</h3>
                     {!readOnly && (
-                        <button onClick={() => { setEditingId(null); setNewMeasure({ ...INITIAL_MEASURE, date: getNowISO() }); setShowModal(true); }} className="bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded text-sm border border-slate-700 transition-colors whitespace-nowrap">
+                        <button onClick={() => { setEditingId(null); setNewMeasure({ ...INITIAL_MEASURE, date: getNowISO() }); setShowModal(true); }} className="bg-[#fdf7e7] hover:bg-[#fdf7e7] text-[#3c584b] px-3 py-1.5 rounded text-sm border border-[#cbd9ce] transition-colors whitespace-nowrap">
                             NUEVA MEDIDA
                         </button>
                     )}
                 </div>
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm text-left text-slate-300 whitespace-nowrap">
-                        <thead className="bg-slate-800 text-xs uppercase">
+                    <table className="w-full text-sm text-left text-[#3c584b] whitespace-nowrap">
+                        <thead className="bg-[#fdf7e7] text-xs uppercase">
                             <tr>
                                 <th className="px-4 py-3">Fecha</th>
                                 <th className="px-4 py-3">Peso</th>
@@ -302,7 +302,7 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                         </thead>
                         <tbody className="divide-y divide-slate-800">
                             {patient.anthropometry.map(r => (
-                                <tr key={r.id} className="hover:bg-slate-800/50 transition-colors">
+                                <tr key={r.id} className="hover:bg-[#fdf7e7] transition-colors">
                                     <td className="px-4 py-3">
                                         {new Date(r.date).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}
                                     </td>
@@ -319,10 +319,10 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                                     <td className="px-4 py-3 text-right">
                                         {!readOnly && (
                                             <div className="flex justify-end gap-2">
-                                                <button onClick={() => handleEdit(r)} className="p-1.5 text-blue-400 hover:bg-blue-400/10 rounded-lg transition-colors">
+                                                <button onClick={() => handleEdit(r)} className="p-1.5 text-[#3c584b] hover:bg-[#cbd9ce] rounded-lg transition-colors">
                                                     <Edit2 size={16} />
                                                 </button>
-                                                <button onClick={() => setDeleteId(r.id)} className="p-1.5 text-red-400 hover:bg-red-400/10 rounded-lg transition-colors">
+                                                <button onClick={() => setDeleteId(r.id)} className="p-1.5 text-[#3c584b] hover:bg-[#cbd9ce] rounded-lg transition-colors">
                                                     <Trash2 size={16} />
                                                 </button>
                                             </div>
@@ -332,7 +332,7 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                             ))}
                             {patient.anthropometry.length === 0 && (
                                 <tr>
-                                    <td colSpan={12} className="px-4 py-8 text-center text-slate-500 italic">No hay registros de medidas.</td>
+                                    <td colSpan={12} className="px-4 py-8 text-center text-[#3c584b] italic">No hay registros de medidas.</td>
                                 </tr>
                             )}
                         </tbody>
@@ -342,25 +342,25 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
 
             {/* DELETE CONFIRMATION MODAL */}
             {deleteId && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[70] p-4">
-                    <div className="bg-[var(--card-bg)] border border-slate-700 rounded-xl p-8 max-w-sm w-full shadow-2xl text-center animate-in fade-in zoom-in duration-200">
-                        <div className="w-16 h-16 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/20">
+                <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-[70] p-4">
+                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-8 max-w-sm w-full shadow-2xl text-center animate-in fade-in zoom-in duration-200">
+                        <div className="w-16 h-16 bg-[#cbd9ce] text-[#3c584b] rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/20">
                             <AlertTriangle size={32} />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">¿Eliminar Registro?</h3>
-                        <p className="text-slate-400 text-sm mb-8 leading-relaxed">
+                        <h3 className="text-xl font-bold text-[#3c584b] mb-2">¿Eliminar Registro?</h3>
+                        <p className="text-[#3c584b] text-sm mb-8 leading-relaxed">
                             Esta acción eliminará permanentemente esta medición antropométrica de la ficha del paciente.
                         </p>
                         <div className="flex gap-3 justify-center">
                             <button
                                 onClick={() => setDeleteId(null)}
-                                className="px-5 py-2.5 text-slate-400 hover:text-white font-medium hover:bg-slate-800 rounded-lg transition-colors"
+                                className="px-5 py-2.5 text-[#3c584b] hover:text-[#3c584b] font-medium hover:bg-[#fdf7e7] rounded-lg transition-colors"
                             >
                                 Cancelar
                             </button>
                             <button
                                 onClick={confirmDelete}
-                                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-lg font-bold shadow-lg shadow-red-900/20 transition-all active:scale-95"
+                                className="bg-[#cbd9ce] hover:bg-[#cbd9ce] text-[#3c584b] px-6 py-2.5 rounded-lg font-bold shadow-lg shadow-md transition-all active:scale-95"
                             >
                                 Sí, Eliminar
                             </button>
@@ -371,19 +371,19 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
 
             {/* Modal Nueva/Editar Medida */}
             {showModal && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-[var(--card-bg)] border border-slate-700 rounded-xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl animate-in fade-in zoom-in duration-200">
+                <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl animate-in fade-in zoom-in duration-200">
                         {/* Modal Header */}
-                        <div className="bg-[var(--primary)] p-4 flex justify-between items-center shrink-0 rounded-t-xl">
-                            <h3 className="text-white font-bold text-lg">{editingId ? 'Editar Medida' : 'Nueva Medida'}</h3>
-                            <button onClick={closeModal} className="text-white/80 hover:text-white transition-colors"><X size={24} /></button>
+                        <div className="bg-[#cbd9ce] p-4 flex justify-between items-center shrink-0 rounded-t-xl">
+                            <h3 className="text-[#3c584b] font-bold text-lg">{editingId ? 'Editar Medida' : 'Nueva Medida'}</h3>
+                            <button onClick={closeModal} className="text-[#3c584b] hover:text-[#3c584b] transition-colors"><X size={24} /></button>
                         </div>
 
                         {/* Scrollable Body */}
                         <div className="p-4 md:p-6 space-y-6 overflow-y-auto custom-scrollbar flex-1">
                             {/* Basics */}
-                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
-                                <h4 className="text-sm font-bold text-blue-400 mb-3 uppercase tracking-wider">Básicos</h4>
+                            <div className="bg-[#fdf7e7] p-4 rounded-lg border border-[#cbd9ce]">
+                                <h4 className="text-sm font-bold text-[#3c584b] mb-3 uppercase tracking-wider">Básicos</h4>
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                     <Input label="Fecha y Hora" type="datetime-local" value={newMeasure.date} onChange={v => handleInputChange('date', v)} />
                                     <Input label="Peso (kg)" type="number" value={newMeasure.weight} onChange={v => handleInputChange('weight', v)} />
@@ -393,17 +393,17 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                             </div>
 
                             {/* Energy Calculation */}
-                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
-                                <h4 className="text-sm font-bold text-green-400 mb-3 uppercase tracking-wider flex items-center gap-2">
+                            <div className="bg-[#fdf7e7] p-4 rounded-lg border border-[#cbd9ce]">
+                                <h4 className="text-sm font-bold text-[#3c584b] mb-3 uppercase tracking-wider flex items-center gap-2">
                                     <Activity size={14} /> Cálculo Energético (Mifflin-St Jeor)
                                 </h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     <div className="col-span-2">
-                                        <label className="block text-xs font-bold text-slate-500 mb-1 uppercase">Factor de Actividad</label>
+                                        <label className="block text-xs font-bold text-[#3c584b] mb-1 uppercase">Factor de Actividad</label>
                                         <select
                                             value={newMeasure.activity || 1.2}
                                             onChange={e => handleInputChange('activity', e.target.value)}
-                                            className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white text-sm focus:border-[var(--primary)] outline-none"
+                                            className="w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded p-2 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none"
                                         >
                                             {ACTIVITY_FACTORS.map(f => (
                                                 <option key={f.value} value={f.value}>{f.label}</option>
@@ -416,8 +416,8 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                             </div>
 
                             {/* Circumferences */}
-                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
-                                <h4 className="text-sm font-bold text-purple-400 mb-3 uppercase tracking-wider">Circunferencias (cm)</h4>
+                            <div className="bg-[#fdf7e7] p-4 rounded-lg border border-[#cbd9ce]">
+                                <h4 className="text-sm font-bold text-[#3c584b] mb-3 uppercase tracking-wider">Circunferencias (cm)</h4>
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                     <Input label="Cintura" value={newMeasure.circumference?.waist} onChange={v => handleInputChange('circumference', v, 'circumference', 'waist')} />
                                     <Input label="Cadera" value={newMeasure.circumference?.hip} onChange={v => handleInputChange('circumference', v, 'circumference', 'hip')} />
@@ -431,19 +431,19 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                             </div>
 
                             {/* Folds */}
-                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                            <div className="bg-[#fdf7e7] p-4 rounded-lg border border-[#cbd9ce]">
                                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
-                                    <h4 className="text-sm font-bold text-orange-400 uppercase tracking-wider">Pliegues (mm)</h4>
+                                    <h4 className="text-sm font-bold text-[#3c584b] uppercase tracking-wider">Pliegues (mm)</h4>
                                     <div className="flex gap-2 flex-wrap">
                                         {bodyComp && (
-                                            <div className={`text-xs font-bold ${bodyComp.color} bg-slate-700/50 px-3 py-1 rounded-full border border-slate-600 flex items-center gap-2`}>
+                                            <div className={`text-xs font-bold ${bodyComp.color} bg-[#fdf7e7] px-3 py-1 rounded-full border border-[#cbd9ce] flex items-center gap-2`}>
                                                 {bodyComp.label}
                                             </div>
                                         )}
-                                        <div className="bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full text-xs font-bold border border-blue-500/20 flex items-center gap-2">
+                                        <div className="bg-[#cbd9ce] text-[#3c584b] px-3 py-1 rounded-full text-xs font-bold border border-[#cbd9ce] flex items-center gap-2">
                                             <Calculator size={12} /> Prom: {foldsMetrics.avg.toFixed(1)} mm
                                         </div>
-                                        <div className="bg-orange-500/10 text-orange-400 px-3 py-1 rounded-full text-xs font-bold border border-orange-500/20 flex items-center gap-2">
+                                        <div className="bg-[#cbd9ce] text-[#3c584b] px-3 py-1 rounded-full text-xs font-bold border border-[#cbd9ce] flex items-center gap-2">
                                             <Calculator size={12} /> Σ {foldsMetrics.sum.toFixed(1)} mm
                                         </div>
                                     </div>
@@ -460,8 +460,8 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                         </div>
 
                         {/* Footer Button */}
-                        <div className="p-4 border-t border-slate-800 bg-[var(--card-bg)] rounded-b-xl shrink-0">
-                            <button onClick={handleSave} className="w-full bg-[var(--primary)] hover:opacity-90 text-white font-bold py-3 rounded-lg transition-all shadow-lg shadow-blue-900/20">
+                        <div className="p-4 border-t border-[#cbd9ce] bg-[#fdf7e7] rounded-b-xl shrink-0">
+                            <button onClick={handleSave} className="w-full bg-[#cbd9ce] hover:opacity-90 text-[#3c584b] font-bold py-3 rounded-lg transition-all shadow-lg shadow-md">
                                 {editingId ? 'Guardar Cambios' : 'Guardar Medida'}
                             </button>
                         </div>
@@ -474,13 +474,13 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
 
 const Input = ({ label, value, onChange, type = "number", readOnly = false }: any) => (
     <div>
-        <label className="block text-xs font-bold text-slate-500 mb-1 uppercase tracking-tighter truncate" title={label}>{label}</label>
+        <label className="block text-xs font-bold text-[#3c584b] mb-1 uppercase tracking-tighter truncate" title={label}>{label}</label>
         <input
             type={type}
             value={value}
             onChange={e => onChange && onChange(e.target.value)}
             readOnly={readOnly}
-            className={`w-full bg-slate-900 border border-slate-700 rounded p-2 text-white text-sm focus:border-[var(--primary)] outline-none transition-all ${readOnly ? 'opacity-50 cursor-not-allowed bg-slate-800' : 'hover:border-slate-600'}`}
+            className={`w-full bg-[#fdf7e7] border border-[#cbd9ce] rounded p-2 text-[#3c584b] text-sm focus:border-[#cbd9ce] outline-none transition-all ${readOnly ? 'opacity-50 cursor-not-allowed bg-[#fdf7e7]' : 'hover:border-[#cbd9ce]'}`}
         />
     </div>
 );
