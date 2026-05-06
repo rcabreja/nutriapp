@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "build:mac": "vite build && electron-builder --universal",
-    "preview": "vite preview"
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "build": {
     "appId": "com.nutriclinical.pro",
@@ -46,6 +47,7 @@
     "react-router-dom": "^7.12.0"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.36.0",
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.27",
@@ -56,6 +58,7 @@
     "typescript": "~5.8.2",
     "vite": "^6.2.0",
     "vite-plugin-electron": "^0.29.0",
-    "vite-plugin-electron-renderer": "^0.14.6"
+    "vite-plugin-electron-renderer": "^0.14.6",
+    "wrangler": "^4.88.0"
   }
 }
