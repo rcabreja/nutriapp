@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 
 const KPICard = ({ title, value, icon: Icon, color }: { title: string, value: string | number, icon: any, color: string }) => (
-  <div className="bg-[#fdf7e7] border border-[#cbd9ce] p-6 rounded-xl flex items-center justify-between">
+  <div className="bg-[#cbd9ce] border border-[#cbd9ce] p-6 rounded-xl flex items-center justify-between">
     <div>
       <p className="text-[#3c584b] text-sm font-medium mb-1">{title}</p>
       <h3 className="text-3xl font-bold text-[#3c584b]">{value}</h3>
@@ -149,7 +149,7 @@ export default function Dashboard() {
       </div>
 
       {/* 2. Chart Section (Weekly Activity) */}
-      <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6">
+      <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-lg font-semibold text-[#3c584b] flex items-center gap-2">
             <TrendingUp size={20} className="text-[#3c584b]" /> Actividad de la Semana
@@ -167,7 +167,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* COL 1: Agenda / Calendar Widget */}
-        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl flex flex-col h-[400px]">
+        <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl flex flex-col h-[400px]">
           <div className="p-4 border-b border-[#cbd9ce] bg-[#fdf7e7] rounded-t-xl">
             <h3 className="text-lg font-semibold text-[#3c584b] mb-4 flex items-center gap-2">
               <Calendar size={18} className="text-[#3c584b]" /> Agenda del Día
@@ -215,7 +215,7 @@ export default function Dashboard() {
         </div>
 
         {/* COL 2: Upcoming Appointments List */}
-        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl flex flex-col h-[400px]">
+        <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl flex flex-col h-[400px]">
           <div className="p-4 border-b border-[#cbd9ce] rounded-t-xl">
             <h3 className="text-lg font-semibold text-[#3c584b] flex items-center gap-2">
               <CalendarDays size={18} className="text-[#3c584b]" /> Próximas Citas
@@ -252,7 +252,7 @@ export default function Dashboard() {
         </div>
 
         {/* COL 3: Recent Patients */}
-        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl flex flex-col h-[400px]">
+        <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl flex flex-col h-[400px]">
           <div className="p-4 border-b border-[#cbd9ce] rounded-t-xl">
             <h3 className="text-lg font-semibold text-[#3c584b] flex items-center gap-2">
               <Users size={18} className="text-[#3c584b]" /> Recientes

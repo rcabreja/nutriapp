@@ -127,7 +127,7 @@ export default function LabsTab({ patient, updatePatient, readOnly }: Props) {
 
             <div className="flex flex-col gap-6">
                 {patient.labs.map(lab => (
-                    <div key={lab.id} className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 hover:border-[#cbd9ce] transition-all">
+                    <div key={lab.id} className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6 hover:border-[#cbd9ce] transition-all">
                         {/* Header */}
                         <div className="flex justify-between items-start mb-6">
                             <div>
@@ -188,7 +188,7 @@ export default function LabsTab({ patient, updatePatient, readOnly }: Props) {
             {/* DELETE CONFIRMATION MODAL */}
             {deleteId && (
                 <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-[70] p-4">
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-8 max-w-sm w-full shadow-2xl text-center animate-in fade-in zoom-in duration-200">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-8 max-w-sm w-full shadow-2xl text-center animate-in fade-in zoom-in duration-200">
                         <div className="w-16 h-16 bg-[#cbd9ce] text-[#3c584b] rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/20">
                             <AlertTriangle size={32} />
                         </div>
@@ -233,7 +233,7 @@ export default function LabsTab({ patient, updatePatient, readOnly }: Props) {
             {/* Edit/Create Modal */}
             {showModal && (
                 <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl w-full max-w-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl w-full max-w-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
                         <div className="bg-[#cbd9ce] p-4 flex justify-between items-center">
                             <h3 className="text-[#3c584b] font-bold text-lg">{editingId ? 'Editar Análisis' : 'Nuevo Análisis'}</h3>
                             <button onClick={() => setShowModal(false)} className="text-[#3c584b] hover:text-[#3c584b] transition-colors">

@@ -17,7 +17,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-[#fdf7e7] flex items-center justify-center p-4">
-      <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-2xl p-8 w-full max-w-md shadow-2xl">
+      <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-2xl p-8 w-full max-w-md shadow-2xl">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-[#3c584b] mb-2">NutriClinical</h1>
           <p className="text-[#3c584b]">Pro System Login</p>

@@ -143,7 +143,7 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
             {/* Right Column: Notes List */}
             <div className="lg:col-span-3 space-y-6">
                 {!readOnly && (
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4 flex justify-between items-center">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4 flex justify-between items-center">
                         <div>
                             <h3 className="text-[#3c584b] font-bold">Seguimiento por Visitas</h3>
                             <p className="text-[#3c584b] text-sm">Registro clínico de objetivos y observaciones.</p>
@@ -159,7 +159,7 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
                         const noteImages = note.images || ((note as any).imageUrl ? [(note as any).imageUrl] : []);
 
                         return (
-                            <div key={note.id} className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 relative group hover:border-[#cbd9ce] transition-all">
+                            <div key={note.id} className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6 relative group hover:border-[#cbd9ce] transition-all">
                                 <div className="flex flex-col md:flex-row gap-6">
                                     <div className="flex-1 space-y-4">
                                         <div className="flex items-center justify-between border-b border-[#cbd9ce] pb-2 mb-2">
@@ -284,7 +284,7 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
             {/* Delete Confirmation Modal */}
             {deleteId && (
                 <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-[70] p-4">
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-8 max-w-sm w-full shadow-2xl text-center transform transition-all scale-100">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-8 max-w-sm w-full shadow-2xl text-center transform transition-all scale-100">
                         <div className="w-16 h-16 bg-[#cbd9ce] text-[#3c584b] rounded-full flex items-center justify-center mx-auto mb-6">
                             <Trash size={32} />
                         </div>
@@ -313,7 +313,7 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
             {/* Edit/Create Modal */}
             {showModal && (
                 <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl w-full max-w-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col max-h-[90vh]">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl w-full max-w-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col max-h-[90vh]">
                         {/* Header */}
                         <div className="bg-[#cbd9ce] p-4 flex justify-between items-center shrink-0">
                             <h3 className="text-[#3c584b] font-bold text-lg">{editingNoteId ? 'Editar Nota de Evolución' : 'Nueva Nota de Evolución'}</h3>
@@ -366,7 +366,7 @@ export default function NotesTab({ patient, updatePatient, readOnly }: Props) {
                             </div>
 
                             {/* Evolution Questionnaire */}
-                            <div className="bg-[#fdf7e7] border border-[#cbd9ce] p-4 rounded-xl space-y-4">
+                            <div className="bg-[#cbd9ce] border border-[#cbd9ce] p-4 rounded-xl space-y-4">
                                 <h4 className="text-sm font-bold text-[#3c584b] uppercase border-b border-[#cbd9ce] pb-2">Cuestionario de Evolución</h4>
 
                                 <div className="grid grid-cols-1 gap-4">

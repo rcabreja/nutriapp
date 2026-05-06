@@ -8,8 +8,8 @@ interface Props {
     readOnly: boolean;
 }
 
-const Section = ({ title, icon: Icon, children }: { title: string, icon: any, children?: React.ReactNode }) => (
-    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6">
+const Section = ({ title, icon: Icon, bgClass = "bg-[#fdf7e7]", children }: { title: string, icon: any, bgClass?: string, children?: React.ReactNode }) => (
+    <div className={`${bgClass} border border-[#cbd9ce] rounded-xl p-6`}>
         <div className="flex items-center gap-2 mb-4 text-[#3c584b]">
             <Icon size={20} />
             <h3 className="font-bold uppercase tracking-wider text-sm">{title}</h3>
@@ -58,7 +58,7 @@ export default function LifestyleTab({ patient, updatePatient, readOnly }: Props
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Activity */}
-                <Section title="Actividad Física" icon={Activity}>
+                <Section title="Actividad Física" icon={Activity} bgClass="bg-[#cbd9ce]">
                     <div className="space-y-4">
                         <label className="flex items-center gap-3 p-3 bg-[#fdf7e7] rounded-lg cursor-pointer">
                             <input
@@ -120,7 +120,7 @@ export default function LifestyleTab({ patient, updatePatient, readOnly }: Props
                 </Section>
 
                 {/* Sleep & Stress */}
-                <Section title="Sueño, Estrés y Sustancias" icon={Moon}>
+                <Section title="Sueño, Estrés y Sustancias" icon={Moon} bgClass="bg-[#cbd9ce]">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="text-xs text-[#3c584b] font-bold uppercase">Horas Sueño</label>
@@ -248,7 +248,7 @@ export default function LifestyleTab({ patient, updatePatient, readOnly }: Props
                 </Section>
 
                 {/* Habits & Routine Section */}
-                <Section title="Hábitos y Rutina Diaria" icon={Coffee}>
+                <Section title="Hábitos y Rutina Diaria" icon={Coffee} bgClass="bg-[#cbd9ce]">
                     <div className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>

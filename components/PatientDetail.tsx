@@ -134,7 +134,7 @@ export default function PatientDetail() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6">
+      <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6">
         <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
           <div className="w-20 h-20 sm:w-16 sm:h-16 rounded-full bg-[#fdf7e7] overflow-hidden flex items-center justify-center text-[#3c584b] text-2xl font-bold border-2 border-[#cbd9ce] shrink-0">
             {patient.avatarUrl ? <img src={patient.avatarUrl} alt="" className="w-full h-full object-cover" /> : patient.name.charAt(0)}
@@ -198,7 +198,7 @@ export default function PatientDetail() {
       {/* Reminder Modal */}
       {showReminderModal && (
         <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 w-full max-w-md shadow-2xl">
+          <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6 w-full max-w-md shadow-2xl">
             <h3 className="text-xl font-bold text-[#3c584b] mb-4 flex items-center gap-2">
               <Send size={20} className="text-[#3c584b]" /> Enviar Recordatorio
             </h3>
@@ -236,7 +236,7 @@ export default function PatientDetail() {
       {/* Edit Profile Modal */}
       {showEditProfileModal && (
         <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl w-full max-w-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+          <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl w-full max-w-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
             <div className="bg-[#cbd9ce] p-4 flex justify-between items-center">
               <h3 className="text-[#3c584b] font-bold text-lg">Editar Perfil de Paciente</h3>
               <button onClick={() => setShowEditProfileModal(false)} className="text-[#3c584b] hover:text-[#3c584b] transition-colors">

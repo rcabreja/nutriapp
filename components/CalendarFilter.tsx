@@ -134,7 +134,7 @@ export default function CalendarFilter({ notes, selectedDate, onSelectDate }: Ca
     };
 
     return (
-        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4 h-fit">
+        <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4 h-fit">
             {renderHeader()}
             {renderDays()}
             {renderCells()}

@@ -291,14 +291,14 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
     return (
         <div className="space-y-8">
             {/* SECTION 1: ADHERENCE (Blue Card) */}
-            <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6">
+            <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6">
                 <h3 className="flex items-center gap-2 font-bold text-[#3c584b] mb-6 text-lg">
                     <CheckCircle className="text-[#3c584b]" size={24} /> Seguimiento y Adherencia
                 </h3>
 
                 <div className="flex flex-col xl:flex-row gap-8">
                     {/* Left: Progress Card */}
-                    <div className="flex-1 bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 text-[#3c584b] shadow-sm">
+                    <div className="flex-1 bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6 text-[#3c584b] shadow-sm">
                         <h4 className="text-xs font-bold text-[#3c584b] uppercase mb-4 tracking-wider">PROGRESO DEL DÍA SELECCIONADO</h4>
 
                         <div className="flex justify-between items-end mb-2">
@@ -498,7 +498,7 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
             {
                 showEditModal && (
                     <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl">
+                        <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl">
                             {/* Header */}
                             <div className="bg-[#cbd9ce] p-4 flex justify-between items-center shrink-0 rounded-t-xl">
                                 <h3 className="text-[#3c584b] font-bold text-lg">Editar Plan Nutricional</h3>
@@ -530,7 +530,7 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                                 </div>
 
                                 {/* Macronutrients Edit Section */}
-                                <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                                <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4">
                                     <h4 className="text-sm font-bold text-[#3c584b] uppercase mb-4 text-center">Distribución de Macronutrientes</h4>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                         {/* Protein */}
@@ -611,7 +611,7 @@ export default function PlansTab({ patient, updatePatient, readOnly }: Props) {
                                     </div>
 
                                     {editedPlan.sections.map((section, sIdx) => (
-                                        <div key={sIdx} className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                                        <div key={sIdx} className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4">
                                             <div className="flex justify-between items-center mb-3">
                                                 <input
                                                     type="text"

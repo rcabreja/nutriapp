@@ -122,7 +122,7 @@ export default function ThemeSettings() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Colors */}
-                <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 space-y-6 shadow-sm">
+                <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6 space-y-6 shadow-sm">
                     <h3 className="text-xl font-bold text-[#3c584b] flex items-center gap-2 mb-4 pb-2 border-b border-[#cbd9ce]">
                         <Palette size={20} className="text-[#cbd9ce]" /> Ajuste Manual de Colores
                     </h3>
@@ -156,7 +156,7 @@ export default function ThemeSettings() {
                 </div>
 
                 {/* Typography */}
-                <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 space-y-6 h-fit shadow-sm">
+                <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6 space-y-6 h-fit shadow-sm">
                     <h3 className="text-xl font-bold text-[#3c584b] flex items-center gap-2 mb-4 pb-2 border-b border-[#cbd9ce]">
                         <Type size={20} className="text-[#cbd9ce]" /> Tipografía
                     </h3>

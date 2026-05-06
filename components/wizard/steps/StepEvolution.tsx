@@ -72,7 +72,7 @@ export default function StepEvolution({ formData, onChange }: Props) {
                 />
             </div>
 
-            <div className="bg-[#fdf7e7] border border-[#cbd9ce] p-4 rounded-xl space-y-4">
+            <div className="bg-[#cbd9ce] border border-[#cbd9ce] p-4 rounded-xl space-y-4">
                 <h4 className="text-sm font-bold text-[#cbd9ce] uppercase border-b border-[#cbd9ce] pb-2">Cuestionario de Evolución</h4>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

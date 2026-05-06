@@ -204,7 +204,7 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
         <div className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* IMC Chart */}
-                <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4 sm:p-6">
+                <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4 sm:p-6">
                     <h3 className="text-sm font-bold text-[#3c584b] mb-4">Evolución Peso vs IMC</h3>
                     <div className="h-64 w-full relative">
                         <Line data={imcData} options={chartOptions} />
@@ -212,7 +212,7 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                 </div>
 
                 {/* Reference Table */}
-                <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4 sm:p-6 overflow-x-auto">
+                <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4 sm:p-6 overflow-x-auto">
                     <h3 className="text-sm font-bold text-[#3c584b] mb-4">Referencia IMC (OMS)</h3>
                     <table className="w-full text-xs text-[#3c584b] min-w-[200px]">
                         <thead><tr className="border-b border-[#cbd9ce]"><th className="text-left py-2">Categoría</th><th className="text-right">Rango</th></tr></thead>
@@ -227,7 +227,7 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
                 </div>
 
                 {/* Measures Chart */}
-                <div className="col-span-1 lg:col-span-2 bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4 sm:p-6">
+                <div className="col-span-1 lg:col-span-2 bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4 sm:p-6">
                     <h3 className="text-sm font-bold text-[#3c584b] mb-4">Evolución de Medidas (cm)</h3>
                     <div className="h-64 w-full relative">
                         <Line data={measureData} options={{ ...chartOptions, scales: { y: { grid: { color: '#1e293b' } }, x: { grid: { display: false } } } }} />
@@ -237,7 +237,7 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
 
             {/* Energy Expenditure Card (Latest) */}
             {sortedRecords.length > 0 && (
-                <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 relative overflow-hidden group">
+                <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                         <Activity size={100} className="text-[#cbd9ce]" />
                     </div>
@@ -273,7 +273,7 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
             )}
 
             {/* Table & Action */}
-            <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl overflow-hidden">
+            <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl overflow-hidden">
                 <div className="p-4 border-b border-[#cbd9ce] flex justify-between items-center">
                     <h3 className="text-[#3c584b] font-bold">Registro de Medidas</h3>
                     {!readOnly && (
@@ -343,7 +343,7 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
             {/* DELETE CONFIRMATION MODAL */}
             {deleteId && (
                 <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-[70] p-4">
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-8 max-w-sm w-full shadow-2xl text-center animate-in fade-in zoom-in duration-200">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-8 max-w-sm w-full shadow-2xl text-center animate-in fade-in zoom-in duration-200">
                         <div className="w-16 h-16 bg-[#cbd9ce] text-[#3c584b] rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/20">
                             <AlertTriangle size={32} />
                         </div>
@@ -372,7 +372,7 @@ export default function AnthroTab({ patient, updatePatient, readOnly }: Props) {
             {/* Modal Nueva/Editar Medida */}
             {showModal && (
                 <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl animate-in fade-in zoom-in duration-200">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl animate-in fade-in zoom-in duration-200">
                         {/* Modal Header */}
                         <div className="bg-[#cbd9ce] p-4 flex justify-between items-center shrink-0 rounded-t-xl">
                             <h3 className="text-[#3c584b] font-bold text-lg">{editingId ? 'Editar Medida' : 'Nueva Medida'}</h3>

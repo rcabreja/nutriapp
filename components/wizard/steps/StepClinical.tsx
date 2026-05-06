@@ -42,7 +42,7 @@ const Checkbox = ({ label, checked, onChange }: any) => (
 );
 
 const Section = ({ title, icon: Icon, children }: any) => (
-    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-5 mb-6">
+    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-5 mb-6">
         <div className="flex items-center gap-2 mb-5 text-[#cbd9ce] border-b border-[#cbd9ce] pb-3">
             <Icon size={20} />
             <h4 className="font-bold uppercase text-sm tracking-wider text-[#3c584b]">{title}</h4>

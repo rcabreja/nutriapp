@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:mac": "vite build && electron-builder -m",
+    "build:mac": "vite build && electron-builder --universal",
     "preview": "vite preview"
   },
   "build": {
@@ -22,11 +22,15 @@
     ],
     "mac": {
       "target": [
+        "pkg",
         "dmg",
         "zip",
         "dir"
       ],
       "icon": "public/icon.png"
+    },
+    "pkg": {
+      "installLocation": "/Applications"
     }
   },
   "dependencies": {

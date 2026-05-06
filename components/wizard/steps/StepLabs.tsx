@@ -34,7 +34,7 @@ export default function StepLabs({ formData, onChange }: Props) {
 
     return (
         <div className="space-y-6">
-            <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+            <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4">
                 <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-lg p-3 mb-6 flex gap-3 items-start">
                     <AlertTriangle className="text-[#3c584b] shrink-0 mt-0.5" size={18} />
                     <p className="text-sm text-[#3c584b]">

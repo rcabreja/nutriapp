@@ -38,7 +38,7 @@ export default function PatientsList() {
         </button>
       </div>
 
-      <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl overflow-hidden">
+      <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl overflow-hidden">
         <div className="p-4 border-b border-[#cbd9ce]">
           <div className="relative w-full sm:max-w-md">
             <Search className="absolute left-3 top-3 text-[#3c584b]" size={18} />
@@ -117,7 +117,7 @@ export default function PatientsList() {
       {/* DELETE CONFIRMATION MODAL */}
       {patientToDelete && (
         <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-[70] p-4">
-          <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-8 max-w-sm w-full shadow-2xl text-center animate-in fade-in zoom-in duration-200">
+          <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-8 max-w-sm w-full shadow-2xl text-center animate-in fade-in zoom-in duration-200">
             <div className="w-16 h-16 bg-[#cbd9ce] text-[#3c584b] rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/20">
               <AlertTriangle size={32} />
             </div>

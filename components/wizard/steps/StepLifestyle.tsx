@@ -41,9 +41,9 @@ const Checkbox = ({ label, checked, onChange }: any) => (
     </label>
 );
 
-const Section = ({ title, icon: Icon, children }: any) => (
-    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-5 mb-6">
-        <div className="flex items-center gap-2 mb-5 text-[#cbd9ce] border-b border-[#cbd9ce] pb-3">
+const Section = ({ title, icon: Icon, bgClass = "bg-[#fdf7e7]", iconClass = "text-[#cbd9ce]", children }: any) => (
+    <div className={`${bgClass} border border-[#cbd9ce] rounded-xl p-5 mb-6`}>
+        <div className={`flex items-center gap-2 mb-5 ${iconClass} border-b border-[#cbd9ce] pb-3`}>
             <Icon size={20} />
             <h4 className="font-bold uppercase text-sm tracking-wider text-[#3c584b]">{title}</h4>
         </div>
@@ -55,7 +55,7 @@ export default function StepLifestyle({ formData, onChange }: Props) {
     return (
         <div className="space-y-6">
             {/* Actividad Física */}
-            <Section title="Actividad Física" icon={Activity}>
+            <Section title="Actividad Física" icon={Activity} bgClass="bg-[#cbd9ce]" iconClass="text-[#3c584b]">
                 <div className="mb-4">
                     <Checkbox
                         label="Realiza Actividad Física regularmente"
@@ -97,7 +97,7 @@ export default function StepLifestyle({ formData, onChange }: Props) {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Sueño y Estrés */}
-                <Section title="Sueño, Estrés y Sustancias" icon={Moon}>
+                <Section title="Sueño, Estrés y Sustancias" icon={Moon} bgClass="bg-[#cbd9ce]" iconClass="text-[#3c584b]">
                     <div className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                             <Input label="Horas Sueño" value={formData.sleepHours} onChange={(v: any) => onChange('sleepHours', v)} />
@@ -142,7 +142,7 @@ export default function StepLifestyle({ formData, onChange }: Props) {
                 </Section>
 
                 {/* Hábitos y Rutina */}
-                <Section title="Hábitos y Rutina Diaria" icon={Coffee}>
+                <Section title="Hábitos y Rutina Diaria" icon={Coffee} bgClass="bg-[#cbd9ce]" iconClass="text-[#3c584b]">
                     <div className="space-y-4">
                         <div className="grid grid-cols-1 gap-4">
                             <Input label="Suplementación Actual" value={formData.supplementation} onChange={(v: any) => onChange('supplementation', v)} />

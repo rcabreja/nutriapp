@@ -91,7 +91,7 @@ export default function DataSettings() {
     };
 
     return (
-        <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-6 space-y-6 shadow-sm">
+        <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-6 space-y-6 shadow-sm">
             <h3 className="text-xl font-bold text-[#3c584b] flex items-center gap-2 mb-4 pb-2 border-b border-[#cbd9ce]">
                 <Database size={20} className="text-[#cbd9ce]" /> Gestión de Datos
             </h3>
@@ -102,7 +102,7 @@ export default function DataSettings() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                     {/* JSON Export */}
-                    <div className="p-4 rounded-lg bg-[#fdf7e7] border border-[#cbd9ce] flex flex-col justify-between group hover:border-[#cbd9ce] transition-colors">
+                    <div className="p-4 rounded-lg bg-[#cbd9ce] border border-[#cbd9ce] flex flex-col justify-between group hover:border-[#cbd9ce] transition-colors">
                         <div>
                             <div className="flex items-center gap-2 mb-2 text-[#cbd9ce]">
                                 <FileJson size={24} />
@@ -121,7 +121,7 @@ export default function DataSettings() {
                     </div>
 
                     {/* CSV Export */}
-                    <div className="p-4 rounded-lg bg-[#fdf7e7] border border-[#cbd9ce] flex flex-col justify-between group hover:border-[#cbd9ce] transition-colors">
+                    <div className="p-4 rounded-lg bg-[#cbd9ce] border border-[#cbd9ce] flex flex-col justify-between group hover:border-[#cbd9ce] transition-colors">
                         <div>
                             <div className="flex items-center gap-2 mb-2 text-[#3c584b]">
                                 <FileSpreadsheet size={24} />

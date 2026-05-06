@@ -307,7 +307,7 @@ export default function CreatePatientWizard({ onClose }: Props) {
 
     return (
         <div className="fixed inset-0 bg-[#fdf7e7] backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl w-full max-w-5xl shadow-2xl flex flex-col max-h-[90vh] animate-in fade-in zoom-in duration-200">
+            <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl w-full max-w-5xl shadow-2xl flex flex-col max-h-[90vh] animate-in fade-in zoom-in duration-200">
                 {/* Header */}
                 <div className="bg-[#cbd9ce] p-4 flex justify-between items-center shrink-0 rounded-t-xl">
                     <h3 className="text-[#3c584b] font-bold text-lg flex items-center gap-2">Nuevo Paciente</h3>

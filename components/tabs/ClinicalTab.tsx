@@ -50,7 +50,7 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-6">
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4">
                         <h4 className="text-sm font-bold text-[#3c584b] mb-4 uppercase border-b border-[#cbd9ce] pb-2">Antecedentes Clínicos</h4>
                         <div className="space-y-3">
                             <Field label="Motivo Consulta" value={data.background.motive} editing={isEditing} onChange={v => setData({ ...data, background: { ...data.background, motive: v } })} />
@@ -62,7 +62,7 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
                     </div>
 
                     {/* Pathological Checkboxes and Text */}
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4">
                         <h4 className="text-sm font-bold text-[#3c584b] mb-4 uppercase border-b border-[#cbd9ce] pb-2">Patologías</h4>
                         <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-4">
                             <Checkbox label="Diabetes" checked={data.background.pathological?.diabetes} editing={isEditing} onChange={(c: any) => setData({ ...data, background: { ...data.background, pathological: { ...data.background.pathological!, diabetes: c } } })} />
@@ -76,7 +76,7 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
                     </div>
 
                     {/* Symptoms Section */}
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4">
                         <h4 className="text-sm font-bold text-[#3c584b] mb-4 uppercase border-b border-[#cbd9ce] pb-2">Sintomatología Actual</h4>
                         <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm mb-4">
                             {symptomsList.map(sym => (
@@ -95,7 +95,7 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
 
                 <div className="space-y-6">
                     {/* Gyneco */}
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4">
                         <h4 className="text-sm font-bold text-[#3c584b] mb-4 uppercase border-b border-[#cbd9ce] pb-2">Gineco-obstétricos</h4>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                             <Field label="G" value={data.gyneco?.g} editing={isEditing} onChange={v => setData({ ...data, gyneco: { ...data.gyneco!, g: v } })} />
@@ -131,7 +131,7 @@ export default function ClinicalTab({ patient, updatePatient, readOnly }: Props)
                         </div>
                     </div>
 
-                    <div className="bg-[#fdf7e7] border border-[#cbd9ce] rounded-xl p-4">
+                    <div className="bg-[#cbd9ce] border border-[#cbd9ce] rounded-xl p-4">
                         <h4 className="text-sm font-bold text-[#3c584b] mb-4 uppercase border-b border-[#cbd9ce] pb-2">Recordatorio 24H (Básico)</h4>
                         <div className="space-y-3">
                             <Field label="Desayuno" value={data.recall24h.breakfast} editing={isEditing} onChange={v => setData({ ...data, recall24h: { ...data.recall24h, breakfast: v } })} />
